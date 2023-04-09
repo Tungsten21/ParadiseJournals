@@ -22,10 +22,10 @@ namespace UI.Dialogs
     /// </summary>
     public partial class BaseDialog : Window
     {
-        public BaseDialog()
+        public BaseDialog(BaseDialogViewModel dataContext)
         {
+            DataContext = dataContext;
             InitializeComponent();
-            DataContext = ((App)Application.Current).serviceProvider.GetService<BaseDialogViewModel>();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using UI.Dialogs;
 using ViewModels;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
@@ -37,11 +38,17 @@ namespace UI
             //});
 
             services.AddSingleton<MainWindow>();
+            services.AddTransient<BaseDialog>();
+            services.AddSingleton<EntryView>();
+
+
             services.AddSingleton<EntryViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<BaseDialogViewModel>();
+
+
             services.AddSingleton<IDialogService, DialogService>();
-            services.AddSingleton<EntryView>();
+            
         }
 
         private void OnStart(object sender, StartupEventArgs e)

@@ -23,11 +23,9 @@ namespace UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(EntryViewModel dataContext)
         {
-            ServiceProvider serviceProvider = ((App)Application.Current).serviceProvider;
-            this.DataContext = serviceProvider.GetService<EntryViewModel>();
-
+            DataContext = dataContext;
             InitializeComponent();
         }
     }
