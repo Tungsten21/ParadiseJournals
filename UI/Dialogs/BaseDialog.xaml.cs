@@ -11,24 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModels;
+using ViewModels.Dialogs;
 using ViewModels.Interfaces;
 
-namespace UI
+namespace UI.Dialogs
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BaseDialog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BaseDialog : Window
     {
-        public MainWindow()
+        public BaseDialog()
         {
-            ServiceProvider serviceProvider = ((App)Application.Current).serviceProvider;
-            this.DataContext = serviceProvider.GetService<EntryViewModel>();
-
             InitializeComponent();
+            DataContext = ((App)Application.Current).serviceProvider.GetService<BaseDialogViewModel>();
         }
     }
 }
