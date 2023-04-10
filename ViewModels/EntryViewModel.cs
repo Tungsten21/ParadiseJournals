@@ -24,6 +24,12 @@ namespace ViewModels
             _dialogService.ShowDialog<LoginViewModel>("testView");
         }
 
+        [RelayCommand]
+        private void OpenCreateNewUserDialog()
+        {
+            _dialogService.ShowDialog<CreateNewUserViewModel>("testView2", "Large");
+        }
+
         //Methods
     }
 }

@@ -31,12 +31,13 @@ namespace ViewModels
             dataContext.ViewModel = viewModel;
 
             baseDialogWindow.Title = title;
-
             var windowSizes = mapWindowSize(windowSize);
-
             baseDialogWindow.Width = windowSizes.Item1;
             baseDialogWindow.Height = windowSizes.Item2;
 
+            if(viewModel is IClosable vm) 
+                vm.CloseWindow = () => baseDialogWindow.Close();
+               
             baseDialogWindow.Show();
         }
 
@@ -49,7 +50,7 @@ namespace ViewModels
                 return Tuple.Create(((int)DialogSize.MediumWidth), ((int)DialogSize.MediumHeight));
 
             if (windowSize == "Large")
-                return Tuple.Create(((int)DialogSize.SmallWidth), ((int)DialogSize.LargeHeight));
+                return Tuple.Create(((int)DialogSize.LargeWidth), ((int)DialogSize.LargeHeight));
 
             throw new Exception("Invaid size type provided...");
 

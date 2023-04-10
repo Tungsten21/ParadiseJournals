@@ -9,12 +9,12 @@ namespace Common.Enums
     public enum DialogSize
     {
         //Tune accordingly (try and keep aspect ratios the same)
-        SmallWidth = 200,
-        MediumWidth = 400,
-        LargeWidth = 550,
+        SmallWidth = 325,
+        MediumWidth = 525,
+        LargeWidth = 800,
 
-        SmallHeight = 325,
-        MediumHeight = 525,
-        LargeHeight = 800
+        SmallHeight = 200,
+        MediumHeight = 400,
+        LargeHeight = 550
     }
 }

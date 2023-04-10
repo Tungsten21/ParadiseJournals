@@ -8,12 +8,14 @@ using ViewModels.Interfaces;
 
 namespace ViewModels.Dialogs
 {
-    public partial class LoginViewModel : ObservableObject, IViewModel
+    public partial class LoginViewModel : ObservableObject, IViewModel, IClosable
     {
 
         public LoginViewModel()
         {
             
         }
+
+        public Action CloseWindow { get; set; }
     }
 }

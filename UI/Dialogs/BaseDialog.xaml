@@ -14,7 +14,10 @@
                 <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
                     <local:LoginDialog/>
                 </DataTemplate>
-                
+                <DataTemplate DataType="{x:Type viewModels:CreateNewUserViewModel}">
+                    <local:CreateNewUserDialog/>
+                </DataTemplate>
+
             </ContentControl.Resources>
         </ContentControl>
     </Grid>

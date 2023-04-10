@@ -40,11 +40,14 @@ namespace UI
             services.AddSingleton<MainWindow>();
             services.AddTransient<BaseDialog>();
             services.AddSingleton<EntryView>();
+            services.AddSingleton<CreateNewUserDialog>();
 
 
             services.AddSingleton<EntryViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<BaseDialogViewModel>();
+            services.AddSingleton<CreateNewUserViewModel>();
+
 
 
             services.AddSingleton<IDialogService, DialogService>();
