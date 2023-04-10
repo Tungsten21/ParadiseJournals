@@ -44,13 +44,13 @@ namespace ViewModels
         private Tuple<int, int> mapWindowSize(string windowSize)
         {
             if (windowSize == "Small")
-                return Tuple.Create(((int)DialogSize.SmallWidth), ((int)DialogSize.SmallHeight));
+                return Tuple.Create((int)DialogSize.SmallWidth, (int)DialogSize.SmallHeight);
 
             if (windowSize == "Medium")
-                return Tuple.Create(((int)DialogSize.MediumWidth), ((int)DialogSize.MediumHeight));
+                return Tuple.Create((int)DialogSize.MediumWidth, (int)DialogSize.MediumHeight);
 
             if (windowSize == "Large")
-                return Tuple.Create(((int)DialogSize.LargeWidth), ((int)DialogSize.LargeHeight));
+                return Tuple.Create((int)DialogSize.LargeWidth, (int)DialogSize.LargeHeight);
 
             throw new Exception("Invaid size type provided...");
 

@@ -63,6 +63,7 @@
                 Grid.Column="1"
                 Content="Sign-In"
                 Width="150"
-                Height="40"/>
+                Height="40"
+                Command="{Binding AttemptLoginCommand}"/>
     </Grid>
 </UserControl>

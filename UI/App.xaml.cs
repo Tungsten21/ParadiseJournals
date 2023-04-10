@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +11,7 @@ using UI.Dialogs;
 using ViewModels;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
+using ViewModels.Navigation;
 
 namespace UI
 {
@@ -42,16 +44,20 @@ namespace UI
             services.AddSingleton<EntryView>();
             services.AddSingleton<CreateNewUserDialog>();
 
-
+            services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<EntryViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<BaseDialogViewModel>();
             services.AddSingleton<CreateNewUserViewModel>();
+            services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IMessenger, WeakReferenceMessenger>();
 
 
 
             services.AddSingleton<IDialogService, DialogService>();
-            
+
+            services.AddSingleton<IServiceProvider, ServiceProvider>();
         }
 
         private void OnStart(object sender, StartupEventArgs e)
