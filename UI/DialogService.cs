@@ -11,31 +11,36 @@ namespace ViewModels
 {
     public class DialogService : IDialogService
     {
+        private IServiceProvider _serviceProvider;
+
+        public IViewModel ViewModel { get; set; }
+
+        public DialogService(IServiceProvider serviceProvider) {
+            _serviceProvider = serviceProvider;
+        }
+
         public void ShowDialog<TViewModel>(string title, string? windowSize = "Medium") where TViewModel : IViewModel
         {
-            TViewModel viewModel;
-            var serviceProvider = ((App)Application.Current).serviceProvider;
-
             try
             {
-                viewModel = serviceProvider.GetService<TViewModel>();
+                ViewModel = _serviceProvider.GetService<TViewModel>();
             }
             catch (Exception ex) //catch exception if view model hasnt been registered with service provider...
             {
                 throw (ex);
             }
 
-            BaseDialog baseDialogWindow = serviceProvider.GetService<BaseDialog>();
+            BaseDialog baseDialogWindow = _serviceProvider.GetService<BaseDialog>();
 
             BaseDialogViewModel dataContext = baseDialogWindow.DataContext as BaseDialogViewModel;
-            dataContext.ViewModel = viewModel;
+            dataContext.ViewModel = ViewModel;
 
             baseDialogWindow.Title = title;
             var windowSizes = mapWindowSize(windowSize);
             baseDialogWindow.Width = windowSizes.Item1;
             baseDialogWindow.Height = windowSizes.Item2;
 
-            if(viewModel is IClosable vm) 
+            if(ViewModel is IClosable vm) 
                 vm.CloseWindow = () => baseDialogWindow.Close();
                
             baseDialogWindow.Show();
@@ -54,6 +59,11 @@ namespace ViewModels
 
             throw new Exception("Invaid size type provided...");
 
+        }
+
+        Tuple<int, int> IDialogService.mapWindowSize(string windowSize)
+        {
+            throw new NotImplementedException();
         }
     }
 }

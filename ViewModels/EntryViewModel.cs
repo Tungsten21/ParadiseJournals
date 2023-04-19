@@ -10,8 +10,8 @@ namespace ViewModels
     {
         //Properties
         private IDialogService _dialogService;
-        //Constructors
 
+        //Constructors
         public EntryViewModel(IDialogService dialogService)
         {
            _dialogService = dialogService;
@@ -21,13 +21,13 @@ namespace ViewModels
         [RelayCommand]
         private void OpenLoginDialog()
         {
-            _dialogService.ShowDialog<LoginViewModel>("testView");
+            _dialogService.ShowDialog<LoginViewModel>("Login", "Large");
         }
 
         [RelayCommand]
         private void OpenCreateNewUserDialog()
         {
-            _dialogService.ShowDialog<CreateNewUserViewModel>("testView2", "Large");
+            _dialogService.ShowDialog<CreateNewUserViewModel>("Create New User", "Large");
         }
 
         //Methods

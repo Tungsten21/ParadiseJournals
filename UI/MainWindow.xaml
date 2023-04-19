@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UI"
         xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
 
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
