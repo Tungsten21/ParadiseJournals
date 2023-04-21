@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModels;
-using ViewModels.Interfaces;
 
-namespace UI
+namespace UI.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuBar : UserControl
     {
-        public MainWindow(MainWindowViewModel dataContext)
+        public MenuBar()
         {
-            DataContext = dataContext;
             InitializeComponent();
         }
     }

@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="UI.Controls.MenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UI.Controls"
+             xmlns:icons="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="75">
+    <Grid Background="Blue">
+        <!--Define Rows & Columns-->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="1"
+                Width="50"
+                Height="50"
+                Margin="0 10">
+            <icons:FontAwesome FontSize="40"
+                               Icon="Home"/>
+        </Button>
+        <Button Grid.Row="2"
+                Width="50"
+                Height="50"
+                Margin="0 10">
+            <icons:FontAwesome FontSize="40"
+                               Icon="Book"/>
+        </Button>
+        <Button Grid.Row="3"
+                Width="50"
+                Height="50"
+                Margin="0 10">
+            <icons:FontAwesome FontSize="40"
+                               Icon="Heart"/>
+        </Button>
+        <Button Grid.Row="4"
+                Width="50"
+                Height="50"
+                Margin="0 10">
+            <icons:FontAwesome FontSize="40"
+                               Icon="File"/>
+        </Button>
+        <Button Grid.Row="5" 
+                Width="50"
+                Height="50"
+                Margin="0 10">
+            <icons:FontAwesome FontSize="40"
+                               Icon="Cog"/>
+        </Button>
+    </Grid>
+</UserControl>

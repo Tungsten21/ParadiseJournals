@@ -1,0 +1,30 @@
+﻿<Window x:Class="UI.Dialogs.BaseDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI.Dialogs"
+        xmlns:viewModels="clr-namespace:ViewModels.Dialogs;assembly=ViewModels"
+        mc:Ignorable="d"
+        Title="BaseDialog" Height="450" Width="800">
+    <Grid>
+        <!--Content Control to dynamically map view to view models-->
+        <ContentControl Content="{Binding ViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                    <local:LoginDialog/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:CreateNewUserViewModel}">
+                    <local:CreateNewUserDialog/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:CreateNewJournalViewModel}">
+                    <local:CreateNewJournalDialog/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:CreateNewWishListViewModel}">
+                    <local:CreateNewWishListDialog/>
+                </DataTemplate>
+                    
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>

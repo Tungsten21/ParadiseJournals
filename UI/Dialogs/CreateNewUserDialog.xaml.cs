@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModels;
-using ViewModels.Interfaces;
 
-namespace UI
+namespace UI.Dialogs
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CreateNewUserDialog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreateNewUserDialog : UserControl
     {
-        public MainWindow(MainWindowViewModel dataContext)
+        public CreateNewUserDialog()
         {
-            DataContext = dataContext;
             InitializeComponent();
         }
     }
