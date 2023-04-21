@@ -43,6 +43,9 @@ namespace UI
             services.AddTransient<BaseDialog>();
             services.AddSingleton<EntryView>();
             services.AddSingleton<CreateNewUserDialog>();
+            services.AddSingleton<CreateNewJournalDialog>();
+            services.AddSingleton<CreateNewWishListDialog>();
+            services.AddSingleton<JournalHomeViewModel>();
 
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<EntryViewModel>();
@@ -50,6 +53,10 @@ namespace UI
             services.AddSingleton<BaseDialogViewModel>();
             services.AddSingleton<CreateNewUserViewModel>();
             services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<CreateNewJournalViewModel>();
+            services.AddSingleton<CreateNewWishListViewModel>();
+
+
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>();
 

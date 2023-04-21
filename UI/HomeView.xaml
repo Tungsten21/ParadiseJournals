@@ -92,12 +92,14 @@
                 <Button Width="125"
                         Height="40"
                         Content="Create Journal"
-                        Margin="15 0"/>
+                        Margin="15 0"
+                        Command="{Binding OpenCreateNewJournalDialogCommand}"/>
                 
                 <Button Width="125"
                         Height="40"
                         Content="Create Wishlist"
-                        Margin="15 0"/>
+                        Margin="15 0"
+                        Command="{Binding OpenCreateNewWishListDialogCommand}"/>
             </StackPanel>
             
         </Grid>

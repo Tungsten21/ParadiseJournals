@@ -9,44 +9,52 @@ namespace Tests.ViewModels
     [TestClass()]
     public class EntryViewModelTests
     {
-        private Mock<IDialogService> _dialogService;
+        private Mock<IDialogService> _dialogService; //move to ui specific tests in seperate project
         private Mock<INavigationService> _navigationService;
-        private EntryViewModel entryViewModel;
+        private EntryViewModel _entryViewModel;
         
 
         [TestInitialize]
         public void Setup()
         {
            _dialogService = new();
-           entryViewModel = new(_dialogService.Object);
+           _entryViewModel = new(_dialogService.Object);
            _navigationService = new();
         }
 
         [TestMethod()]
-        public void OpenLoginDialogCommandShouldCreateDialogWithLoginViewModelAsDataContext()
+        public void OpenLoginDialogCommandShouldCallDialogServiceWithLoginViewModel()
         {
             // Arrange
             var loginViewModel = new LoginViewModel(_navigationService.Object);
-            _dialogService.SetupProperty<IViewModel>(x => x.ViewModel);
-            _dialogService.Setup(x => x.ShowDialog<LoginViewModel>(It.IsAny<string>(), It.IsAny<string>())).Callback(() => _dialogService.Object.ViewModel = loginViewModel);
+            _dialogService.SetupProperty(x => x.CurrentViewModel);
+            _dialogService.Setup(x => x.ShowDialog<LoginViewModel>(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback(() => _dialogService.Object.CurrentViewModel = loginViewModel);
 
             // Act
-            entryViewModel.OpenLoginDialogCommand.Execute(null);
+            _entryViewModel.OpenLoginDialogCommand.Execute(null);
 
             // Assert
             _dialogService.Verify(m => m.ShowDialog<LoginViewModel>("Login", "Large"));
-            Assert.IsInstanceOfType(_dialogService.Object.ViewModel, typeof(LoginViewModel));
+            Assert.IsInstanceOfType(_dialogService.Object.CurrentViewModel, typeof(LoginViewModel));
 
         }
         
         [TestMethod()]
-        public void OpenCreateNewUserDialogCommandShouldCreateDialogWithCreateNewUserViewModelAsDataContext()
+        public void OpenCreateNewUserCommandShouldCallDialogServiceWithCreateNewUserViewModel()
         {
-            //Act
-            entryViewModel.OpenCreateNewUserDialogCommand.Execute(null);
+            // Arrange
+            var createNewUserViewModel = new CreateNewUserViewModel(_navigationService.Object);
+            _dialogService.SetupProperty(x => x.CurrentViewModel);
+            _dialogService.Setup(x => x.ShowDialog<CreateNewUserViewModel>(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback(() => _dialogService.Object.CurrentViewModel = createNewUserViewModel);
 
-            //Assert
+            // Act
+            _entryViewModel.OpenCreateNewUserDialogCommand.Execute(null);
+
+            // Assert
             _dialogService.Verify(m => m.ShowDialog<CreateNewUserViewModel>("Create New User", "Large"));
+            Assert.IsInstanceOfType(_dialogService.Object.CurrentViewModel, typeof(CreateNewUserViewModel));
         }
     }
 }

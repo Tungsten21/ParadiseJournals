@@ -13,7 +13,7 @@ namespace ViewModels
     {
         private IServiceProvider _serviceProvider;
 
-        public IViewModel ViewModel { get; set; }
+        public IViewModel CurrentViewModel { get; set; }
 
         public DialogService(IServiceProvider serviceProvider) {
             _serviceProvider = serviceProvider;
@@ -23,7 +23,7 @@ namespace ViewModels
         {
             try
             {
-                ViewModel = _serviceProvider.GetService<TViewModel>();
+                CurrentViewModel = _serviceProvider.GetService<TViewModel>();
             }
             catch (Exception ex) //catch exception if view model hasnt been registered with service provider...
             {
@@ -33,14 +33,14 @@ namespace ViewModels
             BaseDialog baseDialogWindow = _serviceProvider.GetService<BaseDialog>();
 
             BaseDialogViewModel dataContext = baseDialogWindow.DataContext as BaseDialogViewModel;
-            dataContext.ViewModel = ViewModel;
+            dataContext.ViewModel = CurrentViewModel;
 
             baseDialogWindow.Title = title;
             var windowSizes = mapWindowSize(windowSize);
             baseDialogWindow.Width = windowSizes.Item1;
             baseDialogWindow.Height = windowSizes.Item2;
 
-            if(ViewModel is IClosable vm) 
+            if(CurrentViewModel is IClosable vm) 
                 vm.CloseWindow = () => baseDialogWindow.Close();
                
             baseDialogWindow.Show();

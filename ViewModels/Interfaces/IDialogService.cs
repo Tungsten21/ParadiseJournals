@@ -2,7 +2,7 @@
 {
     public interface IDialogService
     {
-        IViewModel ViewModel { get; set; }
+        IViewModel CurrentViewModel { get; set; }
 
         void ShowDialog<TViewModel>(string title, string? windowSize = "Medium") where TViewModel : IViewModel;
 

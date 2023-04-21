@@ -23,7 +23,7 @@ namespace ViewModels.Navigation
 
         public void NavigateToViewModel<TViewModel>() where TViewModel : IViewModel
         {
-            IViewModel destViewModel = _serviceProvider.GetService<TViewModel>();
+            IViewModel destViewModel = (IViewModel)_serviceProvider.GetService(typeof(TViewModel));
             _messenger.Send(new NavigationMessage<IViewModel>(destViewModel));
         }
 
