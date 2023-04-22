@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModels.Interfaces;
-using ViewModels.Navigation;
 
 namespace ViewModels.Dialogs
 {

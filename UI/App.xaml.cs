@@ -1,11 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using UI.Dialogs;
 using ViewModels;
@@ -16,7 +11,7 @@ using ViewModels.Navigation;
 namespace UI
 {
 
-    
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

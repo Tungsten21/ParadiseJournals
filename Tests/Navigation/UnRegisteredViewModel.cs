@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModels.Interfaces;
 
-namespace ViewModels.Navigation
+namespace Tests.Navigation
 {
-    public interface INavigationService
+    public class UnRegisteredViewModel : IViewModel
     {
-        void NavigateToViewModel<TViewModel>() where TViewModel : IViewModel;
     }
 }

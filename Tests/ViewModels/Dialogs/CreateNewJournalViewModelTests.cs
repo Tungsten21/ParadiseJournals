@@ -3,6 +3,7 @@ using ViewModels.Dialogs;
 using ViewModels.Navigation;
 using ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
+using ViewModels.Interfaces;
 
 namespace Tests.ViewModels.Dialogs
 {

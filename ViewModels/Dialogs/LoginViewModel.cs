@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ViewModels.Interfaces;
-using ViewModels.Navigation;
 
 namespace ViewModels.Dialogs
 {

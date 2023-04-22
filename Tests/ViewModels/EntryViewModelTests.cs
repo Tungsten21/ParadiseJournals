@@ -2,7 +2,6 @@
 using ViewModels;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
-using ViewModels.Navigation;
 
 namespace Tests.ViewModels
 {

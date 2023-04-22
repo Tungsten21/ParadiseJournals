@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
 
@@ -9,6 +10,8 @@ namespace ViewModels
     {
         //Properties
         private readonly IDialogService _dialogService;
+
+        
 
         //Constructors
         public HomeViewModel(IDialogService dialogService)
