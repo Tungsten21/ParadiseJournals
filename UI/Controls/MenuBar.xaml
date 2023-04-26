@@ -6,8 +6,12 @@
              xmlns:local="clr-namespace:UI.Controls"
              xmlns:icons="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="75">
-    <Grid Background="Blue">
+             d:DesignHeight="500" d:DesignWidth="75"
+             DataContext="{Binding MenuBarViewModel}">
+
+    <Grid Background="Blue"
+          Width="75"
+          Visibility="{Binding IsMenuBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
         <!--Define Rows & Columns-->
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -22,21 +26,24 @@
         <Button Grid.Row="1"
                 Width="50"
                 Height="50"
-                Margin="0 10">
+                Margin="0 10"
+                Command="{Binding NavigateToHomeViewModelCommand}">
             <icons:FontAwesome FontSize="40"
                                Icon="Home"/>
         </Button>
         <Button Grid.Row="2"
                 Width="50"
                 Height="50"
-                Margin="0 10">
+                Margin="0 10"
+                Command="{Binding OpenCreateNewJournalDialogCommand}">
             <icons:FontAwesome FontSize="40"
                                Icon="Book"/>
         </Button>
         <Button Grid.Row="3"
                 Width="50"
                 Height="50"
-                Margin="0 10">
+                Margin="0 10"
+                Command="{Binding OpenCreateNewWishListDialogCommand}">
             <icons:FontAwesome FontSize="40"
                                Icon="Heart"/>
         </Button>

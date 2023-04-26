@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModels.Interfaces;
+using ViewModels.Items;
 
 namespace ViewModels.Dialogs
 {
@@ -13,32 +14,39 @@ namespace ViewModels.Dialogs
     {
         //Properties
         private readonly INavigationService _navigationService;
+        private readonly HomeViewModel _homeViewModel;
+
+        [ObservableProperty]
+        private JournalViewModel _journalViewModel = new();
 
         public Action CloseWindow { get; set; }
-        //Constructors
-        public CreateNewJournalViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
 
         //Commands
         [RelayCommand]
         private void AttemptToCreateJournal()
         {
-           //TODO: Add validation to ensure necessaery fields have valid input
-           if(true)
+            //TODO: Add validation to ensure necessaery fields have valid input
+            if (true)
             {
-                CloseWindwowAndProgress();
+                _navigationService.NavigateToViewModel<JournalHomeViewModel>
+                    (() => AddJournalToHomeViewModel(_homeViewModel));
+                CloseWindow?.Invoke();
             }
         }
 
-        //Methods
-        private void CloseWindwowAndProgress()
+        //Constructors
+        public CreateNewJournalViewModel(INavigationService navigationService, HomeViewModel homeViewModel)
         {
-            CloseWindow?.Invoke();
-            _navigationService.NavigateToViewModel<JournalHomeViewModel>();
-
+            _navigationService = navigationService;
+            _homeViewModel = homeViewModel;
         }
 
+        //Methods
+        private void AddJournalToHomeViewModel(HomeViewModel homeViewModel)
+        {
+            homeViewModel.UserJournals.Add(new(JournalViewModel));
+            if (!homeViewModel.AtLeastOneJournal)
+                homeViewModel.AtLeastOneJournal = true;
+        }
     }
 }

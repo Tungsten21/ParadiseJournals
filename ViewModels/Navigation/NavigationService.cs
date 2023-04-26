@@ -15,6 +15,7 @@ namespace ViewModels.Navigation
 
         private readonly IMessenger _messenger;
         private readonly IServiceProvider _serviceProvider;
+        private IViewModel _destViewModel;
 
         public NavigationService(IServiceProvider serviceProvider, IMessenger messenger)
         {
@@ -22,13 +23,12 @@ namespace ViewModels.Navigation
             _serviceProvider = serviceProvider;
         }
 
-        public void NavigateToViewModel<TViewModel>() where TViewModel : IViewModel
+        public void NavigateToViewModel<TViewModel>(Action? action = null) where TViewModel : IViewModel
         {
-            IViewModel destViewModel = (IViewModel)_serviceProvider.GetService(typeof(TViewModel)) 
+            _destViewModel = (IViewModel)_serviceProvider.GetService(typeof(TViewModel))
                 ?? throw new ArgumentInvalidException("Passed in viewmodel is not registered with DI.");
-            
-            _messenger.Send(new NavigationMessage<IViewModel>(destViewModel));
+            action?.Invoke();
+            _messenger.Send(new NavigationMessage<IViewModel>(_destViewModel));
         }
-
     }
 }

@@ -8,6 +8,7 @@ namespace ViewModels.Interfaces
 {
     public interface INavigationService
     {
-        void NavigateToViewModel<TViewModel>() where TViewModel : IViewModel;
+        void NavigateToViewModel<TViewModel>(Action? action = null) where TViewModel : IViewModel;
+
     }
 }

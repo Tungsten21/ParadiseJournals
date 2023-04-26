@@ -2,8 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using UI.Dialogs;
 using ViewModels;
+using ViewModels.Controls;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
 using ViewModels.Navigation;
@@ -40,9 +42,9 @@ namespace UI
             services.AddSingleton<CreateNewUserDialog>();
             services.AddSingleton<CreateNewJournalDialog>();
             services.AddSingleton<CreateNewWishListDialog>();
-            services.AddSingleton<JournalHomeViewModel>();
 
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<MenuBarViewModel>();
             services.AddSingleton<EntryViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<BaseDialogViewModel>();
@@ -50,15 +52,13 @@ namespace UI
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<CreateNewJournalViewModel>();
             services.AddSingleton<CreateNewWishListViewModel>();
+            services.AddSingleton<JournalHomeViewModel>();
+            services.AddSingleton<WishListHomeViewModel>();
 
 
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>();
-
-
-
             services.AddSingleton<IDialogService, DialogService>();
-
             services.AddSingleton<IServiceProvider, ServiceProvider>();
         }
 

@@ -4,20 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
+        xmlns:controls="clr-namespace:UI.Controls"
         xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
 
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
-            <DataTemplate DataType="{x:Type viewModels:EntryViewModel}">
-                <local:EntryView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
-                <local:HomeView/>
-            </DataTemplate>
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        </ContentControl.Resources>
-    </ContentControl>
+        <controls:MenuBar/>
+
+        <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModels:EntryViewModel}">
+                    <local:EntryView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                    <local:HomeView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:JournalHomeViewModel}">
+                    <local:JournalHomeView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:WishListHomeViewModel}">
+                    <local:WishListHomeView/>
+                </DataTemplate>
+
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+
+    
 
 </Window>

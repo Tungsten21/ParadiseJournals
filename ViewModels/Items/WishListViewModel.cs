@@ -1,13 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ViewModels.Interfaces;
 
 namespace ViewModels.Items
 {
-    public class JournalViewModel : ObservableObject, IViewModel
+    public partial class WishListViewModel: ObservableObject, IViewModel
     {
         //Properties
-        public readonly JournalModel _model = new();
+        public readonly WishListModel _model = new();
 
         public string Title
         {
@@ -56,14 +61,14 @@ namespace ViewModels.Items
         }
 
         //Constructors
-        public JournalViewModel()
+        public WishListViewModel()
         {
-
+            
         }
 
-        public JournalViewModel(JournalModel model) => _model = model;
+        public WishListViewModel(WishListModel model) => _model = model;
 
-        public JournalViewModel(JournalViewModel viewModel)
+        public WishListViewModel(WishListViewModel viewModel)
         {
             Title = viewModel.Title;
             Country = viewModel.Country;
@@ -73,6 +78,5 @@ namespace ViewModels.Items
             City = viewModel.City;
         }
 
-        //Methods
     }
 }

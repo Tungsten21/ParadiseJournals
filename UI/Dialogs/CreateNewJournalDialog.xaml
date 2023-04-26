@@ -51,7 +51,10 @@
                     Width="250"
                     VerticalAlignment="Center">
             <TextBlock Text="Journal Title: "/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding JournalViewModel.Title, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    Mode=OneWayToSource}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
@@ -59,7 +62,10 @@
                     Width="250"
                     VerticalAlignment="Center">
             <TextBlock Text="Country:"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding JournalViewModel.Country, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    Mode=OneWayToSource}"/>
         </StackPanel>
 
         <Grid Grid.Row="3" ShowGridLines="True"
@@ -74,14 +80,22 @@
                 <TextBlock Text="Start Date:"/>
                 <DatePicker Height="30"
                             BorderBrush="Transparent"
-                            VerticalContentAlignment="Center"/>
+                            VerticalContentAlignment="Center"
+                            Focusable="False"
+                            Text="{Binding JournalViewModel.StartDate, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    Mode=OneWayToSource}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="End Date:"/>
                 <DatePicker Height="30"
                             BorderBrush="Transparent"
-                            VerticalContentAlignment="Center"/>
+                            VerticalContentAlignment="Center"
+                            Focusable="False"
+                            Text="{Binding JournalViewModel.EndDate, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    Mode=OneWayToSource}"/>
             </StackPanel>
         </Grid>
 
@@ -90,7 +104,10 @@
                     Width="250"
                     VerticalAlignment="Center">
             <TextBlock Text="City (Optional):"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding JournalViewModel.City, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    Mode=OneWayToSource}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4"
@@ -98,7 +115,10 @@
                     Width="250"
                     VerticalAlignment="Center">
             <TextBlock Text="Description (Optional):"/>
-            <TextBox Height="50"/>
+            <TextBox Height="50"
+                     Text="{Binding JournalViewModel.Description, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    Mode=OneWayToSource}"/>
         </StackPanel>
 
         <Button Grid.Row="4"

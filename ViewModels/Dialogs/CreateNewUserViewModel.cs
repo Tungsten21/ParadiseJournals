@@ -15,14 +15,15 @@ namespace ViewModels.Dialogs
 
         //Properties
 
+        public Action CloseWindow { get; set; }
+
+        //Commands
+
         //Constructors
         public CreateNewUserViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
-
-        public Action CloseWindow { get; set; }
-        //Commands
 
         //Methods
     }

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <None Remove="Commands\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
   </ItemGroup>
 
@@ -17,7 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Folder Include="Dialogs\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
 
 </Project>

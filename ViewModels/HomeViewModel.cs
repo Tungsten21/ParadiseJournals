@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
+using ViewModels.Items;
 
 namespace ViewModels
 {
@@ -11,13 +12,24 @@ namespace ViewModels
         //Properties
         private readonly IDialogService _dialogService;
 
-        
+        [NotifyPropertyChangedFor(nameof(NoItemsDetected))]
+        [NotifyPropertyChangedFor(nameof(NoWishListsFound))]
+        [ObservableProperty]
+        private bool _atLeastOneJournal;
 
-        //Constructors
-        public HomeViewModel(IDialogService dialogService)
-        {
-            _dialogService = dialogService;
-        }
+        [NotifyPropertyChangedFor(nameof(NoItemsDetected))]
+        [NotifyPropertyChangedFor(nameof(NoJournalsFound))]
+        [ObservableProperty]
+        private bool _atLeastOneWishlist;
+
+        public bool NoJournalsFound => AtLeastOneWishlist && !AtLeastOneJournal;
+
+        public bool NoWishListsFound => !AtLeastOneWishlist && AtLeastOneJournal;
+
+        public bool NoItemsDetected => !AtLeastOneJournal && !AtLeastOneWishlist;
+
+        public ObservableCollection<JournalViewModel> UserJournals { get; set; } = new();
+        public ObservableCollection<WishListViewModel> UserWishlists { get; set; } = new();
 
         //Commands
         [RelayCommand]
@@ -30,6 +42,12 @@ namespace ViewModels
         private void OpenCreateNewWishListDialog()
         {
             _dialogService.ShowDialog<CreateNewWishListViewModel>("Create New Wishlist", "Large");
+        }
+
+        //Constructors
+        public HomeViewModel(IDialogService dialogService)
+        {
+            _dialogService = dialogService;
         }
 
         //Methods

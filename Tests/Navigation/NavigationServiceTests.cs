@@ -51,7 +51,6 @@ namespace Tests.ViewModels
             }
             catch (Exception e)
             {
-
                 exception = e;
             }
 

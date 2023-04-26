@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class JournalModel
+    public class WishListModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
