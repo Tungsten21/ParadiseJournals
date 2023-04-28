@@ -29,7 +29,7 @@ namespace ViewModels
         public bool NoItemsDetected => !AtLeastOneJournal && !AtLeastOneWishlist;
 
         public ObservableCollection<JournalViewModel> UserJournals { get; set; } = new();
-        public ObservableCollection<WishListViewModel> UserWishlists { get; set; } = new();
+        public ObservableCollection<WishListViewModel> UserWishLists { get; set; } = new();
 
         //Commands
         [RelayCommand]

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.Controls.ListViews
+namespace UI.Controls.ItemsControls
 {
     /// <summary>
-    /// Interaction logic for HomeViewItemsPanel.xaml
+    /// Interaction logic for HomeViewItemsPanelTemplate.xaml
     /// </summary>
-    public partial class HomeViewItemsPanel : UserControl
+    public partial class HomeViewItemsPanelTemplate : UserControl
     {
-        public HomeViewItemsPanel()
+        public HomeViewItemsPanelTemplate()
         {
             InitializeComponent();
         }

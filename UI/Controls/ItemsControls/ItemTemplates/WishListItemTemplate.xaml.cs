@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI.Controls.ListViews.ItemTemplates
+namespace UI.Controls.ItemsControls.ItemTemplates
 {
     /// <summary>
     /// Interaction logic for WishListItemTemplate.xaml

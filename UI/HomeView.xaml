@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expressionblend/2008" 
              xmlns:local="clr-namespace:UI"
-             xmlns:itemTemplates="clr-namespace:UI.Controls.ListViews.ItemTemplates"
+             xmlns:itemsControls="clr-namespace:UI.Controls.ItemsControls"
+             xmlns:itemTemplates="clr-namespace:UI.Controls.ItemsControls.ItemTemplates"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -36,38 +37,65 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Background="Teal"
-                        Visibility="{Binding AtLeastOneJournal,
-                                             Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Background="Teal"
+                  
+                  Visibility="{Binding AtLeastOneJournal,
+                                       Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
                 <TextBlock Text="My Journals:"
                            FontSize="20"
                            FontWeight="Bold"/>
-                <ListView Height="250"
-                          ItemsSource="{Binding UserJournals}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <itemTemplates:JournalItemTemplate/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
 
-            <StackPanel Grid.Column="2"
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding UserJournals}"
+                                  ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}"
+                                  MinWidth="250">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Background="Tan"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+
+                        <!--<ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <itemTemplates:JournalItemTemplate/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>-->
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid Grid.Column="2"
                         Background="Purple"
                         Visibility="{Binding AtLeastOneWishlist,
                                              Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
                 <TextBlock Text="My Wishlists:"
                            FontSize="20"
                            FontWeight="Bold"/>
-                <ListView Height="250"
-                          ItemsSource="{Binding UserWishlists}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <itemTemplates:WishListItemTemplate/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding UserWishLists}"
+                                  ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}"
+                                  MinWidth="250">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Background="Tan"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
 
             <!--Default View If No Journals Found-->
             <StackPanel Background="Teal"

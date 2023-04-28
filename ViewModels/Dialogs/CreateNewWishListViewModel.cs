@@ -45,7 +45,7 @@ namespace ViewModels.Dialogs
         //Methods
         private void AddWishlistToHomeViewModel(HomeViewModel homeViewModel)
         {
-            homeViewModel.UserWishlists.Add(new(WishListViewModel));
+            homeViewModel.UserWishLists.Add(new(WishListViewModel));
             if(!homeViewModel.AtLeastOneWishlist)
                 homeViewModel.AtLeastOneWishlist = true;
         }
