@@ -4,7 +4,7 @@ using ViewModels.Interfaces;
 
 namespace ViewModels.Items
 {
-    public class JournalViewModel : ObservableObject, IViewModel
+    public class JournalViewModel : ObservableObject, IViewModel, ICreatableItem
     {
         //Properties
         public readonly JournalModel _model = new();

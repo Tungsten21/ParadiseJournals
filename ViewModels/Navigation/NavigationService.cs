@@ -1,12 +1,7 @@
 ﻿using Common.Exceptions;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModels.Interfaces;
+using ViewModels.Messages;
 
 namespace ViewModels.Navigation
 {
@@ -28,7 +23,7 @@ namespace ViewModels.Navigation
             _destViewModel = (IViewModel)_serviceProvider.GetService(typeof(TViewModel))
                 ?? throw new ArgumentInvalidException("Passed in viewmodel is not registered with DI.");
             action?.Invoke();
-            _messenger.Send(new NavigationMessage<IViewModel>(_destViewModel));
+            _messenger.Send(new NavigationMessage(_destViewModel));
         }
     }
 }

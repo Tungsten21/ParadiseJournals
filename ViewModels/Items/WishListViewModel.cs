@@ -9,7 +9,7 @@ using ViewModels.Interfaces;
 
 namespace ViewModels.Items
 {
-    public partial class WishListViewModel: ObservableObject, IViewModel
+    public partial class WishListViewModel: ObservableObject, IViewModel, ICreatableItem
     {
         //Properties
         public readonly WishListModel _model = new();

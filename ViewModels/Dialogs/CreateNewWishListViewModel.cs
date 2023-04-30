@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModels.Interfaces;
 using ViewModels.Items;
+using ViewModels.Messages;
 using ViewModels.Navigation;
 
 namespace ViewModels.Dialogs
@@ -15,7 +17,7 @@ namespace ViewModels.Dialogs
     {
         //Properties
         private readonly INavigationService _navigationService;
-        private readonly HomeViewModel _homeViewModel;
+        private readonly IMessenger _messenger;
 
         [ObservableProperty]
         private WishListViewModel _wishListViewModel = new();
@@ -30,24 +32,19 @@ namespace ViewModels.Dialogs
             if (true)
             {
                 _navigationService.NavigateToViewModel<WishListHomeViewModel>
-                    (() => AddWishlistToHomeViewModel(_homeViewModel));
+                    (() => _messenger.Send(new ItemCreatedMessage(new WishListViewModel(_wishListViewModel))));
                 CloseWindow?.Invoke();
             }
         }
 
         //Constructors
-        public CreateNewWishListViewModel(INavigationService navigationService, HomeViewModel homeViewModel)
+        public CreateNewWishListViewModel(INavigationService navigationService, IMessenger messenger)
         {
             _navigationService = navigationService;
-            _homeViewModel = homeViewModel;
+            _messenger = messenger;
         }
 
         //Methods
-        private void AddWishlistToHomeViewModel(HomeViewModel homeViewModel)
-        {
-            homeViewModel.UserWishLists.Add(new(WishListViewModel));
-            if(!homeViewModel.AtLeastOneWishList)
-                homeViewModel.AtLeastOneWishList = true;
-        }
+        
     }
 }

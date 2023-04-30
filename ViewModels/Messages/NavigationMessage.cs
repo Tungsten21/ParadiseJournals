@@ -7,13 +7,13 @@ using ViewModels.Interfaces;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 
-namespace ViewModels.Navigation
+namespace ViewModels.Messages
 {
-    public class NavigationMessage<TViewModel> : ValueChangedMessage<TViewModel> where TViewModel : IViewModel
+    public class NavigationMessage : ValueChangedMessage<IViewModel>
     {
         public IViewModel ViewModel { get; }
 
-        public NavigationMessage(TViewModel viewModel) : base(viewModel)
+        public NavigationMessage(IViewModel viewModel) : base(viewModel)
         {
             ViewModel = viewModel;
         }

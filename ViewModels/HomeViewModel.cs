@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
 using ViewModels.Items;
+using ViewModels.Messages;
 
 namespace ViewModels
 {
@@ -11,6 +13,7 @@ namespace ViewModels
     {
         //Properties
         private readonly IDialogService _dialogService;
+        private readonly IMessenger _messenger;
 
         [NotifyPropertyChangedFor(nameof(NoItemsDetected))]
         [NotifyPropertyChangedFor(nameof(NoWishListsFound))]
@@ -45,11 +48,31 @@ namespace ViewModels
         }
 
         //Constructors
-        public HomeViewModel(IDialogService dialogService)
+        public HomeViewModel(IDialogService dialogService, IMessenger messenger)
         {
             _dialogService = dialogService;
+            _messenger = messenger;
+
+            _messenger.Register<ItemCreatedMessage>(this, (r, m) => AddItemOnReceived(m.Value));
         }
 
         //Methods
+        public void AddItemOnReceived(ICreatableItem item)
+        {
+            switch (item)
+            {
+                case JournalViewModel:
+                    UserJournals.Add((JournalViewModel) item);
+                    if(!AtLeastOneJournal)
+                        AtLeastOneJournal = true;
+                    break;
+                case WishListViewModel:
+                    UserWishLists.Add((WishListViewModel) item);
+                    if (!AtLeastOneWishList)
+                        AtLeastOneWishList = true;
+                    break;
+
+            }
+        }
     }
 }

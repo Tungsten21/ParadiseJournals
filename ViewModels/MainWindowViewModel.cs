@@ -1,14 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModels.Controls;
 using ViewModels.Interfaces;
-using ViewModels.Navigation;
+using ViewModels.Messages;
 
 namespace ViewModels
 {
@@ -36,9 +31,9 @@ namespace ViewModels
             _currentViewModel = _serviceProvider.GetService<EntryViewModel>();
             _menuBarViewModel = menuBarViewModel;
 
-            _messenger.Register<NavigationMessage<IViewModel>>(this, (r, m) =>
+            _messenger.Register<NavigationMessage>(this, (r, m) =>
             {
-                CurrentViewModel = (IViewModel)_serviceProvider.GetService(m.ViewModel.GetType());
+                CurrentViewModel = (IViewModel)_serviceProvider.GetService(m.Value.GetType());
             });
         }
 
