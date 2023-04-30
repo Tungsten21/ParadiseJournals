@@ -22,7 +22,7 @@ namespace ViewModels.Items
 
         public string Country
         {
-            get => _model.Title;
+            get => _model.Country;
             set => SetProperty(_model.Country, value, _model, (m, c) => m.Country = c);
         }
 
