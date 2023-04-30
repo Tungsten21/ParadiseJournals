@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,26 @@ namespace UI.Controls.ItemsControls
     /// </summary>
     public partial class HomeViewItemsPanelTemplate : UserControl
     {
+        public static DependencyProperty ItemsSourceProperty =
+                    DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(HomeViewItemsPanelTemplate), new PropertyMetadata(null));
+
+        public IEnumerable ItemsSource
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        public static DependencyProperty TitleProperty =
+                    DependencyProperty.Register("Title", typeof(string), typeof(HomeViewItemsPanelTemplate), new PropertyMetadata(null));
+
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
+
+
         public HomeViewItemsPanelTemplate()
         {
             InitializeComponent();

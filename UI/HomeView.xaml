@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expressionblend/2008" 
              xmlns:local="clr-namespace:UI"
              xmlns:itemsControls="clr-namespace:UI.Controls.ItemsControls"
-             xmlns:itemTemplates="clr-namespace:UI.Controls.ItemsControls.ItemTemplates"
+             xmlns:controlViews="clr-namespace:UI.Controls.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -37,67 +37,19 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Background="Teal"
-                  
-                  Visibility="{Binding AtLeastOneJournal,
-                                       Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.15*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                
-                <TextBlock Text="My Journals:"
-                           FontSize="20"
-                           FontWeight="Bold"/>
+            <!--Items Controls -->
+            <itemsControls:HomeViewItemsPanelTemplate Title="My Journals:"
+                                                      ItemsSource="{Binding UserJournals}"
+                                                      Visibility="{Binding AtLeastOneJournal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-                <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Hidden">
-                    <ItemsControl ItemsSource="{Binding UserJournals}"
-                                  ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}"
-                                  MinWidth="250">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Background="Tan"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
+            <itemsControls:HomeViewItemsPanelTemplate Grid.Column="2"
+                                                      Title="My Wishlists:"
+                                                      ItemsSource="{Binding UserWishLists}"
+                                                      Visibility="{Binding AtLeastOneWishList, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
 
-                        <!--<ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <itemTemplates:JournalItemTemplate/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>-->
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-
-            <Grid Grid.Column="2"
-                        Background="Purple"
-                        Visibility="{Binding AtLeastOneWishlist,
-                                             Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.15*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                
-                <TextBlock Text="My Wishlists:"
-                           FontSize="20"
-                           FontWeight="Bold"/>
-                <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Hidden">
-                    <ItemsControl ItemsSource="{Binding UserWishLists}"
-                                  ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}"
-                                  MinWidth="250">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Background="Tan"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-
-            <!--Default View If No Journals Found-->
+            <!--Default View's If No Items Found-->
+            <!--Journals-->
             <StackPanel Background="Teal"
                         Visibility="{Binding NoJournalsFound, 
                                              Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -107,8 +59,8 @@
                            TextAlignment="Center"
                            VerticalAlignment="Center"/>
             </StackPanel>
-            
-            <!--Default View If No Wishlists Found-->
+
+            <!--Wishlists-->
             <StackPanel Grid.Column="2"
                         Background="Purple"
                         Visibility="{Binding NoWishListsFound, 
@@ -121,56 +73,11 @@
             </StackPanel>
         </Grid>
 
-        <!--View Displayed If No Items Found-->
-        <Grid Background="Red"
-              Grid.Row="1"
-              Grid.Column="1"
-              Grid.RowSpan="3"
-              Grid.ColumnSpan="2"
-              Visibility="{Binding NoItemsDetected, 
-                                   Converter={StaticResource BooleanToVisibilityConverter}}">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition/>
-                <RowDefinition Height="0.5*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="No Journals or Wishlists detected..."
-                       FontSize="22"
-                       FontWeight="Bold"
-                       TextAlignment="Center"
-                       VerticalAlignment="Center"/>
-
-            <TextBlock Grid.Row="1"
-                       FontSize="16"
-                       TextAlignment="Center"
-                       VerticalAlignment="Center"
-                       TextWrapping="Wrap">
-                Et dolore nonumy luptatum elitr nostrud dolor lobortis et sadipscing ullamcorper vel sea ipsum tempor lorem sanctus 
-                lorem consectetuer nisl. Dolor lobortis et sadipscing ullamcorper vel sea.
-            </TextBlock>
-
-            <StackPanel Grid.Row="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <Button Width="125"
-                        Height="40"
-                        Content="Create Journal"
-                        Margin="15 0"
-                        Command="{Binding OpenCreateNewJournalDialogCommand}"/>
-
-                <Button Width="125"
-                        Height="40"
-                        Content="Create Wishlist"
-                        Margin="15 0"
-                        Command="{Binding OpenCreateNewWishListDialogCommand}"/>
-            </StackPanel>
-
-        </Grid>
+        <!--No Items Found-->
+        <controlViews:NoItemsFoundView Grid.Row="1"
+                                       Grid.Column="1"
+                                       Grid.RowSpan="3"
+                                       Grid.ColumnSpan="2"/>
 
     </Grid>
 </UserControl>

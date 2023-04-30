@@ -20,13 +20,13 @@ namespace ViewModels
         [NotifyPropertyChangedFor(nameof(NoItemsDetected))]
         [NotifyPropertyChangedFor(nameof(NoJournalsFound))]
         [ObservableProperty]
-        private bool _atLeastOneWishlist;
+        private bool _atLeastOneWishList;
 
-        public bool NoJournalsFound => AtLeastOneWishlist && !AtLeastOneJournal;
+        public bool NoJournalsFound => AtLeastOneWishList && !AtLeastOneJournal;
 
-        public bool NoWishListsFound => !AtLeastOneWishlist && AtLeastOneJournal;
+        public bool NoWishListsFound => !AtLeastOneWishList && AtLeastOneJournal;
 
-        public bool NoItemsDetected => !AtLeastOneJournal && !AtLeastOneWishlist;
+        public bool NoItemsDetected => !AtLeastOneJournal && !AtLeastOneWishList;
 
         public ObservableCollection<JournalViewModel> UserJournals { get; set; } = new();
         public ObservableCollection<WishListViewModel> UserWishLists { get; set; } = new();
