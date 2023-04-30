@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -15,22 +16,25 @@ namespace Tests.ViewModels
     public class HomeViewModelTests
     {
         private Mock<IDialogService> _dialogService;
-        private HomeViewModel _homeViewModel;
         private Mock<INavigationService> _navigationService;
+        private HomeViewModel _homeViewModel;
+        private IMessenger _messenger;
+
 
         [TestInitialize]
         public void Setup()
         {
             _dialogService = new();
-            _homeViewModel = new(_dialogService.Object);
             _navigationService = new();
+            _messenger = new WeakReferenceMessenger();
+            _homeViewModel = new(_dialogService.Object, _messenger);
         }
 
         [TestMethod()]
         public void OpenCreateNewJournalDialogCommandShouldCallDialogServiceWithCreateNewJournalViewModel()
         {
             // Arrange
-            var createNewJournalViewModel = new CreateNewJournalViewModel(_navigationService.Object);
+            var createNewJournalViewModel = new CreateNewJournalViewModel(_navigationService.Object, _messenger);
             _dialogService.SetupProperty(x => x.CurrentViewModel);
             _dialogService.Setup(x => x.ShowDialog<CreateNewJournalViewModel>(It.IsAny<string>(), It.IsAny<string>()))
                 .Callback(() => _dialogService.Object.CurrentViewModel = createNewJournalViewModel);
@@ -48,7 +52,7 @@ namespace Tests.ViewModels
         public void OpenCreateNewWishListDialogCommandShouldCallDialogServiceWithCreateNewWishListViewModel()
         {
             // Arrange
-            var createNewWishListViewModel = new CreateNewWishListViewModel();
+            var createNewWishListViewModel = new CreateNewWishListViewModel(_navigationService.Object, _messenger);
             _dialogService.SetupProperty(x => x.CurrentViewModel);
             _dialogService.Setup(x => x.ShowDialog<CreateNewWishListViewModel>(It.IsAny<string>(), It.IsAny<string>()))
                 .Callback(() => _dialogService.Object.CurrentViewModel = createNewWishListViewModel);

@@ -1,5 +1,6 @@
 ﻿using Moq;
 using ViewModels;
+using ViewModels.Controls;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
 
@@ -8,8 +9,9 @@ namespace Tests.ViewModels
     [TestClass()]
     public class EntryViewModelTests
     {
-        private Mock<IDialogService> _dialogService; //move to ui specific tests in seperate project
+        private Mock<IDialogService> _dialogService;
         private Mock<INavigationService> _navigationService;
+        private MenuBarViewModel _menuBarViewModel;
         private EntryViewModel _entryViewModel;
         
 
@@ -17,15 +19,16 @@ namespace Tests.ViewModels
         public void Setup()
         {
            _dialogService = new();
-           _entryViewModel = new(_dialogService.Object);
            _navigationService = new();
+           _menuBarViewModel = new(_navigationService.Object, _dialogService.Object);
+           _entryViewModel = new(_dialogService.Object);
         }
 
         [TestMethod()]
         public void OpenLoginDialogCommandShouldCallDialogServiceWithLoginViewModel()
         {
             // Arrange
-            var loginViewModel = new LoginViewModel(_navigationService.Object);
+            var loginViewModel = new LoginViewModel(_navigationService.Object, _menuBarViewModel);
             _dialogService.SetupProperty(x => x.CurrentViewModel);
             _dialogService.Setup(x => x.ShowDialog<LoginViewModel>(It.IsAny<string>(), It.IsAny<string>()))
                 .Callback(() => _dialogService.Object.CurrentViewModel = loginViewModel);

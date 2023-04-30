@@ -30,7 +30,7 @@ namespace ViewModels.Dialogs
             //TODO: Add validation to ensure necessaery fields have valid input
             if (true)
             {
-                _navigationService.NavigateToViewModel<WishListHomeViewModel>
+                _navigationService.NavigateToViewModel<JournalHomeViewModel>
                     (() => _messenger.Send(new ItemCreatedMessage(new JournalViewModel(_journalViewModel))));
                 CloseWindow?.Invoke();
             }

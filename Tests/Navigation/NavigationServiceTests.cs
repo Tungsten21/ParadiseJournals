@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Moq;
 using Tests.Navigation;
 using ViewModels;
+using ViewModels.Controls;
 using ViewModels.Interfaces;
 using ViewModels.Navigation;
 
@@ -12,18 +13,23 @@ namespace Tests.ViewModels
     public class NavigationServiceTests
     {
         private Mock<IServiceProvider> _serviceProvider;
+        private Mock<IDialogService> _dialogService;      
         private IMessenger _messenger;
-        private MainWindowViewModel _mainWindowViewModel;
         private INavigationService _navigationService;
-        
+        private MenuBarViewModel _menuBarViewModel;
+        private MainWindowViewModel _mainWindowViewModel;
+
+
 
         [TestInitialize]
         public void Setup()
         {
             _serviceProvider = new();
+            _dialogService = new();
             _messenger = new WeakReferenceMessenger();
-            _mainWindowViewModel = new(_serviceProvider.Object, _messenger);
             _navigationService = new NavigationService(_serviceProvider.Object, _messenger);
+            _menuBarViewModel = new(_navigationService, _dialogService.Object);
+            _mainWindowViewModel = new(_serviceProvider.Object, _messenger, _menuBarViewModel);
         }
 
         [TestMethod]
@@ -31,7 +37,7 @@ namespace Tests.ViewModels
         {
             //Arrange
             _serviceProvider.Setup(x => x.GetService(typeof(HomeViewModel)))
-                .Returns(new HomeViewModel(new Mock<IDialogService>().Object));
+                .Returns(new HomeViewModel(_dialogService.Object, _messenger));
 
             //Act
             _navigationService.NavigateToViewModel<HomeViewModel>();
@@ -57,7 +63,7 @@ namespace Tests.ViewModels
             //Assert
             Assert.IsNotNull(exception);
             Assert.IsInstanceOfType(exception, typeof(ArgumentInvalidException));
-            Assert.IsTrue(exception.Message == "Passed in viewmodel is not registered with DI.");
+            Assert.IsTrue(exception.Message == "Passed in viewmodel " + typeof(UnRegisteredViewModel).FullName + " is not registered with DI.");
         }
     }
 }

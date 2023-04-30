@@ -21,7 +21,7 @@ namespace ViewModels.Navigation
         public void NavigateToViewModel<TViewModel>(Action? action = null) where TViewModel : IViewModel
         {
             _destViewModel = (IViewModel)_serviceProvider.GetService(typeof(TViewModel))
-                ?? throw new ArgumentInvalidException("Passed in viewmodel is not registered with DI.");
+                ?? throw new ArgumentInvalidException("Passed in viewmodel " + typeof(TViewModel).FullName +  " is not registered with DI.");
             action?.Invoke();
             _messenger.Send(new NavigationMessage(_destViewModel));
         }
