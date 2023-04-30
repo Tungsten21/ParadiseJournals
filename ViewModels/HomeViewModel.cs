@@ -15,21 +15,21 @@ namespace ViewModels
         private readonly IDialogService _dialogService;
         private readonly IMessenger _messenger;
 
-        [NotifyPropertyChangedFor(nameof(NoItemsFound))]
-        [NotifyPropertyChangedFor(nameof(NoWishListsButJournalFound))]
+        [NotifyPropertyChangedFor(nameof(NoItemsDetected))]
+        [NotifyPropertyChangedFor(nameof(NoWishListsFound))]
         [ObservableProperty]
         private bool _atLeastOneJournal;
 
-        [NotifyPropertyChangedFor(nameof(NoItemsFound))]
-        [NotifyPropertyChangedFor(nameof(NoJournalsButWishListFound))]
+        [NotifyPropertyChangedFor(nameof(NoItemsDetected))]
+        [NotifyPropertyChangedFor(nameof(NoJournalsFound))]
         [ObservableProperty]
         private bool _atLeastOneWishList;
 
-        public bool NoJournalsButWishListFound => AtLeastOneWishList && !AtLeastOneJournal;
+        public bool NoJournalsFound => AtLeastOneWishList && !AtLeastOneJournal;
 
-        public bool NoWishListsButJournalFound => !AtLeastOneWishList && AtLeastOneJournal;
+        public bool NoWishListsFound => !AtLeastOneWishList && AtLeastOneJournal;
 
-        public bool NoItemsFound => !AtLeastOneJournal && !AtLeastOneWishList;
+        public bool NoItemsDetected => !AtLeastOneJournal && !AtLeastOneWishList;
 
         public ObservableCollection<JournalViewModel> UserJournals { get; set; } = new();
         public ObservableCollection<WishListViewModel> UserWishLists { get; set; } = new();
