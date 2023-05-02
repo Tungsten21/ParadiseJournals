@@ -33,7 +33,7 @@ namespace ViewModels
 
             _messenger.Register<NavigationMessage>(this, (r, m) =>
             {
-                CurrentViewModel = (IViewModel)_serviceProvider.GetService(m.Value.GetType());
+                CurrentViewModel = m.Value;
             });
         }
 
