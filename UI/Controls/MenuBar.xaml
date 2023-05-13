@@ -12,29 +12,56 @@
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/Controls/MenuItemStyle.xaml"/>
     </UserControl.Resources>
+    
+
 
     <Menu>
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel />
+                <Grid ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
-        <MenuItem Header="Item 1" />
-        <MenuItem Header="Item 2" Style="{DynamicResource MenuItemStyle1}">
-            <MenuItem Header="Sub item 1" />
-            <MenuItem Header="Sub item 2" />
-            <MenuItem Header="Sub item 3" />
-            <MenuItem Header="Sub item 4" />
+        <MenuItem Grid.Row="1" Header="Home"/>
+        <MenuItem Grid.Row="2"
+                  Header="Journals">
+            <MenuItem Header="Create New"/>
+            <MenuItem Header="View"/>
         </MenuItem>
-        <MenuItem Header="Item 3" />
-        <MenuItem Header="Item 4" />
+        <MenuItem Grid.Row="3"
+                  Header="Wishlists">
+            <MenuItem Header="Create New"/>
+            <MenuItem Header="View"/>
+        </MenuItem>
+        <MenuItem Grid.Row="4"
+                  Header="Export">
+            <MenuItem Header="Journals"/>
+            <MenuItem Header="Wishlists"/>
+        </MenuItem>
+        <MenuItem Grid.Row="5"
+                  Header="Settings">
+            <MenuItem Header="Account"/>
+            <MenuItem Header="General"/>
+            <MenuItem Header="Log Out"/>
+        </MenuItem>
     </Menu>
-    
+
     <!--<Grid Background="Blue"
           MouseEnter="OnMenuMouseOver"
           MouseLeave="OnMenuMouseLeave"
           ShowGridLines="True" >
-        --><!--Define Rows & Columns--><!--
+        -->
+    <!--Define Rows & Columns-->
+    <!--
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition x:Name="itemRow1" Height="Auto"/>
