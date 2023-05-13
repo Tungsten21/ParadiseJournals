@@ -33,13 +33,16 @@
         </Menu.ItemsPanel>
         <MenuItem Grid.Row="1" Header="Home"/>
         <MenuItem Grid.Row="2"
-                  Header="Journals">
-            <MenuItem Header="Create New"/>
+                  Header="Journals"
+                  Command="{Binding NavigateToHomeViewModelCommand}">
+            <MenuItem Header="Create New"
+                      Command="{Binding OpenCreateNewJournalDialogCommand}"/>
             <MenuItem Header="View"/>
         </MenuItem>
         <MenuItem Grid.Row="3"
                   Header="Wishlists">
-            <MenuItem Header="Create New"/>
+            <MenuItem Header="Create New"
+                      Command="{Binding OpenCreateNewWishListDialogCommand}"/>
             <MenuItem Header="View"/>
         </MenuItem>
         <MenuItem Grid.Row="4"
