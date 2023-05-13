@@ -20,6 +20,8 @@ namespace ViewModels.Controls
         [ObservableProperty]
         private bool _isMenuBarVisible;
 
+        public bool IsMenuExpanded;
+
         //Commands
         [RelayCommand]
         private void NavigateToHomeViewModel()
