@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Background="AliceBlue" ShowGridLines="True">
+    <Grid Background="AliceBlue" ShowGridLines="False">
         <!--Define Rows & Columns-->
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -51,7 +51,7 @@
             <!--Default View's If No Items Found-->
             <!--Journals-->
             <StackPanel Background="Teal"
-                        Visibility="{Binding NoJournalsFound, 
+                        Visibility="{Binding NoJournalsButWishListFound, 
                                              Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="No Journals found..."
                            FontSize="20"
@@ -63,7 +63,7 @@
             <!--Wishlists-->
             <StackPanel Grid.Column="2"
                         Background="Purple"
-                        Visibility="{Binding NoWishListsFound, 
+                        Visibility="{Binding NoWishListsButJournalFound, 
                                              Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="No Wishlists found..."
                            FontSize="20"

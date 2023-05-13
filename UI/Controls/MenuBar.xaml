@@ -9,57 +9,105 @@
              d:DesignHeight="500" d:DesignWidth="75"
              DataContext="{Binding MenuBarViewModel}">
 
-    <Grid Background="Blue"
-          Width="75"
-          Visibility="{Binding IsMenuBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <!--Define Rows & Columns-->
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Resources/Styles/Controls/MenuItemStyle.xaml"/>
+    </UserControl.Resources>
+    
+
+
+    <Menu>
+        <Menu.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Grid ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </ItemsPanelTemplate>
+        </Menu.ItemsPanel>
+        <MenuItem Grid.Row="1" Header="Home"/>
+        <MenuItem Grid.Row="2"
+                  Header="Journals"
+                  Command="{Binding NavigateToHomeViewModelCommand}">
+            <MenuItem Header="Create New"
+                      Command="{Binding OpenCreateNewJournalDialogCommand}"/>
+            <MenuItem Header="View"/>
+        </MenuItem>
+        <MenuItem Grid.Row="3"
+                  Header="Wishlists">
+            <MenuItem Header="Create New"
+                      Command="{Binding OpenCreateNewWishListDialogCommand}"/>
+            <MenuItem Header="View"/>
+        </MenuItem>
+        <MenuItem Grid.Row="4"
+                  Header="Export">
+            <MenuItem Header="Journals"/>
+            <MenuItem Header="Wishlists"/>
+        </MenuItem>
+        <MenuItem Grid.Row="5"
+                  Header="Settings">
+            <MenuItem Header="Account"/>
+            <MenuItem Header="General"/>
+            <MenuItem Header="Log Out"/>
+        </MenuItem>
+    </Menu>
+
+    <!--<Grid Background="Blue"
+          MouseEnter="OnMenuMouseOver"
+          MouseLeave="OnMenuMouseLeave"
+          ShowGridLines="True" >
+        -->
+    <!--Define Rows & Columns-->
+    <!--
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="itemRow1" Height="Auto"/>
+            <RowDefinition x:Name="itemRow2" Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
 
         <Button Grid.Row="1"
                 Width="50"
                 Height="50"
-                Margin="0 10"
                 Command="{Binding NavigateToHomeViewModelCommand}">
             <icons:FontAwesome FontSize="40"
                                Icon="Home"/>
         </Button>
-        <Button Grid.Row="2"
-                Width="50"
-                Height="50"
-                Margin="0 10"
-                Command="{Binding OpenCreateNewJournalDialogCommand}">
-            <icons:FontAwesome FontSize="40"
-                               Icon="Book"/>
-        </Button>
+
+        <local:JournalsMenuItem Grid.Row="2"/>
+        
         <Button Grid.Row="3"
                 Width="50"
                 Height="50"
-                Margin="0 10"
                 Command="{Binding OpenCreateNewWishListDialogCommand}">
             <icons:FontAwesome FontSize="40"
                                Icon="Heart"/>
         </Button>
         <Button Grid.Row="4"
                 Width="50"
-                Height="50"
-                Margin="0 10">
+                Height="50">
             <icons:FontAwesome FontSize="40"
                                Icon="File"/>
         </Button>
         <Button Grid.Row="5" 
                 Width="50"
-                Height="50"
-                Margin="0 10">
+                Height="50">
             <icons:FontAwesome FontSize="40"
                                Icon="Cog"/>
         </Button>
-    </Grid>
+    </Grid>-->
 </UserControl>

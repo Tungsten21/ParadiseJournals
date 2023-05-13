@@ -4,11 +4,13 @@
              xmlns:local="clr-namespace:UI"
              xmlns:dataTemplateSelectors="clr-namespace:UI.Resources.DataTemplateSelectors"
              xmlns:itemTemplates="clr-namespace:UI.Controls.ItemsControls.ItemTemplates"
+             xmlns:converters="clr-namespace:UI.Resources.Converters"
              Startup="OnStart">
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <dataTemplateSelectors:JournalOrWishListItemTeplateSelector x:Key="JournalOrWishListTemplateSelector"/>
-
+        <converters:MenuBarBooleanToWidthConverter x:Key="MenuBarToWidthConverter"/>
+        
         <ResourceDictionary x:Key="ItemTemplates">
             <itemTemplates:JournalItemTemplate x:Key="JournalItemTemplate"/>
             <itemTemplates:WishListItemTemplate x:Key="WishListItemTemplate"/>
