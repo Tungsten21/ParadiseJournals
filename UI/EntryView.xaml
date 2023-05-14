@@ -9,7 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="AliceBlue">
-        <!--Define Rows & Columns-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -22,54 +21,54 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        
 
+         <!--Title-->
         <TextBlock Grid.Column="1"
-                   Text="Paradise Journals"
-                   FontSize="20"
-                   FontWeight="Bold"
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   FontWeight="Bold"
+                   FontSize="20"
+                   Text="Paradise Journals"/>
 
         <!--Content-->
         <!--Text-->
         <TextBlock Grid.Column="1"
                    Grid.Row="1"
-                   Text="Plan &amp; document your travels here!"
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   Text="Plan &amp; document your travels here!"/>
 
         <TextBlock Grid.Column="1"
                    Grid.Row="2"
-                   Text="Either login to your account below, or select to use offline mode."
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   Text="Either login to your account below, or select to use offline mode."/>
 
         <TextBlock Grid.Column="1"
                    Grid.Row="3"
-                   TextAlignment="Center"
-                   VerticalAlignment="Center">
+                   VerticalAlignment="Center"
+                   TextAlignment="Center">
             New user? Click 
             <Hyperlink Command="{Binding OpenCreateNewUserDialogCommand}"> here </Hyperlink>  
             to make an account and have access to all your journals across multiple devices.
         </TextBlock>
 
-        <!--Buttons-->
+        <!--Button Container-->
         <StackPanel Grid.Row="4"
                     Grid.Column="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
             
-            <Button Content="Login"
-                    Width="125"
+            <Button Width="125"
                     Height="40"
                     Margin="10 0"
+                    Content="Login"
                     Command="{Binding OpenLoginDialogCommand}"/>
-            <Button Content="Offline mode"
-                    Width="125"
+
+            <Button Width="125"
                     Height="40"
-                    Margin="10 0"/>
-            
+                    Margin="10 0"
+                    Content="Offline mode"/>
         </StackPanel>
 
     </Grid>

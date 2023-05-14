@@ -29,6 +29,24 @@ namespace UI.Resources.Animations
             set => SetValue(ToProperty, value);
         }
 
+        public override Type TargetPropertyType => typeof(GridLength);
+
+        public GridLengthAnimation()
+        {
+
+        }
+
+        public GridLengthAnimation(Duration duration, GridLength? from = null, GridLength? to = null)
+        {
+            Duration = duration;
+
+            if (from.HasValue)
+                From = from.Value;
+
+            if (to.HasValue)
+                To = to.Value;
+        }
+
         public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
         {
                 double fromVal = ((GridLength)GetValue(GridLengthAnimation.FromProperty)).Value;
@@ -44,24 +62,6 @@ namespace UI.Resources.Animations
                     return new GridLength(animationClock.CurrentProgress.Value *
                         (toVal - fromVal) + fromVal, GridUnitType.Star);
             }
-        }
-
-        public override Type TargetPropertyType => typeof(GridLength);
-
-        public GridLengthAnimation()
-        {
-            
-        }
-
-        public GridLengthAnimation(Duration duration, GridLength? from = null, GridLength? to = null)
-        {
-            Duration = duration;
-
-            if (from.HasValue)
-                From = from.Value;
-
-            if (to.HasValue)
-                To = to.Value;
         }
 
         protected override Freezable CreateInstanceCore()
