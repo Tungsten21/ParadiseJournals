@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:UI.Dialogs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="CornflowerBlue" ShowGridLines="True">
-        <!--Define Rows & Grids-->
+    <Grid Background="CornflowerBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition/>
@@ -25,22 +24,24 @@
 
         <!--Content-->
         <!--Text-->
+        <!--Title-->
         <TextBlock Grid.Column="1"
                    Grid.ColumnSpan="2"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
                    FontSize="20"
                    FontWeight="Bold"
-                   TextWrapping="Wrap"
-                   TextAlignment="Center"
-                   VerticalAlignment="Center"
                    Text="Create a new Wishlist:"/>
 
+        <!--Main Text-->
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
-                   FontSize="16"
+                   VerticalAlignment="Center"
                    TextWrapping="Wrap"
                    TextAlignment="Center"
-                   VerticalAlignment="Center">
+                   FontSize="16">
             Here you can create your own wishlist! Please enter all the required fields
             to get started...
         </TextBlock>
@@ -50,52 +51,48 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Wishlist Title: "/>
             <TextBox Height="30"
-                     Text="{Binding WishListViewModel.Title, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding WishListViewModel.Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Country:"/>
             <TextBox Height="30"
-                     Text="{Binding WishListViewModel.Country, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding WishListViewModel.Country, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
-        <Grid Grid.Row="3" ShowGridLines="True"
-                    Grid.Column="1"
-                    Width="250"
-                    VerticalAlignment="Center">
+        <!--Date Container-->
+        <Grid Grid.Row="3"
+              Grid.Column="1"
+              Width="250"
+              VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
             <StackPanel>
                 <TextBlock Text="Start Date:"/>
                 <DatePicker Height="30"
-                            BorderBrush="Transparent"
                             VerticalContentAlignment="Center"
                             Focusable="False"
-                            Text="{Binding WishListViewModel.StartDate, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                            BorderBrush="Transparent"
+                            Text="{Binding WishListViewModel.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="End Date:"/>
                 <DatePicker Height="30"
-                            BorderBrush="Transparent"
                             VerticalContentAlignment="Center"
                             Focusable="False"
-                            Text="{Binding WishListViewModel.EndDate, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                            BorderBrush="Transparent"
+                            Text="{Binding WishListViewModel.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
             </StackPanel>
         </Grid>
 
@@ -103,11 +100,10 @@
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="City (Optional):"/>
             <TextBox Height="30"
-                     Text="{Binding WishListViewModel.City, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding WishListViewModel.City, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4"
@@ -116,9 +112,7 @@
                     VerticalAlignment="Center">
             <TextBlock Text="Description (Optional):"/>
             <TextBox Height="50"
-                     Text="{Binding WishListViewModel.Description, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding WishListViewModel.Description, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
         <Button Grid.Row="4"

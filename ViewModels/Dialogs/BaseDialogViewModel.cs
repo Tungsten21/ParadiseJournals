@@ -15,13 +15,13 @@ namespace ViewModels.Dialogs
         [ObservableProperty]
         private IViewModel _viewModel;
 
+        //Commands
+
         //Constructors
         public BaseDialogViewModel()
         {
             
         }
-
-        //Commands
 
         //Methods
     }

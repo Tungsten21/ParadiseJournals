@@ -7,26 +7,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <!--Control Container-->
     <Border Background="Gray"
             CornerRadius="10">
+        
+        <!--Format Container-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.15*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:HomeViewItemsPanelTemplate}}"
-                       VerticalAlignment="Center"
+            <!--Title-->
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
                        FontWeight="Bold"
                        FontSize="20"
                        Foreground="White"
-                       HorizontalAlignment="Center"/>
+                       Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:HomeViewItemsPanelTemplate}}"/>
 
+            <!--Items Container-->
             <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Hidden">
-                <ItemsControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=local:HomeViewItemsPanelTemplate}}"
-                              ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}"
-                              MinWidth="250">
+                          VerticalScrollBarVisibility="Hidden">
+                <ItemsControl MinWidth="250"
+                              ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=local:HomeViewItemsPanelTemplate}}"
+                              ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel/>

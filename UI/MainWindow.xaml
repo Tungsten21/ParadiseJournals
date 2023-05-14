@@ -9,10 +9,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
 
-    <Grid ShowGridLines="True" Background="Transparent">
-        <Grid.RowDefinitions>
-            
-        </Grid.RowDefinitions>
+    <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding MenuBarViewModel.IsMenuBarVisible, Converter={StaticResource MenuBarToWidthConverter}}"
                               x:Name="menuColumn"/>
@@ -20,10 +17,12 @@
         </Grid.ColumnDefinitions>
 
         <controls:MenuBar/>
-
+        
+        <!--DataTemplates To Tie Views -> ViewModels-->
         <ContentControl Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Content="{Binding CurrentViewModel}">
+            
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewModels:EntryViewModel}">
                     <local:EntryView/>

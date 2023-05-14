@@ -9,13 +9,14 @@
              d:DesignHeight="500" d:DesignWidth="75"
              DataContext="{Binding MenuBarViewModel}">
 
+    <!--Menu Item Style-->
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/Controls/MenuItemStyle.xaml"/>
     </UserControl.Resources>
     
-
-
+    <!--Menu Control-->
     <Menu>
+        <!--Format Container-->
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <Grid ShowGridLines="True">
@@ -31,25 +32,32 @@
                 </Grid>
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
-        <MenuItem Grid.Row="1" Header="Home"/>
+        
+        <!--Content-->
+        <MenuItem Grid.Row="1" 
+                  Header="Home"
+                  Command="{Binding NavigateToHomeViewModelCommand}"/>
+        
         <MenuItem Grid.Row="2"
-                  Header="Journals"
-                  Command="{Binding NavigateToHomeViewModelCommand}">
+                  Header="Journals">
             <MenuItem Header="Create New"
                       Command="{Binding OpenCreateNewJournalDialogCommand}"/>
             <MenuItem Header="View"/>
         </MenuItem>
+        
         <MenuItem Grid.Row="3"
                   Header="Wishlists">
             <MenuItem Header="Create New"
                       Command="{Binding OpenCreateNewWishListDialogCommand}"/>
             <MenuItem Header="View"/>
         </MenuItem>
+        
         <MenuItem Grid.Row="4"
                   Header="Export">
             <MenuItem Header="Journals"/>
             <MenuItem Header="Wishlists"/>
         </MenuItem>
+        
         <MenuItem Grid.Row="5"
                   Header="Settings">
             <MenuItem Header="Account"/>
@@ -58,6 +66,8 @@
         </MenuItem>
     </Menu>
 
+    <!--Old Menu With Animation (Come back to...)-->
+    
     <!--<Grid Background="Blue"
           MouseEnter="OnMenuMouseOver"
           MouseLeave="OnMenuMouseLeave"

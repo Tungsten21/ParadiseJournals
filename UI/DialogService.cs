@@ -46,7 +46,7 @@ namespace ViewModels
             baseDialogWindow.Show();
         }
 
-        private Tuple<int, int> mapWindowSize(string windowSize)
+        public Tuple<int, int> mapWindowSize(string windowSize)
         {
             if (windowSize == "Small")
                 return Tuple.Create((int)DialogSize.SmallWidth, (int)DialogSize.SmallHeight);
@@ -59,11 +59,6 @@ namespace ViewModels
 
             throw new Exception("Invaid size type provided...");
 
-        }
-
-        Tuple<int, int> IDialogService.mapWindowSize(string windowSize)
-        {
-            throw new NotImplementedException();
         }
     }
 }

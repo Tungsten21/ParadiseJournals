@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:UI.Dialogs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Pink" ShowGridLines="True">
-        <!--Define Rows & Grids-->
+    <Grid Background="Pink">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition/>
@@ -25,22 +24,23 @@
         
         <!--Content-->
         <!--Text-->
+        <!--Title-->
         <TextBlock Grid.Column="1"
                    Grid.ColumnSpan="2"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
                    FontSize="20"
                    FontWeight="Bold"
-                   TextWrapping="Wrap"
-                   TextAlignment="Center"
-                   VerticalAlignment="Center"
                    Text="Create a new Journal:"/>
-
+        <!--Main Text-->
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
-                   FontSize="16"
-                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center">
+                   TextWrapping="Wrap"
+                   FontSize="16">
             Here you can create your own journal! Please enter all the required fields
             to get started...
         </TextBlock>
@@ -50,52 +50,48 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Journal Title: "/>
             <TextBox Height="30"
-                     Text="{Binding JournalViewModel.Title, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding JournalViewModel.Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Country:"/>
             <TextBox Height="30"
-                     Text="{Binding JournalViewModel.Country, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding JournalViewModel.Country, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
-        <Grid Grid.Row="3" ShowGridLines="True"
-                    Grid.Column="1"
-                    Width="250"
-                    VerticalAlignment="Center">
+        <!--Date Container-->
+        <Grid Grid.Row="3" 
+              Grid.Column="1"
+              Width="250"
+              VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
             <StackPanel>
                 <TextBlock Text="Start Date:"/>
                 <DatePicker Height="30"
-                            BorderBrush="Transparent"
                             VerticalContentAlignment="Center"
                             Focusable="False"
-                            Text="{Binding JournalViewModel.StartDate, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                            BorderBrush="Transparent"
+                            Text="{Binding JournalViewModel.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="End Date:"/>
                 <DatePicker Height="30"
-                            BorderBrush="Transparent"
                             VerticalContentAlignment="Center"
                             Focusable="False"
-                            Text="{Binding JournalViewModel.EndDate, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                            BorderBrush="Transparent"
+                            Text="{Binding JournalViewModel.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
             </StackPanel>
         </Grid>
 
@@ -103,23 +99,22 @@
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="City (Optional):"/>
             <TextBox Height="30"
-                     Text="{Binding JournalViewModel.City, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding JournalViewModel.City, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4"
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Description (Optional):"/>
             <TextBox Height="50"
-                     Text="{Binding JournalViewModel.Description, 
-                                    UpdateSourceTrigger=PropertyChanged, 
-                                    Mode=OneWayToSource}"/>
+                     Text="{Binding JournalViewModel.Description,UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
         </StackPanel>
+
 
         <Button Grid.Row="4"
                 Grid.Column="2"
