@@ -57,7 +57,7 @@ namespace ViewModels
         }
 
         //Methods
-        public void AddItemOnReceived(ICreatableItem item)
+        private void AddItemOnReceived(ICreatableItem item)
         {
             switch (item)
             {

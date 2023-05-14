@@ -11,9 +11,9 @@ namespace ViewModels.Dialogs
 {
     public partial class CreateNewUserViewModel : ObservableObject, IViewModel, IClosable
     {
+        //Properties
         private readonly INavigationService _navigationService;
 
-        //Properties
 
         public Action CloseWindow { get; set; }
 

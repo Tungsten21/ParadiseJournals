@@ -17,7 +17,7 @@ namespace ViewModels
         //Constructors
         public ViewWishListViewModel()
         {
-            
+
         }
 
         //Methods
