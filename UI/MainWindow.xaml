@@ -31,11 +31,11 @@
                 <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                     <local:HomeView/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:JournalHomeViewModel}">
-                    <local:JournalHomeView/>
+                <DataTemplate DataType="{x:Type viewModels:ViewJournalViewModel}">
+                    <local:ViewJournalView/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:WishListHomeViewModel}">
-                    <local:WishListHomeView/>
+                <DataTemplate DataType="{x:Type viewModels:ViewWishListViewModel}">
+                    <local:ViewWishListView/>
                 </DataTemplate>
 
             </ContentControl.Resources>

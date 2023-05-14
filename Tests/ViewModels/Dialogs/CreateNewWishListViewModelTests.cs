@@ -38,11 +38,11 @@ namespace Tests.ViewModels.Dialogs
             _homeViewModel = new(_dialogService.Object, _messenger);
             _mainWindowViewModel = new(_serviceProvider.Object, _messenger, _menuBarViewModel);
 
-            _serviceProvider.Setup(x => x.GetService(typeof(WishListHomeViewModel))).Returns(new WishListHomeViewModel());
+            _serviceProvider.Setup(x => x.GetService(typeof(ViewWishListViewModel))).Returns(new ViewWishListViewModel());
         }
 
         [TestMethod()]
-        public void AttemptToCreateWishListCommandShouldNavigateToWishListHomeOnSuccessfulValidation()
+        public void AttemptToCreateWishListCommandShouldNavigateToViewWishListOnSuccessfulValidation()
         {
             //Add mock validation data once added
 
@@ -50,7 +50,7 @@ namespace Tests.ViewModels.Dialogs
             _createNewWishListViewModel.AttemptToCreateWishListCommand.Execute(null);
 
             // Assert
-            Assert.IsInstanceOfType(_mainWindowViewModel.CurrentViewModel, typeof(WishListHomeViewModel));
+            Assert.IsInstanceOfType(_mainWindowViewModel.CurrentViewModel, typeof(ViewWishListViewModel));
         }
 
         [TestMethod()]

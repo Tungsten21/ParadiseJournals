@@ -33,11 +33,11 @@ namespace Tests.ViewModels.Dialogs
             _homeViewModel = new(_dialogService.Object, _messenger);
             _mainWindowViewModel = new(_serviceProvider.Object, _messenger, _menuBarViewModel);
 
-            _serviceProvider.Setup(x => x.GetService(typeof(JournalHomeViewModel))).Returns(new JournalHomeViewModel());
+            _serviceProvider.Setup(x => x.GetService(typeof(ViewJournalViewModel))).Returns(new ViewJournalViewModel());
         }
 
         [TestMethod()]
-        public void AttemptToCreateJournalCommandShouldNavigateToJournalHomeOnSuccessfulValidation()
+        public void AttemptToCreateJournalCommandShouldNavigateToViewJournalnSuccessfulValidation()
         {
             //Add mock validation data once added
   
@@ -45,7 +45,7 @@ namespace Tests.ViewModels.Dialogs
             _createNewJournalViewModel.AttemptToCreateJournalCommand.Execute(null);
 
             // Assert
-            Assert.IsInstanceOfType(_mainWindowViewModel.CurrentViewModel, typeof(JournalHomeViewModel));
+            Assert.IsInstanceOfType(_mainWindowViewModel.CurrentViewModel, typeof(ViewJournalViewModel));
         }
 
         [TestMethod()]

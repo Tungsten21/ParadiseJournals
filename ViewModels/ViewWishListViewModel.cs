@@ -8,21 +8,18 @@ using ViewModels.Interfaces;
 
 namespace ViewModels
 {
-    public partial class JournalHomeViewModel : ObservableObject, IViewModel
+    public partial class ViewWishListViewModel : ObservableObject, IViewModel
     {
-
         //Properties
 
         //Commands
 
         //Constructors
-        public JournalHomeViewModel() 
+        public ViewWishListViewModel()
         {
-        
+            
         }
 
         //Methods
-
-
     }
 }

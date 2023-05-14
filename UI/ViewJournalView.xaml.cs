@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UI
 {
     /// <summary>
-    /// Interaction logic for WishListHomeView.xaml
+    /// Interaction logic for ViewJournalView.xaml
     /// </summary>
-    public partial class WishListHomeView : UserControl
+    public partial class ViewJournalView : UserControl
     {
-        public WishListHomeView()
+        public ViewJournalView()
         {
             InitializeComponent();
         }

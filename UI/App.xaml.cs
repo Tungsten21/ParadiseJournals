@@ -52,8 +52,8 @@ namespace UI
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<CreateNewJournalViewModel>();
             services.AddSingleton<CreateNewWishListViewModel>();
-            services.AddSingleton<JournalHomeViewModel>();
-            services.AddSingleton<WishListHomeViewModel>();
+            services.AddSingleton<ViewJournalViewModel>();
+            services.AddSingleton<ViewWishListViewModel>();
 
 
             services.AddSingleton<INavigationService, NavigationService>();
