@@ -7,7 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <!--Define Rows & Columns-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -23,6 +22,7 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
+        <!--Title-->
         <TextBlock Grid.Column="1"
                    Grid.ColumnSpan="2"
                    Text="Create New User"
@@ -32,13 +32,13 @@
                    VerticalAlignment="Center"/>
 
         <!--Content-->
-        <!--Text-->
+        <!--Main Text-->
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
+                   VerticalAlignment="Center"
                    TextWrapping="Wrap"
-                   TextAlignment="Center"
-                   VerticalAlignment="Center">
+                   TextAlignment="Center">
            Commodo lorem at vero et takimata nulla sanctus eirmod ipsum takimata dolore sit 
             dignissim dolore diam no amet gubergren consectetuer
         </TextBlock>
@@ -48,6 +48,7 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Email:"/>
             <TextBox Height="30"/>
         </StackPanel>
@@ -56,6 +57,7 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Password:"/>
             <TextBox Height="30"/>
         </StackPanel>
@@ -64,6 +66,7 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="First Name:"/>
             <TextBox Height="30"/>
         </StackPanel>
@@ -72,6 +75,7 @@
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Username:"/>
             <TextBox Height="30"/>
         </StackPanel>
@@ -80,6 +84,7 @@
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
+            
             <TextBlock Text="Confirm Password:"/>
             <TextBox Height="30"/>
         </StackPanel>

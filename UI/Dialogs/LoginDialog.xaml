@@ -7,7 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <!--Define Rows & Columns-->
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -22,32 +21,34 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
+        <!--Title-->
         <TextBlock Grid.Column="1"
-                   Text="Login"
-                   FontSize="20"
-                   FontWeight="Bold"
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   FontWeight="Bold"
+                   FontSize="20"
+                   Text="Login"/>
 
         <!--Content-->
         <!--Text-->
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
-                   Text="Login to your existing account. Don't have one? Click here to sign up."
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   Text="Login to your existing account. Don't have one? Click here to sign up."/>
 
         <TextBlock Grid.Row="6"
                    Grid.Column="1"
-                   Text="%Login FeedbackText%"
-                   Foreground="Red"
+                   VerticalAlignment="Center"
                    TextAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   Foreground="Red"
+                   Text="%Login FeedbackText%"/>
 
         <!--Controls-->
         <StackPanel Grid.Row="2"
                     Grid.Column="1"
                     Width="200">
+            
             <TextBlock Text="Username:"/>
             <TextBox/>
         </StackPanel>
@@ -55,15 +56,16 @@
         <StackPanel Grid.Row="3"
                     Grid.Column="1"
                     Width="200">
+            
             <TextBlock Text="Password:"/>
             <TextBox/>
         </StackPanel>
 
         <Button Grid.Row="4"
                 Grid.Column="1"
-                Content="Sign-In"
                 Width="150"
                 Height="40"
+                Content="Sign-In"
                 Command="{Binding AttemptLoginCommand}"/>
     </Grid>
 </UserControl>
