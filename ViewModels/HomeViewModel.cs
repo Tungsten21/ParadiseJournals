@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Models;
+using Models.Interfaces;
 using System.Collections.ObjectModel;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
@@ -61,13 +63,13 @@ namespace ViewModels
         {
             switch (item)
             {
-                case JournalViewModel:
-                    UserJournals.Add((JournalViewModel) item);
+                case JournalModel:
+                    UserJournals.Add(new JournalViewModel((JournalModel) item));
                     if(!AtLeastOneJournal)
                         AtLeastOneJournal = true;
                     break;
-                case WishListViewModel:
-                    UserWishLists.Add((WishListViewModel) item);
+                case WishListModel:
+                    UserWishLists.Add(new WishListViewModel((WishListModel) item));
                     if (!AtLeastOneWishList)
                         AtLeastOneWishList = true;
                     break;

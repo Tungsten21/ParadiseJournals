@@ -18,15 +18,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
         <!--Content Container-->
         <Grid Grid.Row="1"
-              Grid.Column="1"
               Grid.RowSpan="3"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -53,9 +50,8 @@
 
         <!--No Items Found-->
         <controlViews:NoItemsFoundView Grid.Row="1"
-                                       Grid.Column="1"
                                        Grid.RowSpan="3"
-                                       Grid.ColumnSpan="2"/>
+                                       Grid.ColumnSpan="3"/>
 
     </Grid>
 </UserControl>

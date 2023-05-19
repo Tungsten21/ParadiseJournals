@@ -60,7 +60,7 @@ namespace Tests.ViewModels.Dialogs
                 EndDate = "28/03/23"
             };
 
-            _createNewJournalViewModel.JournalViewModel = model;
+            _createNewJournalViewModel.JournalItemViewModel = model;
 
             //Act
             _createNewJournalViewModel.AttemptToCreateJournalCommand.Execute(null);

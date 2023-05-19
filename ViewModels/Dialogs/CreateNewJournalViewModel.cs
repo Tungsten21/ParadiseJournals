@@ -31,7 +31,8 @@ namespace ViewModels.Dialogs
             if (true)
             {
                 _navigationService.NavigateToViewModel<ViewJournalViewModel>
-                    (() => _messenger.Send(new ItemCreatedMessage(new JournalViewModel(_journalViewModel))));
+                    (() => _messenger.Send(new ItemCreatedMessage(JournalViewModel.Model.Clone())));
+
                 CloseWindow?.Invoke();
             }
         }

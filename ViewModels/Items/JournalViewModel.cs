@@ -4,54 +4,54 @@ using ViewModels.Interfaces;
 
 namespace ViewModels.Items
 {
-    public class JournalViewModel : ObservableObject, IViewModel, ICreatableItem
+    public class JournalViewModel : ObservableObject, IViewModel
     {
         //Properties
-        public readonly JournalModel _model = new();
+        public readonly JournalModel Model = new();
 
         public string Title
         {
-            get => _model.Title;
-            set => SetProperty(_model.Title, value, _model, (m, t) => m.Title = t);
+            get => Model.Title;
+            set => SetProperty(Model.Title, value, Model, (m, t) => m.Title = t);
         }
 
         public string Country
         {
-            get => _model.Country;
-            set => SetProperty(_model.Country, value, _model, (m, c) => m.Country = c);
+            get => Model.Country;
+            set => SetProperty(Model.Country, value, Model, (m, c) => m.Country = c);
         }
 
         public string StartDate
         {
-            get => _model.StartDate.ToString();
+            get => Model.StartDate.ToString();
             set
             {
                 if (value.Length != 0)
-                    SetProperty(_model.StartDate, DateOnly.Parse(value), _model, (m, sd) => m.StartDate = DateOnly.Parse(value));
+                    SetProperty(Model.StartDate, DateOnly.Parse(value), Model, (m, sd) => m.StartDate = DateOnly.Parse(value));
             }
 
         }
 
         public string EndDate
         {
-            get => _model.EndDate.ToString();
+            get => Model.EndDate.ToString();
             set
             {
                 if (value.Length != 0)
-                    SetProperty(_model.EndDate, DateOnly.Parse(value), _model, (m, ed) => m.EndDate = DateOnly.Parse(value));
+                    SetProperty(Model.EndDate, DateOnly.Parse(value), Model, (m, ed) => m.EndDate = DateOnly.Parse(value));
             }
         }
 
         public string Description
         {
-            get => _model.Description;
-            set => SetProperty(_model.Description, value, _model, (m, d) => m.Description = d);
+            get => Model.Description;
+            set => SetProperty(Model.Description, value, Model, (m, d) => m.Description = d);
         }
 
         public string City
         {
-            get => _model.City;
-            set => SetProperty(_model.City, value, _model, (m, c) => m.City = c);
+            get => Model.City;
+            set => SetProperty(Model.City, value, Model, (m, c) => m.City = c);
         }
 
         //Constructors
@@ -60,7 +60,7 @@ namespace ViewModels.Items
 
         }
 
-        public JournalViewModel(JournalModel model) => _model = model;
+        public JournalViewModel(JournalModel model) => Model = model;
 
         public JournalViewModel(JournalViewModel viewModel)
         {

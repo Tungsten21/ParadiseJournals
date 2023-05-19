@@ -32,7 +32,7 @@ namespace ViewModels.Dialogs
             if (true)
             {
                 _navigationService.NavigateToViewModel<ViewWishListViewModel>
-                    (() => _messenger.Send(new ItemCreatedMessage(new WishListViewModel(_wishListViewModel))));
+                    (() => _messenger.Send(new ItemCreatedMessage(WishListViewModel.Model.Clone())));
                 CloseWindow?.Invoke();
             }
         }

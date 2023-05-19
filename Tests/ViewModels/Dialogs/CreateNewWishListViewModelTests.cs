@@ -65,7 +65,7 @@ namespace Tests.ViewModels.Dialogs
                 EndDate = "28/03/23"
             };
 
-            _createNewWishListViewModel.WishListViewModel = model;
+            _createNewWishListViewModel.WishListItemViewModel = model;
 
             //Act
             _createNewWishListViewModel.AttemptToCreateWishListCommand.Execute(null);

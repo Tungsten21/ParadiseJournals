@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModels.Interfaces
+namespace Models.Interfaces
 {
     public interface ICreatableItem
     {
+        ICreatableItem Clone();
     }
 }

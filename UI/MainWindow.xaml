@@ -9,18 +9,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
 
-    <Grid Background="Transparent">
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding MenuBarViewModel.IsMenuBarVisible, Converter={StaticResource MenuBarToWidthConverter}}"
                               x:Name="menuColumn"/>
+
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
         <controls:MenuBar/>
         
         <!--DataTemplates To Tie Views -> ViewModels-->
-        <ContentControl Grid.Column="1"
-                        Grid.ColumnSpan="2"
+        <ContentControl Grid.Column="2"
                         Content="{Binding CurrentViewModel}">
             
             <ContentControl.Resources>

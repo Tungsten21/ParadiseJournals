@@ -302,7 +302,21 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="Maroon">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                        <RotateTransform Angle="-45" CenterX="0.5" CenterY="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FFDDDDDD"/>
+                <GradientStop Color="#FFFBFBFB" Offset="0.366"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition/>
@@ -324,5 +338,105 @@
             <MenuItem Header="Item 3" />
             <MenuItem Header="Item 4" />
         </Menu>
+
+        <ScrollViewer Grid.Column="1"
+                      MaxHeight="300">
+            <ItemsControl>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <local:AlignableWrapPanel VerticalAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Margin="20 0"/>
+                    </ItemsPanelTemplate>
+
+                </ItemsControl.ItemsPanel>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+
+                <Border Width="75"
+                    Height="75"
+                    Background="Navy"
+                    Margin="10 10"/>
+            </ItemsControl>
+        </ScrollViewer>
+
     </Grid>
 </Window>
