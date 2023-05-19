@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
+using System.Collections.ObjectModel;
 using ViewModels.Interfaces;
 
 namespace ViewModels.Items
@@ -19,6 +20,16 @@ namespace ViewModels.Items
         {
             get => Model.Country;
             set => SetProperty(Model.Country, value, Model, (m, c) => m.Country = c);
+        }
+
+        public ObservableCollection<JournalDayViewModel>? Days
+        {
+            get => MapDayModels();
+            set
+            {
+                var dayModels = MapDayViewModels(value);
+                SetProperty(Model.Days, dayModels, Model, (m, d) => m.Days = dayModels);
+            }
         }
 
         public string StartDate
@@ -62,16 +73,24 @@ namespace ViewModels.Items
 
         public JournalViewModel(JournalModel model) => Model = model;
 
-        public JournalViewModel(JournalViewModel viewModel)
-        {
-            Title = viewModel.Title;
-            Country = viewModel.Country;
-            StartDate = viewModel.StartDate;
-            EndDate = viewModel.EndDate;
-            Description = viewModel.Description;
-            City = viewModel.City;
-        }
 
         //Methods
+        private IEnumerable<JournalDayModel> MapDayViewModels(ObservableCollection<JournalDayViewModel> colleciton)
+        {
+            return from viewModels in colleciton select viewModels.Model;
+        }
+
+        private ObservableCollection<JournalDayViewModel> MapDayModels()
+        {
+            var dayModels = Model.Days;
+            var dayViewModels = new ObservableCollection<JournalDayViewModel>();
+
+            foreach (var dayViewModel in dayModels)
+                dayViewModels.Add(new JournalDayViewModel(dayViewModel));
+
+            return dayViewModels;
+        }
+
+
     }
 }

@@ -96,126 +96,27 @@
                       VerticalAlignment="Center"
                       Margin="15 50">
 
-            <ItemsControl>
+            <ItemsControl ItemsSource="{Binding Days}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <resources:AlignableWrapPanel HorizontalContentAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <!--<Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="100"
+                                Height="100"
+                                Background="Navy"
+                                Margin="10 10">
+                            
+                            <TextBlock VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       FontSize="18"
+                                       Foreground="White"
+                                       Text="{Binding ShortDateFormat}"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </Grid>
