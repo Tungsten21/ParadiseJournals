@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ namespace ViewModels.Dialogs
             //TODO: Add validation to ensure necessaery fields have valid input
             if (true)
             {
+                CreateJournal();
+
                 _navigationService.NavigateToViewModel<ViewJournalViewModel>
                     (() => _messenger.Send(new ItemCreatedMessage(JournalViewModel.Model.Clone())));
 
@@ -45,6 +48,23 @@ namespace ViewModels.Dialogs
         }
 
         //Methods
+        private void CreateJournal()
+        {
+            //Eventually move to its own service input & output -> ServiceModels. Map -> ViewModel Models.
+            var model = JournalViewModel.Model;
+            DateOnly startDate = model.StartDate;
+            DateOnly endDate = model.EndDate;
+
+            ObservableCollection<JournalDayViewModel> journalDays = new();
+
+            for(DateOnly beginDate = startDate; beginDate <= endDate; beginDate = beginDate.AddDays(1))
+            {
+                var journalDay = new JournalDayViewModel() { ShortDateFormat = beginDate.ToShortDateString() };
+                journalDays.Add(journalDay); 
+            }
+
+            JournalViewModel.Days = journalDays;
+        }
         
     }
 }

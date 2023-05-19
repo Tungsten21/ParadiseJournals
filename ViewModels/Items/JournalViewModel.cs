@@ -1,44 +1,94 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using ViewModels.Interfaces;
+using Common.Extensions;
+using ViewModels.Validation;
 
 namespace ViewModels.Items
 {
-    public class JournalViewModel : ObservableObject, IViewModel
+    public class JournalViewModel : ObservableValidator, IViewModel
     {
         //Properties
+        //private IReadOnlyCollection<ValidationResult> _errors = new List<ValidationResult>();
+        private string _title;
+        private string _country;
+        private string _startDate;
+        private string _endDate;
+
         public readonly JournalModel Model = new();
 
+
+        [MinLength(5, ErrorMessage = "Journal title must be at least 5 characters.")]
         public string Title
         {
-            get => Model.Title;
-            set => SetProperty(Model.Title, value, Model, (m, t) => m.Title = t);
-        }
-
-        public string Country
-        {
-            get => Model.Country;
-            set => SetProperty(Model.Country, value, Model, (m, c) => m.Country = c);
-        }
-
-        public string StartDate
-        {
-            get => Model.StartDate.ToString();
+            get => _title;
             set
             {
-                if (value.Length != 0)
-                    SetProperty(Model.StartDate, DateOnly.Parse(value), Model, (m, sd) => m.StartDate = DateOnly.Parse(value));
+                Model.Title.Clear();
+                if (SetProperty(ref _title, value, true) && GetErrors(nameof(Title)).Count() == 0)
+                    Model.Title = value;
             }
 
         }
 
-        public string EndDate
+        [Required(ErrorMessage = "Please select a country.")]
+        public string Country
         {
-            get => Model.EndDate.ToString();
+            get => _country;
             set
             {
-                if (value.Length != 0)
-                    SetProperty(Model.EndDate, DateOnly.Parse(value), Model, (m, ed) => m.EndDate = DateOnly.Parse(value));
+                Model.Country.Clear();
+                if (SetProperty(ref _country, value, true) && GetErrors(nameof(Country)).Count() == 0)
+                    Model.Title = value;
+            }
+        }
+
+        public ObservableCollection<JournalDayViewModel>? Days
+        {
+            get => MapDayModels();
+            set
+            {
+                var dayModels = MapDayViewModels(value);
+                SetProperty(Model.Days, dayModels, Model, (m, d) => m.Days = dayModels);
+            }
+        }
+
+        [DateComparator(CompareMode.LessThan, "EndDate", ErrorMessage = "dwdadada")]
+        public string StartDate
+        {
+            get => _startDate;
+            set
+            {
+                if (value.Length == 0)
+                    return;
+
+                if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
+                {
+                    ClearErrors(nameof(EndDate));
+                    Model.StartDate = DateOnly.Parse(value);
+                }
+                    
+            }
+
+        }
+
+        [DateComparator(CompareMode.GreaterThan, "StartDate", ErrorMessage = "dwdadada")]
+        public string EndDate
+        {
+            get => _endDate;
+            set
+            {
+                if (value.Length == 0)
+                    return;
+
+                if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
+                {
+                    ClearErrors(nameof(StartDate));
+                    Model.EndDate = DateOnly.Parse(value);
+                }
             }
         }
 
@@ -62,16 +112,22 @@ namespace ViewModels.Items
 
         public JournalViewModel(JournalModel model) => Model = model;
 
-        public JournalViewModel(JournalViewModel viewModel)
-        {
-            Title = viewModel.Title;
-            Country = viewModel.Country;
-            StartDate = viewModel.StartDate;
-            EndDate = viewModel.EndDate;
-            Description = viewModel.Description;
-            City = viewModel.City;
-        }
 
         //Methods
+        private IEnumerable<JournalDayModel> MapDayViewModels(ObservableCollection<JournalDayViewModel> colleciton)
+        {
+            return from viewModels in colleciton select viewModels.Model;
+        }
+
+        private ObservableCollection<JournalDayViewModel> MapDayModels()
+        {
+            var dayModels = Model.Days;
+            var dayViewModels = new ObservableCollection<JournalDayViewModel>();
+
+            foreach (var dayViewModel in dayModels)
+                dayViewModels.Add(new JournalDayViewModel(dayViewModel));
+
+            return dayViewModels;
+        }
     }
 }

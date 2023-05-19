@@ -84,138 +84,36 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod consequat turpis, 
                 quis condimentum nisl maximus eu. Praesent in sapien.
             </TextBlock>
-
-            
-            
         </Grid>
         
         <!--Individual Day ItemsControl-->
         <ScrollViewer Grid.Row="1"
                       Grid.ColumnSpan="2"
-                      Background="Red"
                       VerticalAlignment="Center"
+                      VerticalScrollBarVisibility="Hidden"
                       Margin="15 50">
 
-            <ItemsControl>
+            <ItemsControl ItemsSource="{Binding Days}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <resources:AlignableWrapPanel HorizontalContentAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <!--<Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>
-
-                <Border Width="100"
-                    Height="100"
-                    Background="Navy"
-                    Margin="10 10"/>-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="100"
+                                Height="100"
+                                Margin="10 10"
+                                Background="Navy">
+                            
+                            <TextBlock VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       FontSize="18"
+                                       Foreground="White"
+                                       Text="{Binding ShortDateFormat}"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </Grid>
