@@ -29,7 +29,7 @@ namespace ViewModels.Dialogs
         private void AttemptToCreateWishList()
         {
             //TODO: Add validation to ensure necessaery fields have valid input
-            if (true)
+            if (!WishListViewModel.HasErrors)
             {
                 _navigationService.NavigateToViewModel<ViewWishListViewModel>
                     (() => _messenger.Send(new ItemCreatedMessage(WishListViewModel.Model.Clone())));

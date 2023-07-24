@@ -18,9 +18,9 @@ namespace ViewModels.Validation
         {
             if (_compareMode == CompareMode.LessThan)
             {
-                DateOnly beforeDate = DateOnly.Parse((string)value);
+                var beforeDate = DateOnly.Parse((string)value);
 
-                string? afterDateString = (string?)validationContext.ObjectType.GetProperty(_dateToCompareFieldName)
+                var afterDateString = (string?)validationContext.ObjectType.GetProperty(_dateToCompareFieldName)
                     .GetValue(validationContext.ObjectInstance);
 
                 bool afterDateSet = afterDateString != null;
@@ -28,23 +28,21 @@ namespace ViewModels.Validation
                 if (afterDateSet && beforeDate < DateOnly.Parse(afterDateString) || !afterDateSet)
                     return ValidationResult.Success;
 
-                ErrorMessage = "AHAHAHAHA";
                 return new ValidationResult("Start Date must be earlier than the End Date.");
 
             }
             else
             {
-                string? beforeDateString = (string?)validationContext.ObjectType.GetProperty(_dateToCompareFieldName)
+                var beforeDateString = (string?)validationContext.ObjectType.GetProperty(_dateToCompareFieldName)
                     .GetValue(validationContext.ObjectInstance);
 
-                DateOnly afterDate = DateOnly.Parse((string) value);
+                var afterDate = DateOnly.Parse((string) value);
 
-                bool beforeDateSet = beforeDateString != null;
+                var beforeDateSet = beforeDateString != null;
 
                 if (beforeDateSet && afterDate > DateOnly.Parse(beforeDateString) || !beforeDateSet)
                     return ValidationResult.Success;
 
-                ErrorMessage = "AHAHAHAHA2";
                 return new ValidationResult("End Date must be after the Start Date.");
             }
 

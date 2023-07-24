@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace ViewModels.Dialogs
         private void AttemptToCreateJournal()
         {
             //TODO: Add validation to ensure necessaery fields have valid input
-            if (true)
+            if (!JournalViewModel.HasErrors)
             {
                 CreateJournal();
 

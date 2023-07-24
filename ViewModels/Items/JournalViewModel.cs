@@ -56,7 +56,8 @@ namespace ViewModels.Items
             }
         }
 
-        [DateComparator(CompareMode.LessThan, "EndDate", ErrorMessage = "dwdadada")]
+        [Required]
+        [DateComparator(CompareMode.LessThan, "EndDate", ErrorMessage = "Start date must be before the end date.")]
         public string StartDate
         {
             get => _startDate;
@@ -75,7 +76,8 @@ namespace ViewModels.Items
 
         }
 
-        [DateComparator(CompareMode.GreaterThan, "StartDate", ErrorMessage = "dwdadada")]
+        [Required]
+        [DateComparator(CompareMode.GreaterThan, "StartDate", ErrorMessage = "End date must be after the start date.")]
         public string EndDate
         {
             get => _endDate;
@@ -92,6 +94,7 @@ namespace ViewModels.Items
             }
         }
 
+        [OpitionalMinimumLength(5)]
         public string Description
         {
             get => Model.Description;
@@ -125,8 +128,10 @@ namespace ViewModels.Items
             var dayViewModels = new ObservableCollection<JournalDayViewModel>();
 
             foreach (var dayViewModel in dayModels)
+            {
                 dayViewModels.Add(new JournalDayViewModel(dayViewModel));
-
+            }
+                
             return dayViewModels;
         }
     }
