@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Common.Extensions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,62 +14,102 @@ using ViewModels.Validation;
 
 namespace ViewModels.Items
 {
-    public partial class WishListViewModel: ObservableValidator, IViewModel
+    public partial class WishListViewModel: ValidatableViewModel, IViewModel
     {
         //Properties
+        private string _title;
+        private string _country;
+        private string _startDate;
+        private string _endDate;
+        private string _descripition;
+        private string _city;
         public readonly WishListModel Model = new();
 
-        [Required]
-        [MinLength(5, ErrorMessage = "Wishlist title must be at least 5 characters.")]
+        [Required(ErrorMessage = "Please enter a title.")]
+        [MinLength(5, ErrorMessage = "Title must be at least 5 characters.")]
         public string Title
         {
-            get => Model.Title;
-            set => SetProperty(Model.Title, value, Model, (m, t) => m.Title = t);
+            get => _title;
+            set
+            {
+                Model.Title.Clear();
+                if (SetProperty(ref _title, value, true) && GetErrors(nameof(Title)).Count() == 0)
+                    Model.Title = value;
+            }
+
         }
 
         [Required(ErrorMessage = "Please select a country.")]
         public string Country
         {
-            get => Model.Country;
-            set => SetProperty(Model.Country, value, Model, (m, c) => m.Country = c);
+            get => _country;
+            set
+            {
+                Model.Country.Clear();
+                if (SetProperty(ref _country, value, true) && GetErrors(nameof(Country)).Count() == 0)
+                    Model.Country = value;
+            }
         }
 
         [Required]
         [DateComparator(CompareMode.LessThan, "EndDate", ErrorMessage = "Start date must be before the end date.")]
         public string StartDate
         {
-            get => Model.StartDate.ToString();
-
+            get => _startDate;
             set
             {
-                if (value.Length != 0)
-                    SetProperty(Model.StartDate, DateOnly.Parse(value), Model, (m, sd) => m.StartDate = DateOnly.Parse(value));
+                if (value.Length == 0)
+                    return;
+
+                if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
+                {
+                    ClearErrors(nameof(EndDate));
+                    Model.StartDate = DateOnly.Parse(value);
+                }
+
             }
 
         }
 
         [Required]
-        [DateComparator(CompareMode.LessThan, "StartDate", ErrorMessage = "End date must be after the start date.")]
+        [DateComparator(CompareMode.GreaterThan, "StartDate", ErrorMessage = "End date must be after the start date.")]
         public string EndDate
         {
-            get => Model.EndDate.ToString();
+            get => _endDate;
             set
             {
-                if (value.Length != 0)
-                    SetProperty(Model.EndDate, DateOnly.Parse(value), Model, (m, ed) => m.EndDate = DateOnly.Parse(value));
+                if (value.Length == 0)
+                    return;
+
+                if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
+                {
+                    ClearErrors(nameof(StartDate));
+                    Model.EndDate = DateOnly.Parse(value);
+                }
             }
         }
 
+        [MinLength(5, ErrorMessage = "Description must be greater than 5 characters")]
         public string Description
         {
-            get => Model.Description;
-            set => SetProperty(Model.Description, value, Model, (m, d) => m.Description = d);
+            get => _descripition;
+            set
+            {
+                Model.Description.Clear();
+                if (SetProperty(ref _descripition, value, true) && GetErrors(nameof(Description)).Count() == 0)
+                    Model.Description = value;
+            }
         }
 
         public string City
         {
-            get => Model.City;
-            set => SetProperty(Model.City, value, Model, (m, c) => m.City = c);
+            get => _city;
+            set
+            {
+                Model.City.Clear();
+                if (SetProperty(ref _city, value, true) && GetErrors(nameof(City)).Count() == 0)
+                    Model.City = value;
+            }
         }
 
         //Constructors
@@ -87,6 +129,7 @@ namespace ViewModels.Items
             Description = viewModel.Description;
             City = viewModel.City;
         }
+
 
     }
 }

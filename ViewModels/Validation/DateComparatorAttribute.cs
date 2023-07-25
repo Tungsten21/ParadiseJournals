@@ -23,6 +23,12 @@ namespace ViewModels.Validation
                 var afterDateString = (string?)validationContext.ObjectType.GetProperty(_dateToCompareFieldName)
                     .GetValue(validationContext.ObjectInstance);
 
+                bool afterDateHasErrors = ((ValidatableViewModel)validationContext.ObjectInstance).GetErrors(_dateToCompareFieldName).Any();
+                if (afterDateHasErrors)
+                {
+                    return ValidationResult.Success;
+                }
+
                 bool afterDateSet = afterDateString != null;
 
                 if (afterDateSet && beforeDate < DateOnly.Parse(afterDateString) || !afterDateSet)
@@ -39,6 +45,12 @@ namespace ViewModels.Validation
                 var afterDate = DateOnly.Parse((string) value);
 
                 var beforeDateSet = beforeDateString != null;
+
+                bool beforeDateHasErrors = ((ValidatableViewModel)validationContext.ObjectInstance).GetErrors(_dateToCompareFieldName).Any();
+                if (beforeDateHasErrors)
+                {
+                    return ValidationResult.Success;
+                }
 
                 if (beforeDateSet && afterDate > DateOnly.Parse(beforeDateString) || !beforeDateSet)
                     return ValidationResult.Success;

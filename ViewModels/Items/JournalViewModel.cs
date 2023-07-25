@@ -9,7 +9,7 @@ using ViewModels.Validation;
 
 namespace ViewModels.Items
 {
-    public class JournalViewModel : ObservableValidator, IViewModel
+    public class JournalViewModel : ValidatableViewModel, IViewModel
     {
         //Properties
         //private IReadOnlyCollection<ValidationResult> _errors = new List<ValidationResult>();
@@ -17,11 +17,12 @@ namespace ViewModels.Items
         private string _country;
         private string _startDate;
         private string _endDate;
-
+        private string _descripition;
+        private string _city;
         public readonly JournalModel Model = new();
 
-
-        [MinLength(5, ErrorMessage = "Journal title must be at least 5 characters.")]
+        [Required(ErrorMessage = "Please enter a title.")]
+        [MinLength(5, ErrorMessage = "Title must be at least 5 characters.")]
         public string Title
         {
             get => _title;
@@ -42,7 +43,7 @@ namespace ViewModels.Items
             {
                 Model.Country.Clear();
                 if (SetProperty(ref _country, value, true) && GetErrors(nameof(Country)).Count() == 0)
-                    Model.Title = value;
+                    Model.Country = value;
             }
         }
 
@@ -71,7 +72,7 @@ namespace ViewModels.Items
                     ClearErrors(nameof(EndDate));
                     Model.StartDate = DateOnly.Parse(value);
                 }
-                    
+
             }
 
         }
@@ -94,17 +95,27 @@ namespace ViewModels.Items
             }
         }
 
-        [OpitionalMinimumLength(5)]
+        [MinLength(5, ErrorMessage = "Description must be greater than 5 characters")]
         public string Description
         {
-            get => Model.Description;
-            set => SetProperty(Model.Description, value, Model, (m, d) => m.Description = d);
+            get => _descripition;
+            set
+            {
+                Model.Description.Clear();
+                if (SetProperty(ref _descripition, value, true) && GetErrors(nameof(Description)).Count() == 0)
+                    Model.Description = value;
+            }
         }
 
         public string City
         {
-            get => Model.City;
-            set => SetProperty(Model.City, value, Model, (m, c) => m.City = c);
+            get => _city;
+            set
+            {
+                Model.City.Clear();
+                if (SetProperty(ref _city, value, true) && GetErrors(nameof(City)).Count() == 0)
+                    Model.City = value;
+            }
         }
 
         //Constructors
@@ -131,7 +142,7 @@ namespace ViewModels.Items
             {
                 dayViewModels.Add(new JournalDayViewModel(dayViewModel));
             }
-                
+
             return dayViewModels;
         }
     }
