@@ -9,7 +9,7 @@ using ViewModels.Validation;
 
 namespace ViewModels.Items
 {
-    public class JournalViewModel : ValidatableViewModel, IViewModel
+    public partial class JournalViewModel : ValidatableViewModel, IViewModel
     {
         //Properties
         //private IReadOnlyCollection<ValidationResult> _errors = new List<ValidationResult>();
@@ -19,7 +19,39 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
+
         public readonly JournalModel Model = new();
+
+        private bool _isStartDateInvalid;
+        private bool _isEndDateInvalid;
+
+        public bool IsStartDateInvalid
+        {
+            get
+            {
+                return GetErrors(nameof(StartDate)).Any();
+            }
+            set
+            {
+                _isStartDateInvalid = value;
+                SetProperty(ref _isStartDateInvalid, value, false);
+            }
+        }
+
+        public bool IsEndDateInvalid
+        {
+            get
+            {
+                return GetErrors(nameof(EndDate)).Any();
+            }
+            set
+            {
+                _isEndDateInvalid = value;
+                SetProperty(ref _isEndDateInvalid, value, false);
+            }
+        }
+
+
 
         [Required(ErrorMessage = "Please enter a title.")]
         [MinLength(5, ErrorMessage = "Title must be at least 5 characters.")]
@@ -69,10 +101,14 @@ namespace ViewModels.Items
 
                 if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
                 {
-                    ClearErrors(nameof(EndDate));
+                    ClearErrors(nameof(StartDate));
+                    IsStartDateInvalid = true;
                     Model.StartDate = DateOnly.Parse(value);
+
+                    return;
                 }
 
+                IsStartDateInvalid = false;
             }
 
         }
@@ -89,9 +125,14 @@ namespace ViewModels.Items
 
                 if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
                 {
-                    ClearErrors(nameof(StartDate));
+                    ClearErrors(nameof(EndDate));
+                    IsEndDateInvalid = true;
                     Model.EndDate = DateOnly.Parse(value);
+
+                    return;
                 }
+
+                IsEndDateInvalid = false;
             }
         }
 
@@ -124,7 +165,16 @@ namespace ViewModels.Items
 
         }
 
-        public JournalViewModel(JournalModel model) => Model = model;
+        public JournalViewModel(JournalModel model)
+        {
+            Model = model;
+            SetProperty(ref _title, model.Title, nameof(Title));
+            SetProperty(ref _country, model.Country, nameof(Country));
+            SetProperty(ref _startDate, model.StartDate.ToString(), nameof(StartDate));
+            SetProperty(ref _endDate, model.EndDate.ToString(), nameof(EndDate));
+            SetProperty(ref _city, model.City, nameof(City));
+            SetProperty(ref _descripition, model.Description, nameof(Description));
+        }
 
 
         //Methods

@@ -30,7 +30,7 @@ namespace ViewModels.Dialogs
         private void AttemptToCreateJournal()
         {
             //TODO: Add validation to ensure necessaery fields have valid input
-            if (!JournalViewModel.IsValid())
+            if (JournalViewModel.IsValid())
             {
                 CreateJournal();
 

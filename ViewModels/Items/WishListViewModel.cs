@@ -23,7 +23,9 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
+
         public readonly WishListModel Model = new();
+
 
         [Required(ErrorMessage = "Please enter a title.")]
         [MinLength(5, ErrorMessage = "Title must be at least 5 characters.")]

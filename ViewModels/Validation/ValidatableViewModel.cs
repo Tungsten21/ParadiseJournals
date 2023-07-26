@@ -14,7 +14,7 @@ namespace ViewModels.Validation
         public bool IsValid()
         {
             ValidateAllProperties();
-            return GetErrors().Any();
+            return !GetErrors().Any();
         }
     }
 }
