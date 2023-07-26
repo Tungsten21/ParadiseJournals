@@ -6,10 +6,11 @@ using System.ComponentModel.DataAnnotations;
 using ViewModels.Interfaces;
 using Common.Extensions;
 using ViewModels.Validation;
+using Models.Interfaces;
 
 namespace ViewModels.Items
 {
-    public partial class JournalViewModel : ValidatableViewModel, IViewModel
+    public partial class JournalViewModel : ValidatableViewModel, IViewModel, IClonableModel
     {
         //Properties
         //private IReadOnlyCollection<ValidationResult> _errors = new List<ValidationResult>();
@@ -19,8 +20,7 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
-
-        public readonly JournalModel Model = new();
+        private readonly JournalModel _model = new();
 
         private bool _isStartDateInvalid;
         private bool _isEndDateInvalid;
@@ -60,9 +60,9 @@ namespace ViewModels.Items
             get => _title;
             set
             {
-                Model.Title.Clear();
+                _model.Title.Clear();
                 if (SetProperty(ref _title, value, true) && GetErrors(nameof(Title)).Count() == 0)
-                    Model.Title = value;
+                    _model.Title = value;
             }
 
         }
@@ -73,9 +73,9 @@ namespace ViewModels.Items
             get => _country;
             set
             {
-                Model.Country.Clear();
+                _model.Country.Clear();
                 if (SetProperty(ref _country, value, true) && GetErrors(nameof(Country)).Count() == 0)
-                    Model.Country = value;
+                    _model.Country = value;
             }
         }
 
@@ -85,7 +85,7 @@ namespace ViewModels.Items
             set
             {
                 var dayModels = MapDayViewModels(value);
-                SetProperty(Model.Days, dayModels, Model, (m, d) => m.Days = dayModels);
+                SetProperty(_model.Days, dayModels, _model, (m, d) => m.Days = dayModels);
             }
         }
 
@@ -103,7 +103,7 @@ namespace ViewModels.Items
                 {
                     ClearErrors(nameof(StartDate));
                     IsStartDateInvalid = true;
-                    Model.StartDate = DateOnly.Parse(value);
+                    _model.StartDate = DateOnly.Parse(value);
 
                     return;
                 }
@@ -127,7 +127,7 @@ namespace ViewModels.Items
                 {
                     ClearErrors(nameof(EndDate));
                     IsEndDateInvalid = true;
-                    Model.EndDate = DateOnly.Parse(value);
+                    _model.EndDate = DateOnly.Parse(value);
 
                     return;
                 }
@@ -142,9 +142,9 @@ namespace ViewModels.Items
             get => _descripition;
             set
             {
-                Model.Description.Clear();
+                _model.Description.Clear();
                 if (SetProperty(ref _descripition, value, true) && GetErrors(nameof(Description)).Count() == 0)
-                    Model.Description = value;
+                    _model.Description = value;
             }
         }
 
@@ -153,9 +153,9 @@ namespace ViewModels.Items
             get => _city;
             set
             {
-                Model.City.Clear();
+                _model.City.Clear();
                 if (SetProperty(ref _city, value, true) && GetErrors(nameof(City)).Count() == 0)
-                    Model.City = value;
+                    _model.City = value;
             }
         }
 
@@ -167,7 +167,7 @@ namespace ViewModels.Items
 
         public JournalViewModel(JournalModel model)
         {
-            Model = model;
+            _model = model;
             SetProperty(ref _title, model.Title, nameof(Title));
             SetProperty(ref _country, model.Country, nameof(Country));
             SetProperty(ref _startDate, model.StartDate.ToString(), nameof(StartDate));
@@ -185,7 +185,7 @@ namespace ViewModels.Items
 
         private ObservableCollection<JournalDayViewModel> MapDayModels()
         {
-            var dayModels = Model.Days;
+            var dayModels = _model.Days;
             var dayViewModels = new ObservableCollection<JournalDayViewModel>();
 
             foreach (var dayViewModel in dayModels)
@@ -194,6 +194,21 @@ namespace ViewModels.Items
             }
 
             return dayViewModels;
+        }
+
+        public IModel CloneModel()
+        {
+            return new JournalModel()
+            {
+                Id = _model.Id,
+                Title = _model.Title,
+                Country = _model.Country,
+                StartDate = _model.StartDate,
+                EndDate = _model.EndDate,
+                Description = _model.Description,
+                City = _model.City,
+                Days = _model.Days
+            };
         }
     }
 }

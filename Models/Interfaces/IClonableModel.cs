@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models.Interfaces
 {
-    public interface ICreatableItem
+    public interface IClonableModel
     {
-        ICreatableItem Clone();
+        IClonableModel CloneModel();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,7 +36,7 @@ namespace ViewModels.Dialogs
                 CreateJournal();
 
                 _navigationService.NavigateToViewModel<ViewJournalViewModel>
-                    (() => _messenger.Send(new ItemCreatedMessage(JournalViewModel.Model.Clone())));
+                    (() => _messenger.Send(new ItemCreatedMessage(JournalViewModel.CloneModel())));
 
                 CloseWindow?.Invoke();
             }
@@ -52,7 +53,7 @@ namespace ViewModels.Dialogs
         private void CreateJournal()
         {
             //Eventually move to its own service input & output -> ServiceModels. Map -> ViewModel Models.
-            var model = JournalViewModel.Model;
+            var model = (JournalModel) JournalViewModel.CloneModel();
             DateOnly startDate = model.StartDate;
             DateOnly endDate = model.EndDate;
 

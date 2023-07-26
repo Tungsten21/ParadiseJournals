@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class WishListModel : ICreatableItem
+    public class WishListModel : IModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -17,18 +17,5 @@ namespace Models
         public string? Description { get; set; }
         public string? City { get; set; }
 
-        public ICreatableItem Clone()
-        {
-            return new WishListModel()
-            {
-                Id = Id,
-                Title = Title,
-                Country = Country,
-                StartDate = StartDate,
-                EndDate = EndDate,
-                Description = Description,
-                City = City
-            };
-        }
     }
 }

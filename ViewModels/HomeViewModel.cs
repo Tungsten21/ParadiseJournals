@@ -59,7 +59,7 @@ namespace ViewModels
         }
 
         //Methods
-        private void AddItemOnReceived(ICreatableItem item)
+        private void AddItemOnReceived(IClonableModel item)
         {
             switch (item)
             {

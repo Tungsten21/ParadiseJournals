@@ -26,7 +26,7 @@ namespace ViewModels
         }
 
         //Methods
-        private void SetJournal(ICreatableItem value)
+        private void SetJournal(IModel value)
         {
             if (value is JournalModel model)
                 JournalViewModel = new JournalViewModel(model);

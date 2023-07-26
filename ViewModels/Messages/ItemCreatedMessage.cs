@@ -3,11 +3,11 @@ using Models.Interfaces;
 
 namespace ViewModels.Messages
 {
-    public class ItemCreatedMessage : ValueChangedMessage<ICreatableItem>
+    public class ItemCreatedMessage : ValueChangedMessage<IModel>
     {
-        public ICreatableItem Item { get; }
+        public IModel Item { get; }
 
-        public ItemCreatedMessage(ICreatableItem item) : base(item)
+        public ItemCreatedMessage(IModel item) : base(item)
         {
             Item = item;
         }

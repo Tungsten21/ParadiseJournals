@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class JournalModel : ICreatableItem
+    public class JournalModel : IClonableModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -18,7 +18,7 @@ namespace Models
         public string? Description { get; set; }
         public string? City { get; set; }
 
-        public ICreatableItem Clone()
+        public IClonableModel CloneModel()
         {
             return new JournalModel()
             {
