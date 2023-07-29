@@ -39,7 +39,6 @@ namespace Tests.ViewModels.Dialogs
         [TestMethod()]
         public void AttemptToCreateJournalCommandShouldNavigateToViewJournalnSuccessfulValidation()
         {
-            //Add mock validation data once added
             JournalViewModel model = new()
             {
                 Title = "testTitle",
@@ -87,6 +86,36 @@ namespace Tests.ViewModels.Dialogs
             Assert.IsTrue(expectedJournal.Country == "testCountry");
             Assert.IsTrue(expectedJournal.StartDate == "21/03/2023"); //Parsing DateOnly from model -> produces full year
             Assert.IsTrue(expectedJournal.EndDate == "28/03/2023");
+        }
+
+        [DataRow("Ttle", "Sweden", "12/05/23", "19/05/23", "Stockholm", "Stockholm Visit")] //Title 
+        [DataRow("Title", "", "12/05/23", "19/05/23", "Stockholm", "Stockholm Visit")] //Country 
+        [DataRow("Title", "Sweden", "21/05/23", "19/05/23", "Stockholm", "Stockholm Visit")] //StartDate 
+        [DataRow("Title", "Sweden", "12/05/23", "10/05/23", "Stockholm", "Stockholm Visit")] //EndDate 
+        [DataRow("Title", "Sweden", "12/05/23", "19/05/23", "Stockholm", "Sto")] //Desc 
+        [DataTestMethod()]
+        public void CreateJournalValidationShouldFailWithIllegalEntries(string title, string country, string startDate, string endDate, 
+            string city, string desc)
+        {
+            //Arrange
+            JournalViewModel model = new JournalViewModel()
+            {
+                Title = title,
+                Country = country,
+                StartDate = startDate,
+                EndDate = endDate,
+                City = city,
+                Description = desc
+            };
+
+            _createNewJournalViewModel.JournalViewModel = model;
+
+            //Act
+            _createNewJournalViewModel.AttemptToCreateJournalCommand.Execute(null);
+
+            //Assert
+            Assert.IsTrue(_createNewJournalViewModel.JournalViewModel.HasErrors);
+            Assert.IsNotInstanceOfType(_mainWindowViewModel.CurrentViewModel, typeof(ViewJournalViewModel));
         }
     }
 }
