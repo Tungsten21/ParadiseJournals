@@ -37,7 +37,7 @@ namespace Tests.ViewModels
         {
             //Arrange
             _serviceProvider.Setup(x => x.GetService(typeof(HomeViewModel)))
-                .Returns(new HomeViewModel(_dialogService.Object, _messenger));
+                .Returns(new HomeViewModel(_dialogService.Object, _messenger, _navigationService));
 
             //Act
             _navigationService.NavigateToViewModel<HomeViewModel>();

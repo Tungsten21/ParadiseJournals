@@ -35,10 +35,10 @@ namespace Tests.ViewModels.Dialogs
             _navigationService = new NavigationService(_serviceProvider.Object, _messenger);
             _menuBarViewModel = new(_navigationService, _dialogService.Object);
             _createNewWishListViewModel = new(_navigationService, _messenger);
-            _homeViewModel = new(_dialogService.Object, _messenger);
+            _homeViewModel = new(_dialogService.Object, _messenger, _navigationService);
             _mainWindowViewModel = new(_serviceProvider.Object, _messenger, _menuBarViewModel);
 
-            _serviceProvider.Setup(x => x.GetService(typeof(ViewWishListViewModel))).Returns(new ViewWishListViewModel());
+            _serviceProvider.Setup(x => x.GetService(typeof(ViewWishListViewModel))).Returns(new ViewWishListViewModel(_messenger));
         }
 
         [TestMethod()]
@@ -65,7 +65,7 @@ namespace Tests.ViewModels.Dialogs
                 EndDate = "28/03/23"
             };
 
-            _createNewWishListViewModel.WishListItemViewModel = model;
+            _createNewWishListViewModel.WishListViewModel = model;
 
             //Act
             _createNewWishListViewModel.AttemptToCreateWishListCommand.Execute(null);

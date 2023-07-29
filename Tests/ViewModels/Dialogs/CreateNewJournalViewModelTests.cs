@@ -30,17 +30,26 @@ namespace Tests.ViewModels.Dialogs
             _navigationService = new NavigationService(_serviceProvider.Object, _messenger);
             _menuBarViewModel = new(_navigationService, _dialogService.Object);
             _createNewJournalViewModel = new(_navigationService, _messenger);
-            _homeViewModel = new(_dialogService.Object, _messenger);
+            _homeViewModel = new(_dialogService.Object, _messenger, _navigationService);
             _mainWindowViewModel = new(_serviceProvider.Object, _messenger, _menuBarViewModel);
 
-            _serviceProvider.Setup(x => x.GetService(typeof(ViewJournalViewModel))).Returns(new ViewJournalViewModel());
+            _serviceProvider.Setup(x => x.GetService(typeof(ViewJournalViewModel))).Returns(new ViewJournalViewModel(_messenger));
         }
 
         [TestMethod()]
         public void AttemptToCreateJournalCommandShouldNavigateToViewJournalnSuccessfulValidation()
         {
             //Add mock validation data once added
-  
+            JournalViewModel model = new()
+            {
+                Title = "testTitle",
+                Country = "testCountry",
+                StartDate = "21/03/23",
+                EndDate = "28/03/23"
+            };
+
+            _createNewJournalViewModel.JournalViewModel = model;
+
             // Act
             _createNewJournalViewModel.AttemptToCreateJournalCommand.Execute(null);
 
@@ -60,7 +69,7 @@ namespace Tests.ViewModels.Dialogs
                 EndDate = "28/03/23"
             };
 
-            _createNewJournalViewModel.JournalItemViewModel = model;
+            _createNewJournalViewModel.JournalViewModel = model;
 
             //Act
             _createNewJournalViewModel.AttemptToCreateJournalCommand.Execute(null);

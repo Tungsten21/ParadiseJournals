@@ -29,7 +29,7 @@ namespace Tests.ViewModels
             _dialogService = new();
             _navigationService = new();
             _messenger = new WeakReferenceMessenger();
-            _homeViewModel = new(_dialogService.Object, _messenger);
+            _homeViewModel = new(_dialogService.Object, _messenger, _navigationService.Object);
         }
 
         [TestMethod()]
@@ -73,7 +73,7 @@ namespace Tests.ViewModels
         {
             //Arrange
             var journalToSend = new JournalViewModel();
-            var messageToSend = new ItemCreatedMessage(journalToSend);
+            var messageToSend = new ItemCreatedMessage(journalToSend.CloneModel());
             
             //Act
             _messenger.Send(messageToSend);
@@ -91,7 +91,7 @@ namespace Tests.ViewModels
         {
             //Arrange
             var wishListToSend = new WishListViewModel();
-            var messageToSend = new ItemCreatedMessage(wishListToSend);
+            var messageToSend = new ItemCreatedMessage(wishListToSend.CloneModel());
 
             //Act
             _messenger.Send(messageToSend);
