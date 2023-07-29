@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class WishListModel
+    public class WishListModel : IModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -15,5 +16,6 @@ namespace Models
         public DateOnly EndDate { get; set; }
         public string? Description { get; set; }
         public string? City { get; set; }
+
     }
 }

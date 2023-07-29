@@ -50,10 +50,11 @@ namespace UI
             services.AddSingleton<BaseDialogViewModel>();
             services.AddSingleton<CreateNewUserViewModel>();
             services.AddSingleton<HomeViewModel>();
-            services.AddSingleton<CreateNewJournalViewModel>();
-            services.AddSingleton<CreateNewWishListViewModel>();
             services.AddSingleton<ViewJournalViewModel>();
             services.AddSingleton<ViewWishListViewModel>();
+
+            services.AddTransient<CreateNewJournalViewModel>();
+            services.AddTransient<CreateNewWishListViewModel>();
 
 
             services.AddSingleton<INavigationService, NavigationService>();

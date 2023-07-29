@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModels.Interfaces
+namespace ViewModels.Validation
 {
-    public interface ICreatableItem
+    public enum CompareMode
     {
+        GreaterThan,
+        LessThan
     }
 }

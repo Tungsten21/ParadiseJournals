@@ -3,13 +3,118 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:ViewModels"
              xmlns:local="clr-namespace:UI"
+             xmlns:resources="clr-namespace:UI.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
+    
+    <Grid DataContext="{Binding JournalViewModel}" 
+          Background="AliceBlue"
+          ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.25*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Journal Thumbnail-->
+        <Border HorizontalAlignment="Stretch"
+                MaxWidth="550"
+                VerticalAlignment="Stretch"
+                MaxHeight="275"
+                CornerRadius="20"
+                Background="Navy">
+
             <TextBlock VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="40"
-                       Text="View Journal"/>
+                       TextAlignment="Center"
+                       FontWeight="Bold"
+                       FontSize="20"
+                       Foreground="White"
+                       Text="%Thumbnail Placholder%">
+            </TextBlock>
+        </Border>
+
+        <!--Journal Information-->
+        <Grid Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              MaxWidth="550"
+              VerticalAlignment="Stretch"
+              MaxHeight="275"
+              Margin="10 0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+          
+            <TextBlock VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       Text="{Binding Title}"/>
+
+            <!--TODO: Add City-->
+            <TextBlock Grid.Row="1"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       Text="{Binding Country}"/>
+            
+            <!--Date Container-->
+            <StackPanel Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding StartDate}"/>
+
+                <TextBlock VerticalAlignment="Center"
+                           Text=" - "/>
+
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding EndDate}"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="3"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod consequat turpis, 
+                quis condimentum nisl maximus eu. Praesent in sapien.
+            </TextBlock>
+        </Grid>
+        
+        <!--Individual Day ItemsControl-->
+        <ScrollViewer Grid.Row="1"
+                      Grid.ColumnSpan="2"
+                      VerticalAlignment="Center"
+                      VerticalScrollBarVisibility="Hidden"
+                      Margin="15 50">
+
+            <ItemsControl ItemsSource="{Binding Days}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <resources:AlignableWrapPanel HorizontalContentAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="100"
+                                Height="100"
+                                Margin="10 10"
+                                Background="Navy">
+                            
+                            <TextBlock VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       FontSize="18"
+                                       Foreground="White"
+                                       Text="{Binding ShortDateFormat}"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +31,13 @@ namespace ViewModels.Dialogs
         private void AttemptToCreateJournal()
         {
             //TODO: Add validation to ensure necessaery fields have valid input
-            if (true)
+            if (JournalViewModel.IsValid())
             {
+                CreateJournal();
+
                 _navigationService.NavigateToViewModel<ViewJournalViewModel>
-                    (() => _messenger.Send(new ItemCreatedMessage(new JournalViewModel(_journalViewModel))));
+                    (() => _messenger.Send(new ItemCreatedMessage(JournalViewModel.CloneModel())));
+
                 CloseWindow?.Invoke();
             }
         }
@@ -44,6 +50,23 @@ namespace ViewModels.Dialogs
         }
 
         //Methods
+        private void CreateJournal()
+        {
+            //Eventually move to its own service input & output -> ServiceModels. Map -> ViewModel Models.
+            var model = (JournalModel) JournalViewModel.CloneModel();
+            DateOnly startDate = model.StartDate;
+            DateOnly endDate = model.EndDate;
+
+            ObservableCollection<JournalDayViewModel> journalDays = new();
+
+            for(DateOnly beginDate = startDate; beginDate <= endDate; beginDate = beginDate.AddDays(1))
+            {
+                var journalDay = new JournalDayViewModel() { ShortDateFormat = beginDate.ToShortDateString() };
+                journalDays.Add(journalDay); 
+            }
+
+            JournalViewModel.Days = journalDays;
+        }
         
     }
 }
