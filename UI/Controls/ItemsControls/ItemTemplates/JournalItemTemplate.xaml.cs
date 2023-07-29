@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModels.Items;
 
 namespace UI.Controls.ItemsControls.ItemTemplates
 {
@@ -23,6 +24,12 @@ namespace UI.Controls.ItemsControls.ItemTemplates
         public JournalItemTemplate()
         {
             InitializeComponent();
+        }
+
+        private void OnItemClick(object sender, MouseButtonEventArgs e)
+        {
+            var dataContext = DataContext as JournalViewModel;
+            dataContext?.ItemClicked();
         }
     }
 }

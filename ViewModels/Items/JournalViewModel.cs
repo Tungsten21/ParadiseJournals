@@ -7,6 +7,7 @@ using ViewModels.Interfaces;
 using Common.Extensions;
 using ViewModels.Validation;
 using Models.Interfaces;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModels.Items
 {
@@ -24,6 +25,8 @@ namespace ViewModels.Items
 
         private bool _isStartDateInvalid;
         private bool _isEndDateInvalid;
+
+        public event EventHandler JournalItemClickedEvent;
 
         public bool IsStartDateInvalid
         {
@@ -178,6 +181,26 @@ namespace ViewModels.Items
 
 
         //Methods
+        public void ItemClicked()
+        {
+            JournalItemClickedEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        public IModel CloneModel()
+        {
+            return new JournalModel()
+            {
+                Id = _model.Id,
+                Title = _model.Title,
+                Country = _model.Country,
+                StartDate = _model.StartDate,
+                EndDate = _model.EndDate,
+                Description = _model.Description,
+                City = _model.City,
+                Days = _model.Days
+            };
+        }
+
         private IEnumerable<JournalDayModel> MapDayViewModels(ObservableCollection<JournalDayViewModel> colleciton)
         {
             return from viewModels in colleciton select viewModels.Model;
@@ -194,21 +217,6 @@ namespace ViewModels.Items
             }
 
             return dayViewModels;
-        }
-
-        public IModel CloneModel()
-        {
-            return new JournalModel()
-            {
-                Id = _model.Id,
-                Title = _model.Title,
-                Country = _model.Country,
-                StartDate = _model.StartDate,
-                EndDate = _model.EndDate,
-                Description = _model.Description,
-                City = _model.City,
-                Days = _model.Days
-            };
         }
     }
 }

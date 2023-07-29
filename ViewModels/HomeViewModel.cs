@@ -16,7 +16,7 @@ namespace ViewModels
         //Properties
         private readonly IDialogService _dialogService;
         private readonly IMessenger _messenger;
-
+        private readonly INavigationService _navigationService;
         [NotifyPropertyChangedFor(nameof(NoItemsFound))]
         [NotifyPropertyChangedFor(nameof(NoWishListsButJournalFound))]
         [ObservableProperty]
@@ -50,30 +50,52 @@ namespace ViewModels
         }
 
         //Constructors
-        public HomeViewModel(IDialogService dialogService, IMessenger messenger)
+        public HomeViewModel(IDialogService dialogService, IMessenger messenger, INavigationService navigationService)
         {
             _dialogService = dialogService;
             _messenger = messenger;
+            _navigationService = navigationService;
 
             _messenger.Register<ItemCreatedMessage>(this, (r, m) => AddItemOnReceived(m.Value));
         }
 
         //Methods
-        private void AddItemOnReceived(IClonableModel item)
+        private void AddItemOnReceived(IModel item)
         {
             switch (item)
             {
-                case JournalModel:
-                    UserJournals.Add(new JournalViewModel((JournalModel) item));
+                case JournalModel journal:
+
+                    var journalVM = new JournalViewModel(journal);
+                    journalVM.JournalItemClickedEvent += OnItemClick;
+                    UserJournals.Add(journalVM);
                     if(!AtLeastOneJournal)
                         AtLeastOneJournal = true;
+                    
                     break;
-                case WishListModel:
-                    UserWishLists.Add(new WishListViewModel((WishListModel) item));
+                case WishListModel wishList:
+
+                    var wishListVM = new WishListViewModel(wishList);
+                    //wishListVM.WishListItemClickedEvent = ...
+                    UserWishLists.Add(wishListVM);
                     if (!AtLeastOneWishList)
                         AtLeastOneWishList = true;
                     break;
 
+            }
+
+        }
+
+        private void OnItemClick(object? sender, EventArgs e)
+        {
+            var vm = sender as IClonableModel;
+
+            switch (vm)
+            {
+                case JournalViewModel journal:
+                    _messenger.Send(new ItemClickedMessage(journal.CloneModel()));
+                    _navigationService.NavigateToViewModel<ViewJournalViewModel>();
+                    break;
             }
         }
     }

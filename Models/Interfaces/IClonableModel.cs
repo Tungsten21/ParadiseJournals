@@ -8,6 +8,6 @@ namespace Models.Interfaces
 {
     public interface IClonableModel
     {
-        IClonableModel CloneModel();
+        IModel CloneModel();
     }
 }

@@ -23,6 +23,7 @@ namespace ViewModels
         {
             _messenger = messenger;
             _messenger.Register<ItemCreatedMessage>(this, (r, m) => SetJournal(m.Value));
+            _messenger.Register<ItemClickedMessage>(this, (r, m) => SetJournal(m.Value));
         }
 
         //Methods

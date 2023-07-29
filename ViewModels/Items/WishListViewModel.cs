@@ -1,6 +1,7 @@
 ﻿using Common.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
+using Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +15,7 @@ using ViewModels.Validation;
 
 namespace ViewModels.Items
 {
-    public partial class WishListViewModel: ValidatableViewModel, IViewModel
+    public partial class WishListViewModel: ValidatableViewModel, IViewModel, IClonableModel
     {
         //Properties
         private string _title;
@@ -132,6 +133,18 @@ namespace ViewModels.Items
             City = viewModel.City;
         }
 
-
+        public IModel CloneModel()
+        {
+            return new WishListModel()
+            {
+                Id = _model.Id,
+                Title = _model.Title,
+                Country = _model.Country,
+                StartDate = _model.StartDate,
+                EndDate = _model.EndDate,
+                Description = _model.Description,
+                City = _model.City
+            };
+        }
     }
 }
