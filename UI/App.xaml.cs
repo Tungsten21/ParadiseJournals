@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using UI.Dialogs;
@@ -31,10 +34,8 @@ namespace UI
 
         private void ConfigureServices(ServiceCollection services)
         {
-            //services.AddDbContext<EmployeeDbContext>(options =>
-            //{
-            //    options.UseSqlite("Data Source = Employee.db");
-            //});
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString));
 
             services.AddSingleton<MainWindow>();
             services.AddTransient<BaseDialog>();
@@ -61,6 +62,7 @@ namespace UI
             services.AddSingleton<IMessenger, WeakReferenceMessenger>();
             services.AddSingleton<IDialogService, DialogService>();
             services.AddSingleton<IServiceProvider, ServiceProvider>();
+            services.AddDbContext<ApplicationDbContext>();
         }
 
         private void OnStart(object sender, StartupEventArgs e)
