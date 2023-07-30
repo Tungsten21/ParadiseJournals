@@ -24,8 +24,38 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
-
         private readonly WishListModel _model = new();
+
+        private bool _isStartDateInvalid;
+        private bool _isEndDateInvalid;
+
+        public event EventHandler WishListItemClickedEvent;
+
+        public bool IsStartDateInvalid
+        {
+            get
+            {
+                return GetErrors(nameof(StartDate)).Any();
+            }
+            set
+            {
+                _isStartDateInvalid = value;
+                SetProperty(ref _isStartDateInvalid, value, false);
+            }
+        }
+
+        public bool IsEndDateInvalid
+        {
+            get
+            {
+                return GetErrors(nameof(EndDate)).Any();
+            }
+            set
+            {
+                _isEndDateInvalid = value;
+                SetProperty(ref _isEndDateInvalid, value, false);
+            }
+        }
 
 
         [Required(ErrorMessage = "Please enter a title.")]
@@ -145,6 +175,24 @@ namespace ViewModels.Items
                 Description = _model.Description,
                 City = _model.City
             };
+        }
+
+        private IEnumerable<JournalDayModel> MapDayViewModels(ObservableCollection<JournalDayViewModel> colleciton)
+        {
+            return from viewModels in colleciton select viewModels.Model;
+        }
+
+        private ObservableCollection<JournalDayViewModel> MapDayModels()
+        {
+            var dayModels = _model.Days;
+            var dayViewModels = new ObservableCollection<JournalDayViewModel>();
+
+            foreach (var dayViewModel in dayModels)
+            {
+                dayViewModels.Add(new JournalDayViewModel(dayViewModel));
+            }
+
+            return dayViewModels;
         }
     }
 }
