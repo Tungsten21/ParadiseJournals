@@ -6,10 +6,112 @@
              xmlns:local="clr-namespace:UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Purple">
-        <TextBlock VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="40"
-                       Text="View Wishlist"/>
+    <Grid DataContext="{Binding WishListViewModel}" 
+          Background="AliceBlue"
+          ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.25*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Wishlist Thumbnail-->
+        <Border HorizontalAlignment="Stretch"
+                MaxWidth="550"
+                VerticalAlignment="Stretch"
+                MaxHeight="275"
+                CornerRadius="20"
+                Background="Navy">
+
+            <TextBlock VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       FontWeight="Bold"
+                       FontSize="20"
+                       Foreground="White"
+                       Text="%Thumbnail Placholder%">
+            </TextBlock>
+        </Border>
+
+        <!--Wishlist Information-->
+        <Grid Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              MaxWidth="550"
+              VerticalAlignment="Stretch"
+              MaxHeight="275"
+              Margin="10 0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       Text="{Binding Title}"/>
+
+            <!--TODO: Add City-->
+            <TextBlock Grid.Row="1"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       Text="{Binding Country}"/>
+
+            <!--Date Container-->
+            <StackPanel Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding StartDate}"/>
+
+                <TextBlock VerticalAlignment="Center"
+                           Text=" - "/>
+
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding EndDate}"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="3"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod consequat turpis, 
+                quis condimentum nisl maximus eu. Praesent in sapien.
+            </TextBlock>
+        </Grid>
+
+        <!-- Wishlist Details-->
+        <Grid Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Stretch"
+                    Background="Beige">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Background="Red">
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"
+                        Background="Blue">
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="4"
+                        Background="Green">
+
+            </StackPanel>
+
+        </Grid>
     </Grid>
+
 </UserControl>

@@ -51,39 +51,80 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
-            
+
             <TextBlock Text="Wishlist Title: "/>
-            <TextBox Height="30"
-                     Text="{Binding WishListViewModel.Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+
+            <StackPanel x:Name="parent">
+                <TextBox Height="30"
+                         Text="{Binding WishListViewModel.Title, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
+                                    <AdornedElementPlaceholder/>
+                                </Border>
+                                <TextBlock Text="{Binding ErrorContent}" Foreground="Red" Padding="0 0 0 10"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
-            
+
             <TextBlock Text="Country:"/>
             <TextBox Height="30"
-                     Text="{Binding WishListViewModel.Country, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                     Text="{Binding WishListViewModel.Country, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding ErrorContent}" Foreground="Red" Padding="0 0 0 10"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
         </StackPanel>
 
         <!--Date Container-->
-        <Grid Grid.Row="3"
+        <Grid Name="dateContainer"
+              Grid.Row="3" 
               Grid.Column="1"
               Width="250"
-              VerticalAlignment="Center">
+              Height="100"
+              VerticalAlignment="Center"
+              ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
+
             <StackPanel>
                 <TextBlock Text="Start Date:"/>
                 <DatePicker Height="30"
                             VerticalContentAlignment="Center"
                             Focusable="False"
                             BorderBrush="Transparent"
-                            Text="{Binding WishListViewModel.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                            Text="{Binding WishListViewModel.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnValidationError=True}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel Visibility="{Binding Source={x:Reference dateContainer}, 
+                                                                Path=DataContext.WishListViewModel.IsPreviousDateInvalid, 
+                                                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
+                                    <AdornedElementPlaceholder/>
+                                </Border>
+                                <TextBlock Text="{Binding ErrorContent, Mode=TwoWay}" Foreground="Red" Padding="0 0 0 10"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </DatePicker>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
@@ -92,7 +133,22 @@
                             VerticalContentAlignment="Center"
                             Focusable="False"
                             BorderBrush="Transparent"
-                            Text="{Binding WishListViewModel.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                            Text="{Binding WishListViewModel.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnValidationError=True}">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel Visibility="{Binding Source={x:Reference dateContainer}, 
+                                                                Path=DataContext.WishListViewModel.IsPreviousDateInvalid, 
+                                                                Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
+                                    <AdornedElementPlaceholder/>
+                                </Border>
+                                <TextBlock Text="{Binding ErrorContent, Mode=TwoWay}" 
+                                           Foreground="Red" 
+                                           Padding="0 0 0 10"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </DatePicker>
             </StackPanel>
         </Grid>
 
@@ -100,7 +156,7 @@
                     Grid.Column="2"
                     Width="250"
                     VerticalAlignment="Center">
-            
+
             <TextBlock Text="City (Optional):"/>
             <TextBox Height="30"
                      Text="{Binding WishListViewModel.City, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
@@ -110,10 +166,23 @@
                     Grid.Column="1"
                     Width="250"
                     VerticalAlignment="Center">
-            <TextBlock Text="Description (Optional):"/>
-            <TextBox Height="50"
-                     Text="{Binding WishListViewModel.Description, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+
+            <TextBlock Text="Description:"/>
+            <TextBox Height="80"
+                     Text="{Binding WishListViewModel.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnValidationError=True}">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding ErrorContent}" Foreground="Red" Padding="0 0 0 10"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
         </StackPanel>
+
 
         <Button Grid.Row="4"
                 Grid.Column="2"

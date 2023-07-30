@@ -72,9 +72,6 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
             </StackPanel>
-
-
-
         </StackPanel>
 
         <StackPanel Grid.Row="2"
@@ -121,7 +118,7 @@
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
                             <StackPanel Visibility="{Binding Source={x:Reference dateContainer}, 
-                                                                Path=DataContext.JournalViewModel.IsEndDateInvalid, 
+                                                                Path=DataContext.JournalViewModel.IsPreviousDateInvalid, 
                                                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
                                     <AdornedElementPlaceholder/>
@@ -143,7 +140,7 @@
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
                             <StackPanel Visibility="{Binding Source={x:Reference dateContainer}, 
-                                                                Path=DataContext.JournalViewModel.IsStartDateInvalid, 
+                                                                Path=DataContext.JournalViewModel.IsPreviousDateInvalid, 
                                                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
                                     <AdornedElementPlaceholder/>

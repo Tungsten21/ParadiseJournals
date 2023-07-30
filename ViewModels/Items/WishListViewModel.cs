@@ -24,9 +24,31 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
-
+        private ObservableCollection<AccomdationViewModel> _accommodations;
+        private ObservableCollection<LocationViewModel> _locaitons;
+        private ObservableCollection<NoteViewModel> _notes;
         private readonly WishListModel _model = new();
 
+        private bool _isPreviousDateInvalid;
+        private bool _isEndDateInvalid;
+
+        public event EventHandler WishListItemClickedEvent;
+
+        public bool IsPreviousDateInvalid
+        {
+            get
+            {
+                return GetErrors(nameof(StartDate)).Any() || GetErrors(nameof(EndDate)).Any();
+            }
+            set
+            {
+                _isPreviousDateInvalid = value;
+                SetProperty(ref _isPreviousDateInvalid, value, true);
+            }
+        }
+
+
+        #region Information
 
         [Required(ErrorMessage = "Please enter a title.")]
         [MinLength(5, ErrorMessage = "Title must be at least 5 characters.")]
@@ -66,10 +88,17 @@ namespace ViewModels.Items
 
                 if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
                 {
-                    ClearErrors(nameof(EndDate));
+                    ClearErrors(nameof(StartDate));
                     _model.StartDate = DateOnly.Parse(value);
+
+                 
+                    IsPreviousDateInvalid = GetErrors(nameof(EndDate)).Any() ? true : false;
+                    ClearErrors(nameof(EndDate));
+
+                    return;
                 }
 
+                IsPreviousDateInvalid = true;
             }
 
         }
@@ -86,9 +115,15 @@ namespace ViewModels.Items
 
                 if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
                 {
-                    ClearErrors(nameof(StartDate));
+                    ClearErrors(nameof(EndDate));
                     _model.EndDate = DateOnly.Parse(value);
+
+                    IsPreviousDateInvalid = GetErrors(nameof(StartDate)).Any() ? true : false;
+                    ClearErrors(nameof(StartDate));
+                    return;
                 }
+
+                IsPreviousDateInvalid = true;
             }
         }
 
@@ -115,22 +150,56 @@ namespace ViewModels.Items
             }
         }
 
-        //Constructors
-        public WishListViewModel()
+        #endregion
+
+        #region Details
+
+
+        public ObservableCollection<AccomdationViewModel> Accommodations
         {
-            
+            get { return _accommodations; }
+            set { _accommodations = value; }
         }
 
-        public WishListViewModel(WishListModel model) => _model = model;
+        
 
-        public WishListViewModel(WishListViewModel viewModel)
+        public ObservableCollection<LocationViewModel> Locations
         {
-            Title = viewModel.Title;
-            Country = viewModel.Country;
-            StartDate = viewModel.StartDate;
-            EndDate = viewModel.EndDate;
-            Description = viewModel.Description;
-            City = viewModel.City;
+            get { return _locaitons; }
+            set { _locaitons = value; }
+        }
+
+        public ObservableCollection<NoteViewModel> Notes
+        {
+            get { return _notes; }
+            set { _notes = value; }
+        }
+
+
+
+        #endregion
+
+        #region Constructor & Misc
+
+        public WishListViewModel()
+        {
+
+        }
+
+        public WishListViewModel(WishListModel model)
+        {
+            _model = model;
+            SetProperty(ref _title, model.Title, nameof(Title));
+            SetProperty(ref _country, model.Country, nameof(Country));
+            SetProperty(ref _startDate, model.StartDate.ToString(), nameof(StartDate));
+            SetProperty(ref _endDate, model.EndDate.ToString(), nameof(EndDate));
+            SetProperty(ref _city, model.City, nameof(City));
+            SetProperty(ref _descripition, model.Description, nameof(Description));
+        }
+
+        public void ItemClicked()
+        {
+            WishListItemClickedEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public IModel CloneModel()
@@ -146,5 +215,8 @@ namespace ViewModels.Items
                 City = _model.City
             };
         }
+        #endregion
+
+
     }
 }
