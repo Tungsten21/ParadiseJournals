@@ -93,7 +93,7 @@
         </StackPanel>
 
         <!--Date Container-->
-        <Grid Name="dateContainer2"
+        <Grid Name="dateContainer"
               Grid.Row="3" 
               Grid.Column="1"
               Width="250"
@@ -114,8 +114,8 @@
                             Text="{Binding WishListViewModel.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnValidationError=True}">
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
-                            <StackPanel Visibility="{Binding Source={x:Reference dateContainer2}, 
-                                                                Path=DataContext.WishListViewModel.IsEndDateInvalid, 
+                            <StackPanel Visibility="{Binding Source={x:Reference dateContainer}, 
+                                                                Path=DataContext.WishListViewModel.IsPreviousDateInvalid, 
                                                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
                                     <AdornedElementPlaceholder/>
@@ -136,8 +136,8 @@
                             Text="{Binding WishListViewModel.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnValidationError=True}">
                     <Validation.ErrorTemplate>
                         <ControlTemplate>
-                            <StackPanel Visibility="{Binding Source={x:Reference dateContainer2}, 
-                                                                Path=DataContext.WishListViewModel.IsStartDateInvalid, 
+                            <StackPanel Visibility="{Binding Source={x:Reference dateContainer}, 
+                                                                Path=DataContext.WishListViewModel.IsPreviousDateInvalid, 
                                                                 Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
                                     <AdornedElementPlaceholder/>

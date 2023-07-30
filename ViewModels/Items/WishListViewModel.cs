@@ -29,34 +29,21 @@ namespace ViewModels.Items
         private ObservableCollection<NoteViewModel> _notes;
         private readonly WishListModel _model = new();
 
-        private bool _isStartDateInvalid;
+        private bool _isPreviousDateInvalid;
         private bool _isEndDateInvalid;
 
         public event EventHandler WishListItemClickedEvent;
 
-        public bool IsStartDateInvalid
+        public bool IsPreviousDateInvalid
         {
             get
             {
-                return GetErrors(nameof(StartDate)).Any();
+                return GetErrors(nameof(StartDate)).Any() || GetErrors(nameof(EndDate)).Any();
             }
             set
             {
-                _isStartDateInvalid = value;
-                SetProperty(ref _isStartDateInvalid, value, true);
-            }
-        }
-
-        public bool IsEndDateInvalid
-        {
-            get
-            {
-                return GetErrors(nameof(EndDate)).Any();
-            }
-            set
-            {
-                _isEndDateInvalid = value;
-                SetProperty(ref _isEndDateInvalid, value, true);
+                _isPreviousDateInvalid = value;
+                SetProperty(ref _isPreviousDateInvalid, value, true);
             }
         }
 
@@ -102,13 +89,16 @@ namespace ViewModels.Items
                 if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
                 {
                     ClearErrors(nameof(StartDate));
-                    IsStartDateInvalid = false;
                     _model.StartDate = DateOnly.Parse(value);
+
+                 
+                    IsPreviousDateInvalid = GetErrors(nameof(EndDate)).Any() ? true : false;
+                    ClearErrors(nameof(EndDate));
 
                     return;
                 }
 
-                IsStartDateInvalid = true;
+                IsPreviousDateInvalid = true;
             }
 
         }
@@ -126,13 +116,14 @@ namespace ViewModels.Items
                 if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
                 {
                     ClearErrors(nameof(EndDate));
-                    IsEndDateInvalid = false;
                     _model.EndDate = DateOnly.Parse(value);
 
+                    IsPreviousDateInvalid = GetErrors(nameof(StartDate)).Any() ? true : false;
+                    ClearErrors(nameof(StartDate));
                     return;
                 }
 
-                IsEndDateInvalid = true;
+                IsPreviousDateInvalid = true;
             }
         }
 

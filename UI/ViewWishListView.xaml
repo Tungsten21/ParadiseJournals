@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding JournalViewModel}" 
+    <Grid DataContext="{Binding WishListViewModel}" 
           Background="AliceBlue"
           ShowGridLines="True">
         <Grid.RowDefinitions>
