@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using Models;
+using Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace ViewModels
         }
 
         //Methods
-        private void SetWishList(object value)
+        private void SetWishList(IModel value)
         {
             if (value is WishListModel model)
                 WishListViewModel = new WishListViewModel(model);

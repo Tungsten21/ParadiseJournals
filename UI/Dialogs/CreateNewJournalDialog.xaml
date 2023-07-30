@@ -72,9 +72,6 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
             </StackPanel>
-
-
-
         </StackPanel>
 
         <StackPanel Grid.Row="2"

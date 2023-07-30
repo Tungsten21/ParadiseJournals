@@ -37,7 +37,7 @@ namespace ViewModels.Items
             set
             {
                 _isStartDateInvalid = value;
-                SetProperty(ref _isStartDateInvalid, value, false);
+                SetProperty(ref _isStartDateInvalid, value, true);
             }
         }
 
@@ -50,7 +50,7 @@ namespace ViewModels.Items
             set
             {
                 _isEndDateInvalid = value;
-                SetProperty(ref _isEndDateInvalid, value, false);
+                SetProperty(ref _isEndDateInvalid, value, true);
             }
         }
 
@@ -105,13 +105,13 @@ namespace ViewModels.Items
                 if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
                 {
                     ClearErrors(nameof(StartDate));
-                    IsStartDateInvalid = true;
+                    IsStartDateInvalid = false;
                     _model.StartDate = DateOnly.Parse(value);
 
                     return;
                 }
 
-                IsStartDateInvalid = false;
+                IsStartDateInvalid = true;
             }
 
         }
@@ -129,13 +129,13 @@ namespace ViewModels.Items
                 if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
                 {
                     ClearErrors(nameof(EndDate));
-                    IsEndDateInvalid = true;
+                    IsEndDateInvalid = false;
                     _model.EndDate = DateOnly.Parse(value);
 
                     return;
                 }
 
-                IsEndDateInvalid = false;
+                IsEndDateInvalid = true;
             }
         }
 
