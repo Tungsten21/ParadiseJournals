@@ -50,7 +50,8 @@
                     VerticalAlignment="Center">
             
             <TextBlock Text="Email:"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding User.Email}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3"
@@ -59,7 +60,8 @@
                     VerticalAlignment="Center">
             
             <TextBlock Text="Password:"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding User.Password}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4"
@@ -68,7 +70,8 @@
                     VerticalAlignment="Center">
             
             <TextBlock Text="First Name:"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding User.FirstName}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
@@ -77,7 +80,8 @@
                     VerticalAlignment="Center">
             
             <TextBlock Text="Username:"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding User.Username}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3"
@@ -86,14 +90,16 @@
                     VerticalAlignment="Center">
             
             <TextBlock Text="Confirm Password:"/>
-            <TextBox Height="30"/>
+            <TextBox Height="30"
+                     Text="{Binding User.ConfirmPassword}"/>
         </StackPanel>
 
         <Button Grid.Row="4"
                 Grid.Column="2"
                 Content="Create Account"
                 Width="125"
-                Height="35"/>
+                Height="35"
+                Command="{Binding AttemptRegisterCommand}"/>
 
     </Grid>
 </UserControl>
