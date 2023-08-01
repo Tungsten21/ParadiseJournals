@@ -29,7 +29,7 @@ namespace Data
 
         public User? GetUser(Guid id)
         {
-            return _context.Users.FirstOrDefault(user => user.Id == id);
+            return _context.Users.FirstOrDefault(user => user.Id == id && user.Deleted == false);
         }
 
         public ResultDto Login(string username, string password)
@@ -37,7 +37,8 @@ namespace Data
             var result = new ResultDto();
 
             var user = _context.Users.FirstOrDefault(user => user.Username == username &&
-                                                               user.Password == password);
+                                                             user.Password == password &&
+                                                             user.Deleted == false);
 
             if (user == null)
             {

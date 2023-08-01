@@ -26,13 +26,8 @@ namespace Services
             {
                 return userDto;
             }
-
+            
             var user = _userRepository.GetUser(loginResult.Id);
-
-            if (user == null)
-            {
-                return userDto;
-            }
 
             _mapper.Map(user, userDto);
             userDto.IsExistingUser = true;

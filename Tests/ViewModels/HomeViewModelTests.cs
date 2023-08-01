@@ -30,6 +30,7 @@ namespace Tests.ViewModels
             _navigationService = new();
             _messenger = new WeakReferenceMessenger();
             _homeViewModel = new(_dialogService.Object, _messenger, _navigationService.Object);
+
         }
 
         [TestMethod()]
