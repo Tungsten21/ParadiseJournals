@@ -1,14 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Data;
+using Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Services;
+using Services.Interfaces;
+using Services.Mappers;
 using System;
+using System.Configuration;
 using System.Windows;
-using System.Windows.Controls;
 using UI.Dialogs;
 using ViewModels;
 using ViewModels.Controls;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
 using ViewModels.Navigation;
+using ViewModels.User;
 
 namespace UI
 {
@@ -31,10 +38,10 @@ namespace UI
 
         private void ConfigureServices(ServiceCollection services)
         {
-            //services.AddDbContext<EmployeeDbContext>(options =>
-            //{
-            //    options.UseSqlite("Data Source = Employee.db");
-            //});
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString));
+
+            services.AddAutoMapper(typeof(ServerProfiles).Assembly);
 
             services.AddSingleton<MainWindow>();
             services.AddTransient<BaseDialog>();
@@ -56,11 +63,17 @@ namespace UI
             services.AddTransient<CreateNewJournalViewModel>();
             services.AddTransient<CreateNewWishListViewModel>();
 
+            services.AddSingleton<IUserContext, UserContext>();
 
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>();
             services.AddSingleton<IDialogService, DialogService>();
             services.AddSingleton<IServiceProvider, ServiceProvider>();
+            services.AddSingleton<IUserService, UserService>();
+
+            services.AddSingleton<IUserRepository, UserRepository>();
+
+
         }
 
         private void OnStart(object sender, StartupEventArgs e)

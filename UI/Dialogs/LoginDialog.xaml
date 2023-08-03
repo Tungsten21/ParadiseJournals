@@ -50,7 +50,7 @@
                     Width="200">
             
             <TextBlock Text="Username:"/>
-            <TextBox/>
+            <TextBox Text="{Binding UserName}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3"
@@ -58,7 +58,7 @@
                     Width="200">
             
             <TextBlock Text="Password:"/>
-            <TextBox/>
+            <TextBox Text="{Binding Password}"/>
         </StackPanel>
 
         <Button Grid.Row="4"
