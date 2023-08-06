@@ -24,7 +24,6 @@ namespace ViewModels.Items
         private readonly JournalModel _model = new();
 
         private bool _isPreviousDateInvalid;
-        private bool _isEndDateInvalid;
 
         public event EventHandler JournalItemClickedEvent;
 
