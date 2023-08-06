@@ -10,10 +10,11 @@ using ViewModels.Controls;
 using ViewModels.Interfaces;
 using ViewModels.Validation;
 using Common.Extensions;
+using ViewModels.User;
 
 namespace ViewModels.Dialogs
 {
-    public partial class LoginViewModel : ValidatableViewModel, IViewModel, IClosable
+    public partial class LoginViewModel : BaseViewModel , IViewModel, IClosable
     {
         //Properties
         private INavigationService _navigationService;
@@ -21,42 +22,12 @@ namespace ViewModels.Dialogs
         private IUserService _userService;
         private readonly MenuBarViewModel _menuBar;
         private readonly IMapper _mapper;
-        private readonly UserDto _tempUser;
 
-        [Required]
-        [MinLength(6)]
-        public string Username
-        {
-            get { return _userName; }
-            set
-            {
-                _tempUser.Username.Clear();
-                if (SetProperty(ref _userName, value, true) && GetErrors(nameof(Username)).Count() == 0)
-                {
-                    _tempUser.Username = value;
-                }
-            }
-        }
+        [ObservableProperty]
+        private UserViewModel _tempUser = new();
 
-        [Required]
-        [PasswordPropertyText]
-        [MinLength(8)]
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                _tempUser.Password.Clear();
-                if (SetProperty(ref _password, value, true) && GetErrors(nameof(Password)).Count() == 0)
-                {
-                    _tempUser.Password = value;
-                }
-            }
-        }
         [ObservableProperty]
         private string _feedBackText;
-        private string _userName;
-        private string _password;
 
         public Action CloseWindow { get; set; }
 
@@ -64,6 +35,10 @@ namespace ViewModels.Dialogs
         [RelayCommand]
         private void AttemptLogin()
         {
+            if (!TempUser.IsValid())
+            {
+                return;
+            }
 
             var user = _userService.Login(_tempUser.Username, _tempUser.Password);
 
@@ -89,7 +64,7 @@ namespace ViewModels.Dialogs
                               IMapper mapper,
                               IUserContext userContext, 
                               INavigationService navigationService, 
-                              IUserService userService)
+                              IUserService userService) : base(userContext)
         {
             _menuBar = menu;
             _mapper = mapper;

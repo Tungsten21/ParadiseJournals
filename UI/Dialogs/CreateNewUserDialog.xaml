@@ -51,7 +51,7 @@
             
             <TextBlock Text="Email:"/>
             <TextBox Height="30"
-                     Text="{Binding UserViewModel.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                     Text="{Binding TempUser.Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -72,7 +72,7 @@
             
             <TextBlock Text="Password:"/>
             <TextBox Height="30"
-                     Text="{Binding UserViewModel.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                     Text="{Binding TempUser.Password, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -93,7 +93,7 @@
             
             <TextBlock Text="First Name:"/>
             <TextBox Height="30"
-                     Text="{Binding UserViewModel.FirstName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                     Text="{Binding TempUser.FirstName, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -114,7 +114,7 @@
             
             <TextBlock Text="Username:"/>
             <TextBox Height="30"
-                     Text="{Binding UserViewModel.Username, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                     Text="{Binding TempUser.Username, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -135,7 +135,7 @@
             
             <TextBlock Text="Confirm Password:"/>
             <TextBox Height="30"
-                     Text="{Binding UserViewModel.ConfirmPassword, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+                     Text="{Binding TempUser.ConfirmPassword, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>

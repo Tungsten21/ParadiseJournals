@@ -8,10 +8,9 @@ using ViewModels.Interfaces;
 
 namespace ViewModels.Validation
 {
-    public class ValidatableViewModel : BaseViewModel
+    public class ValidatableViewModel : ObservableValidator
     {
-        public ValidatableViewModel(IUserContext userContext) : base(userContext) { }
-
+        public ValidatableViewModel() { }
         public bool IsValid()
         {
             ValidateAllProperties();
