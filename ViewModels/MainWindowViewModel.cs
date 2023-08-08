@@ -7,7 +7,7 @@ using ViewModels.Messages;
 
 namespace ViewModels
 {
-    public partial class MainWindowViewModel : ObservableObject
+    public partial class MainWindowViewModel : BaseViewModel
     {
 
         //Properties
@@ -23,8 +23,8 @@ namespace ViewModels
         //Commands 
 
         //Constructors
-        public MainWindowViewModel(IServiceProvider serviceProvider, IMessenger messenger,
-            MenuBarViewModel menuBarViewModel)
+        public MainWindowViewModel(IServiceProvider serviceProvider, IUserContext userContext, IMessenger messenger,
+            MenuBarViewModel menuBarViewModel) : base(userContext)
         {
             _serviceProvider = serviceProvider;
             _messenger = messenger;

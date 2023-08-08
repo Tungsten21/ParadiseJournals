@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI.Dialogs"
         xmlns:viewModels="clr-namespace:ViewModels.Dialogs;assembly=ViewModels"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
         Title="BaseDialog" Height="450" Width="800">
     <Grid>
         <!--Content Control to dynamically map view to view models-->

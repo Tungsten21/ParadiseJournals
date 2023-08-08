@@ -18,7 +18,6 @@ namespace ViewModels.Dialogs
     {
         //Properties
         private INavigationService _navigationService;
-        private IUserContext _userContext;
         private IUserService _userService;
         private readonly MenuBarViewModel _menuBar;
         private readonly IMapper _mapper;
@@ -35,12 +34,12 @@ namespace ViewModels.Dialogs
         [RelayCommand]
         private void AttemptLogin()
         {
-            if (!TempUser.IsValid())
+            if (!TempUser.IsUsernameAndPasswordValid())
             {
                 return;
             }
 
-            var user = _userService.Login(_tempUser.Username, _tempUser.Password);
+            var user = _userService.Login(TempUser.Username, TempUser.Password);
 
             if (!user.IsExistingUser)
             {
@@ -50,7 +49,7 @@ namespace ViewModels.Dialogs
 
             var userModel = _mapper.Map<UserModel>(user);
 
-            _userContext.CurrentUser = userModel;
+            UserContext.CurrentUser = userModel;
 
             _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
             CloseWindow?.Invoke();
@@ -68,7 +67,6 @@ namespace ViewModels.Dialogs
         {
             _menuBar = menu;
             _mapper = mapper;
-            _userContext = userContext;
             _userService = userService;
             _navigationService = navigationService;
             

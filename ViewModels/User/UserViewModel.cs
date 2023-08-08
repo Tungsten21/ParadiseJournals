@@ -97,6 +97,11 @@ namespace ViewModels.User
             }
         }
 
+        public bool IsUsernameAndPasswordValid()
+        {
+            return !GetErrors(nameof(Username)).Any() && !GetErrors(nameof(Password)).Any();
+        }
+
         public UserViewModel() 
         {
 

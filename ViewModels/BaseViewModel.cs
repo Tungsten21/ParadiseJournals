@@ -11,11 +11,12 @@ namespace ViewModels
 {
     public partial class BaseViewModel : ValidatableViewModel
     {
-        private readonly IUserContext _user;
+        [ObservableProperty]
+        private IUserContext _userContext;
 
         public BaseViewModel(IUserContext userContext)
         {
-            _user = userContext;
+            _userContext = userContext;
         }
     }
 }

@@ -42,7 +42,7 @@
                    VerticalAlignment="Center"
                    TextAlignment="Center"
                    Foreground="Red"
-                   Text="%Login FeedbackText%"/>
+                   Text="{Binding FeedBackText}"/>
 
         <!--Controls-->
         <StackPanel Grid.Row="2"
@@ -50,7 +50,7 @@
                     Width="200">
             
             <TextBlock Text="Username:"/>
-            <TextBox Text="{Binding UserName}"/>
+            <TextBox Text="{Binding TempUser.Username}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3"
@@ -58,7 +58,7 @@
                     Width="200">
             
             <TextBlock Text="Password:"/>
-            <TextBox Text="{Binding Password}"/>
+            <TextBox Text="{Binding TempUser.Password}"/>
         </StackPanel>
 
         <Button Grid.Row="4"

@@ -1,6 +1,9 @@
-﻿using Common.Dtos;
+﻿using AutoMapper;
+using Common.Dtos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Models;
+using Services;
 using Services.Interfaces;
 using ViewModels.Controls;
 using ViewModels.Interfaces;
@@ -13,6 +16,7 @@ namespace ViewModels.Dialogs
 
         //Properties
         private readonly INavigationService _navigationService;
+        private readonly IMapper _mapper;
         private readonly MenuBarViewModel _menuBar;
         private readonly IUserService _userService;
 
@@ -50,6 +54,9 @@ namespace ViewModels.Dialogs
                 return;
             }
 
+            var userModel = _mapper.Map<UserModel>(_userService.Login(TempUser.Username, TempUser.Password));
+            UserContext.CurrentUser = userModel;
+
             _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
             CloseWindow?.Invoke();
         }
@@ -57,9 +64,10 @@ namespace ViewModels.Dialogs
         //Commands
 
         //Constructors
-        public CreateNewUserViewModel(MenuBarViewModel menu, INavigationService navigationService,
+        public CreateNewUserViewModel(MenuBarViewModel menu, IMapper mapper, INavigationService navigationService,
                                       IUserContext userContext, IUserService userService) : base(userContext)
         {
+            _mapper = mapper;
             _menuBar = menu;
             _userService = userService;
             _navigationService = navigationService;
