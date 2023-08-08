@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModels.Interfaces;
 
 namespace ViewModels.Validation
 {
     public class ValidatableViewModel : ObservableValidator
     {
         public ValidatableViewModel() { }
-
         public bool IsValid()
         {
             ValidateAllProperties();

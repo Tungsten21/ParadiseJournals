@@ -1,28 +1,31 @@
-﻿using Common.Dtos;
+﻿using AutoMapper;
+using Common.Dtos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Models;
+using Services;
 using Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ViewModels.Controls;
 using ViewModels.Interfaces;
 using ViewModels.User;
 
 namespace ViewModels.Dialogs
 {
-    public partial class CreateNewUserViewModel : ObservableObject, IViewModel, IClosable
+    public partial class CreateNewUserViewModel : BaseViewModel, IViewModel, IClosable
     {
 
         //Properties
         private readonly INavigationService _navigationService;
+        private readonly IMapper _mapper;
+        private readonly MenuBarViewModel _menuBar;
         private readonly IUserService _userService;
 
         [ObservableProperty]
-        private UserViewModel _user = new();
+        private UserViewModel _tempUser = new();
+
+        [ObservableProperty]
+        private string _registerFeedbackText;
+
 
 
         public Action CloseWindow { get; set; }
@@ -30,33 +33,42 @@ namespace ViewModels.Dialogs
         [RelayCommand]
         private void AttemptRegister()
         {
-            var userDto = new UserDto
+            if (!TempUser.IsValid())
             {
-                FirstName = User.FirstName,
-                EmailAddress = User.Email,
-                Username = User.Username,
-                Password = User.Password,
-            };
+                return;
+            }
 
+            var userDto = new UserDto()
+            {
+                FirstName = TempUser.FirstName,
+                EmailAddress = TempUser.Email,
+                Username = TempUser.Username,
+                Password = TempUser.Password,
+            };
+            
             var registerResult = _userService.Register(userDto);
 
             if (!registerResult.Success)
             {
-                //Display error messager
+                RegisterFeedbackText = registerResult.Message;
                 return;
             }
 
-            _navigationService.NavigateToViewModel<HomeViewModel>();
-            CloseWindow?.Invoke();
+            var userModel = _mapper.Map<UserModel>(_userService.Login(TempUser.Username, TempUser.Password));
+            UserContext.CurrentUser = userModel;
 
+            _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
+            CloseWindow?.Invoke();
         }
 
         //Commands
 
         //Constructors
-        public CreateNewUserViewModel(INavigationService navigationService,
-                                      IUserService userService)
+        public CreateNewUserViewModel(MenuBarViewModel menu, IMapper mapper, INavigationService navigationService,
+                                      IUserContext userContext, IUserService userService) : base(userContext)
         {
+            _mapper = mapper;
+            _menuBar = menu;
             _userService = userService;
             _navigationService = navigationService;
         }

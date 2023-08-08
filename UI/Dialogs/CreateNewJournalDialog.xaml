@@ -57,7 +57,7 @@
 
             <TextBlock Text="Journal Title: "/>
 
-            <StackPanel x:Name="parent">
+            <StackPanel>
                 <TextBox Height="30"
                          Text="{Binding JournalViewModel.Title, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
                     <Validation.ErrorTemplate>

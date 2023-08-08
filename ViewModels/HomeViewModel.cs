@@ -11,7 +11,7 @@ using ViewModels.Messages;
 
 namespace ViewModels
 {
-    public partial class HomeViewModel : ObservableObject, IViewModel
+    public partial class HomeViewModel : BaseViewModel, IViewModel
     {
         //Properties
         private readonly IDialogService _dialogService;
@@ -50,7 +50,7 @@ namespace ViewModels
         }
 
         //Constructors
-        public HomeViewModel(IDialogService dialogService, IMessenger messenger, INavigationService navigationService)
+        public HomeViewModel(IUserContext userContext, IDialogService dialogService, IMessenger messenger, INavigationService navigationService) : base(userContext)
         {
             _dialogService = dialogService;
             _messenger = messenger;

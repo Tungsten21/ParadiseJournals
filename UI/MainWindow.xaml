@@ -14,13 +14,13 @@
             <ColumnDefinition Width="{Binding MenuBarViewModel.IsMenuBarVisible, Converter={StaticResource MenuBarToWidthConverter}}"
                               x:Name="menuColumn"/>
 
-            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
         <controls:MenuBar/>
-        
+
         <!--DataTemplates To Tie Views -> ViewModels-->
         <ContentControl Grid.Column="2"
                         Content="{Binding CurrentViewModel}">

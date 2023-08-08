@@ -4,24 +4,27 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using ViewModels.Controls;
 using ViewModels.Interfaces;
+using ViewModels.Validation;
+using Common.Extensions;
+using ViewModels.User;
 
 namespace ViewModels.Dialogs
 {
-    public partial class LoginViewModel : ObservableObject, IViewModel, IClosable
+    public partial class LoginViewModel : BaseViewModel , IViewModel, IClosable
     {
         //Properties
         private INavigationService _navigationService;
-        private IUserContext _userContext;
         private IUserService _userService;
         private readonly MenuBarViewModel _menuBar;
         private readonly IMapper _mapper;
 
         [ObservableProperty]
-        private string _userName;
-        [ObservableProperty]
-        private string _password;
+        private UserViewModel _tempUser = new();
+
         [ObservableProperty]
         private string _feedBackText;
 
@@ -31,8 +34,12 @@ namespace ViewModels.Dialogs
         [RelayCommand]
         private void AttemptLogin()
         {
+            if (!TempUser.IsUsernameAndPasswordValid())
+            {
+                return;
+            }
 
-            var user = _userService.Login(UserName, Password);
+            var user = _userService.Login(TempUser.Username, TempUser.Password);
 
             if (!user.IsExistingUser)
             {
@@ -42,7 +49,7 @@ namespace ViewModels.Dialogs
 
             var userModel = _mapper.Map<UserModel>(user);
 
-            _userContext.CurrentUser = userModel;
+            UserContext.CurrentUser = userModel;
 
             _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
             CloseWindow?.Invoke();
@@ -51,15 +58,15 @@ namespace ViewModels.Dialogs
         
 
         //Constructors
+
         public LoginViewModel(MenuBarViewModel menu,
                               IMapper mapper,
                               IUserContext userContext, 
                               INavigationService navigationService, 
-                              IUserService userService)
+                              IUserService userService) : base(userContext)
         {
             _menuBar = menu;
             _mapper = mapper;
-            _userContext = userContext;
             _userService = userService;
             _navigationService = navigationService;
             

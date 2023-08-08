@@ -1,8 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Common.Extensions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Models;
 using Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,35 +20,60 @@ namespace ViewModels.User
         private string _password;
         private string _confirmPassword;
         private string _firstName;
-        private IModel _model;
+        private readonly UserModel _model = new();
 
+        [Required]
+        [EmailAddress]
+        [MinLength(6)]
         public string Email
         {
             get { return _email; }
-            set 
-            { 
-                SetProperty(ref _email, value);
+            set
+            {
+                _model.EmailAddress.Clear();
+                if (SetProperty(ref _email, value, true) && GetErrors(nameof(Email)).Count() == 0)
+                {
+                    _model.EmailAddress = value;
+                }
             }
         }
 
+        [Required]
+        [MinLength(6)]
         public string Username
         {
             get { return _userName; }
             set
             {
-                SetProperty(ref _userName, value);
+                _model.Username.Clear();
+                if (SetProperty(ref _userName, value, true) && GetErrors(nameof(Username)).Count() == 0)
+                {
+                    _model.Username = value;
+                }
             }
         }
 
+        [Required]
+        [PasswordPropertyText]
+        [MinLength(8)]
         public string Password
         {
             get { return _password; }
             set
             {
-                SetProperty(ref _password, value);
+                _model.Password.Clear();
+                if (SetProperty(ref _password, value, true) && GetErrors(nameof(Password)).Count() == 0)
+                {
+                    _model.Password = value;
+                }
             }
         }
 
+
+        [Required]
+        [PasswordPropertyText]
+        [MinLength(8)]
+        [Compare(nameof(Password))]
         public string ConfirmPassword
         {
             get { return _confirmPassword; }
@@ -55,18 +83,28 @@ namespace ViewModels.User
             }
         }
 
+        [MinLength(2)]
         public string FirstName
         {
             get { return _firstName; }
             set
             {
-                SetProperty(ref _firstName, value);
+                _model.FirstName.Clear();
+                if (SetProperty(ref _firstName, value, true) && GetErrors(nameof(FirstName)).Count() == 0)
+                {
+                    _model.FirstName = value;
+                }
             }
         }
 
-        public UserViewModel()
+        public bool IsUsernameAndPasswordValid()
         {
-            
+            return !GetErrors(nameof(Username)).Any() && !GetErrors(nameof(Password)).Any();
+        }
+
+        public UserViewModel() 
+        {
+
         }
 
         public IModel CloneModel()
