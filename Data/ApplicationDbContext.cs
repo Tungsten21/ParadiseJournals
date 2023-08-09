@@ -38,6 +38,23 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Table names
+            modelBuilder.Entity<Journal>(x => x.ToTable("Journals"));
+            modelBuilder.Entity<JournalDay>(x => x.ToTable("JournalDays"));
+            modelBuilder.Entity<JournalImages>(x => x.ToTable("JournalImages"));
+            modelBuilder.Entity<Wishlist>(x => x.ToTable("Wiishlists"));
+            modelBuilder.Entity<WishlistImage>(x => x.ToTable("WishlistImages"));
+            modelBuilder.Entity<WishlistAccommodations>(x => x.ToTable("WishlistAccommodations"));
+            modelBuilder.Entity<WishlistAccommodationImages>(x => x.ToTable("WishlistAccommodationImages"));
+            modelBuilder.Entity<WishlistLocations>(x => x.ToTable("WishlistLocations"));
+            modelBuilder.Entity<WishlistLocationImages>(x => x.ToTable("WishlistLocationImages"));
+            modelBuilder.Entity<WishlistNotes>(x => x.ToTable("WishlistNotes"));
+            modelBuilder.Entity<WishlistNoteImages>(x => x.ToTable("WishlistNoteImages"));
+            modelBuilder.Entity<User>(x => x.ToTable("Users"));
+            modelBuilder.Entity<UserImage>(x => x.ToTable("UserImages"));
+            modelBuilder.Entity<UserJournal>(x => x.ToTable("UserJournals"));
+            modelBuilder.Entity<UserWishlist>(x => x.ToTable("UserWishlists"));
+
             // Configure relationships and constraints here
             //Journal
             modelBuilder.Entity<Journal>()
@@ -93,7 +110,8 @@ namespace Data
                 .HasOne(wl => wl.WishlistLocationImages)
                 .WithOne(wli => wli.WishlistLocations)
                 .HasForeignKey<WishlistLocations>(wli => wli.WishlistLocationImagesId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade)
+                ;
 
             modelBuilder.Entity<Wishlist>()
                 .HasMany(w => w.WishlistNotes)
