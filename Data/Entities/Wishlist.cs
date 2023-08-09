@@ -11,8 +11,8 @@ namespace Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid PictureId { get; set; }
-        public Picture Picture { get; set; }
+        public Guid WishlistImageId { get; set; }
+        public WishlistImage WishlistImage { get; set; }
         [Required]
         public Guid Owner { get; set; }
         [Required]

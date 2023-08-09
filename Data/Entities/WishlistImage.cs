@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
-    public class UserImage
+    public class WishlistImage
     {
         [Key]
         public Guid Id { get; set; }
         [Required]
-        public Guid UserId { get; set; }
-        [Required]
-        public User User { get; set; }
+        public Guid WishlistId { get; set; }
         [Required]
         public byte[] Image { get; set; }
     }

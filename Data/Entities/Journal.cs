@@ -11,10 +11,12 @@ namespace Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid PictureId { get; set; }
-        public Picture Picture { get; set; }
+        public Guid JournalImagesId { get; set; }
+        public JournalImages JournalImages { get; set; }
         [Required]
-        public Guid Owner { get; set; }
+        public Guid OwnerId { get; set; }
+        [Required]
+        public User Owner { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

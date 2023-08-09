@@ -14,17 +14,13 @@ namespace Data.Entities
         [Required]
         public Guid JournalId { get; set; }
         [Required]
+        public Journal Journal { get; set; }
         public byte[] Thumbnail { get; set; }
-        [Required]
         public byte[] AdditionalImage { get; set; }
-        [Required]
         public byte[] AdditionalImage2 { get; set; }
-        [Required]
         public byte[] AdditionalImage3 { get; set; }
-        [Required]
         public byte[] AdditionalImage4 { get; set; }
-        [Required]
-        public byte[] AdditionalImage { get; set; }
+        public byte[] AdditionalImage5 { get; set; }
 
     }
 }

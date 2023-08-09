@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
-    public class UserImage
+    public class UserJournals
     {
         [Key]
         public Guid Id { get; set; }
@@ -16,6 +16,8 @@ namespace Data.Entities
         [Required]
         public User User { get; set; }
         [Required]
-        public byte[] Image { get; set; }
+        public Journal JournalId { get; set; }
+        [Required]
+        public Journal Wishlist { get; set; }
     }
 }
