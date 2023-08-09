@@ -72,7 +72,7 @@ namespace Data.Migrations
                     b.ToTable("JournalDays");
                 });
 
-            modelBuilder.Entity("Data.Entities.User", b =>
+            modelBuilder.Entity("Data.Entities.Owner", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

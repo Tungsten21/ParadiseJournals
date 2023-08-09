@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
-    public class UserWishlists
+    public class UserJournal
     {
         [Key]
         public Guid Id { get; set; }
         [Required]
-        public Guid UserId { get; set; }
+        public Guid OwnerId { get; set; }
         [Required]
-        public User User { get; set; }
+        public User Owner { get; set; }
         [Required]
-        public Guid WishlistId { get; set; }
+        public Guid JournalId { get; set; }
         [Required]
-        public Wishlist Wishlist { get; set; }
+        public ICollection<Journal> Journals { get; set; }
     }
 }

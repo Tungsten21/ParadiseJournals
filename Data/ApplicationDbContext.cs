@@ -17,9 +17,9 @@ namespace Data
         public DbSet<JournalDay> JournalDays { get; set; }
         public DbSet<JournalImages> JournalImages { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
-        public DbSet<WishlistLocation> WishlistLocations { get; set; }
-        public DbSet<WishlistAccommodation> WishlistAccommodations { get; set; }
-        public DbSet<WishlistNote> WishlistNotes { get; set; }
+        public DbSet<WishlistLocations> WishlistLocations { get; set; }
+        public DbSet<WishlistAccommodations> WishlistAccommodations { get; set; }
+        public DbSet<WishlistNotes> WishlistNotes { get; set; }
 
         public ApplicationDbContext()
         {
@@ -53,11 +53,61 @@ namespace Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Journal>()
-                .HasOne(j => j.Owner)
-                .WithMany(o => o.Journals)
+                .HasOne(j => j.UserJournal)
+                .WithMany(uj => uj.Journals)
+                .HasForeignKey(j => j.UserJournalId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //User
+            //Wishlist
+            modelBuilder.Entity<Wishlist>()
+                .HasOne(w => w.WishlistImage)
+                .WithOne(wi => wi.Wishlist)
+                .HasForeignKey<Wishlist>(w => w.WishlistImageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Wishlist>()
+                .HasOne(w => w.UserWishlist)
+                .WithMany(uw => uw.Wishlists)
+                .HasForeignKey(w => w.UserWishlistId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Wishlist>()
+                .HasMany(w => w.WishlistAccommodations)
+                .WithOne(wa => wa.Wishlist)
+                .HasForeignKey(wa => wa.WishlistId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<WishlistAccommodations>()
+                .HasOne(wa => wa.WishlistAccommodationImages)
+                .WithOne(wai => wai.WishlistAccommodations)
+                .HasForeignKey<WishlistAccommodations>(wa => wa.WishlistAccomidationImagesId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Wishlist>()
+                .HasMany(w => w.WishlistLocations)
+                .WithOne(wl => wl.Wishlist)
+                .HasForeignKey(wl => wl.WishlistId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<WishlistLocations>()
+                .HasOne(wl => wl.WishlistLocationImages)
+                .WithOne(wli => wli.WishlistLocations)
+                .HasForeignKey<WishlistLocations>(wli => wli.WishlistLocationImagesId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Wishlist>()
+                .HasMany(w => w.WishlistNotes)
+                .WithOne(wn => wn.Wishlist)
+                .HasForeignKey(wn => wn.WishlistId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<WishlistNotes>()
+                .HasOne(wn => wn.WishlistNoteImages)
+                .WithOne(wni => wni.WishlistNotes)
+                .HasForeignKey<WishlistNotes>(wni => wni.WishlistNoteImagesId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //Owner
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserImage)
                 .WithOne(ui => ui.User)
@@ -65,14 +115,16 @@ namespace Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Journals)
-                .WithOne(j => j.Owner)
-                .HasForeignKey<Wishlist>(u => wl.PictureId);
+                .HasMany(u => u.UserJournals)
+                .WithOne(uj => uj.Owner)
+                .HasForeignKey(uj => uj.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<WishlistAccommodation>()
-                .HasOne(wla => wla.Picture)
-                .WithOne(p => p.WishlistAccommodation)
-                .HasForeignKey<WishlistAccommodation>(wla => wla.PictureId);
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.UserWishlists)
+                .WithOne(uw => uw.Owner)
+                .HasForeignKey(uw => uw.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

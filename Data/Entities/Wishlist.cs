@@ -11,10 +11,18 @@ namespace Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid WishlistImageId { get; set; }
-        public WishlistImage WishlistImage { get; set; }
+        public Guid? WishlistImageId { get; set; }
+        public WishlistImage? WishlistImage { get; set; }
         [Required]
-        public Guid Owner { get; set; }
+        public Guid UserWishlistId { get; set; }
+        [Required]
+        public UserWishlist UserWishlist { get; set; }
+        public Guid? WishlistAccommodationsId { get; set; }
+        public ICollection<WishlistAccommodations>? WishlistAccommodations { get; set; }
+        public Guid? WishlistLocationsId { get; set; }
+        public ICollection<WishlistLocations>? WishlistLocations { get; set; }
+        public Guid? WishlistNotesId { get; set; }
+        public ICollection<WishlistNotes>? WishlistNotes { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

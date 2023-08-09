@@ -14,6 +14,8 @@ namespace Data.Entities
         [Required]
         public Guid WishlistId { get; set; }
         [Required]
+        public Wishlist Wishlist { get; set; }
+        [Required]
         public byte[] Image { get; set; }
     }
 }

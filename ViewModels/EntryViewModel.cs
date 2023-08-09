@@ -21,7 +21,7 @@ namespace ViewModels
         [RelayCommand]
         private void OpenCreateNewUserDialog()
         {
-            _dialogService.ShowDialog<CreateNewUserViewModel>("Create New User", "Large");
+            _dialogService.ShowDialog<CreateNewUserViewModel>("Create New Owner", "Large");
         }
 
         //Constructors

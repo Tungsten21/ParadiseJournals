@@ -13,13 +13,15 @@ namespace Data.Entities
         [Key]
         public Guid Id { get; set; }
         [Required]
-        public Guid WishlistId { get; set; }
-        public byte[] Thumbnail { get; set; }
-        public byte[] AdditionalImage { get; set; }
-        public byte[] AdditionalImage2 { get; set; }
-        public byte[] AdditionalImage3 { get; set; }
-        public byte[] AdditionalImage4 { get; set; }
-        public byte[] AdditionalImage5 { get; set; }
+        public Guid WishlistAccommodationsId { get; set; }
+        [Required]
+        public WishlistAccommodations WishlistAccommodations { get; set; }
+        public byte[]? Thumbnail { get; set; }
+        public byte[]? AdditionalImage { get; set; }
+        public byte[]? AdditionalImage2 { get; set; }
+        public byte[]? AdditionalImage3 { get; set; }
+        public byte[]? AdditionalImage4 { get; set; }
+        public byte[]? AdditionalImage5 { get; set; }
 
     }
 }
