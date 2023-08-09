@@ -24,7 +24,7 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
-        private ObservableCollection<AccomdationViewModel> _accommodations;
+        private ObservableCollection<AccommodationViewModel> _accommodations;
         private ObservableCollection<LocationViewModel> _locaitons;
         private ObservableCollection<NoteViewModel> _notes;
         private readonly WishListModel _model = new();
@@ -155,7 +155,7 @@ namespace ViewModels.Items
         #region Details
 
 
-        public ObservableCollection<AccomdationViewModel> Accommodations
+        public ObservableCollection<AccommodationViewModel> Accommodations
         {
             get { return _accommodations; }
             set { _accommodations = value; }

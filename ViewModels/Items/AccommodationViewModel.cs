@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ViewModels.Items
 {
-    public class AccomdationViewModel
+    public class AccommodationViewModel
     {
 
 		private string _name;
