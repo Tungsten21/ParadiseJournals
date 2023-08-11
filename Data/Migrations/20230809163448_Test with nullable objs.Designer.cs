@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809163448_Test with nullable objs")]
+    partial class Testwithnullableobjs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +34,7 @@ namespace Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("JournalImagesId")
+                    b.Property<Guid>("JournalImagesId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -50,12 +53,11 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("JournalImagesId")
-                        .IsUnique()
-                        .HasFilter("[JournalImagesId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("UserJournalId");
 
-                    b.ToTable("Journals", (string)null);
+                    b.ToTable("Journals");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalDay", b =>
@@ -75,7 +77,7 @@ namespace Data.Migrations
 
                     b.HasIndex("JournalId");
 
-                    b.ToTable("JournalDays", (string)null);
+                    b.ToTable("JournalDays");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalImages", b =>
@@ -85,29 +87,35 @@ namespace Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("AdditionalImage")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage2")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage3")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage4")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage5")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("JournalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Thumbnail")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("JournalImages", (string)null);
+                    b.ToTable("JournalImages");
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
@@ -150,7 +158,7 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasFilter("[UserImageId] IS NOT NULL");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Data.Entities.UserImage", b =>
@@ -168,7 +176,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserImages", (string)null);
+                    b.ToTable("UserImage");
                 });
 
             modelBuilder.Entity("Data.Entities.UserJournal", b =>
@@ -187,7 +195,7 @@ namespace Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("UserJournals", (string)null);
+                    b.ToTable("UserJournal");
                 });
 
             modelBuilder.Entity("Data.Entities.UserWishlist", b =>
@@ -206,7 +214,7 @@ namespace Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("UserWishlists", (string)null);
+                    b.ToTable("UserWishlist");
                 });
 
             modelBuilder.Entity("Data.Entities.Wishlist", b =>
@@ -231,16 +239,16 @@ namespace Data.Migrations
                     b.Property<Guid>("UserWishlistId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WishlistAccommodationsId")
+                    b.Property<Guid>("WishlistAccommodationsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WishlistImageId")
+                    b.Property<Guid>("WishlistImageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WishlistLocationsId")
+                    b.Property<Guid>("WishlistLocationsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WishlistNotesId")
+                    b.Property<Guid>("WishlistNotesId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -248,10 +256,9 @@ namespace Data.Migrations
                     b.HasIndex("UserWishlistId");
 
                     b.HasIndex("WishlistImageId")
-                        .IsUnique()
-                        .HasFilter("[WishlistImageId] IS NOT NULL");
+                        .IsUnique();
 
-                    b.ToTable("Wiishlists", (string)null);
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistAccommodationImages", b =>
@@ -261,21 +268,27 @@ namespace Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("AdditionalImage")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage2")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage3")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage4")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage5")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Thumbnail")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("WishlistAccommodationsId")
@@ -283,7 +296,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistAccommodationImages", (string)null);
+                    b.ToTable("WishlistAccommodationImages");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistAccommodations", b =>
@@ -317,7 +330,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("WishlistAccomidationImagesId")
+                    b.Property<Guid>("WishlistAccomidationImagesId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("WishlistId")
@@ -326,12 +339,11 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("WishlistAccomidationImagesId")
-                        .IsUnique()
-                        .HasFilter("[WishlistAccomidationImagesId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("WishlistId");
 
-                    b.ToTable("WishlistAccommodations", (string)null);
+                    b.ToTable("WishlistAccommodations");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistImage", b =>
@@ -349,7 +361,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistImages", (string)null);
+                    b.ToTable("WishlistImage");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistLocationImages", b =>
@@ -359,21 +371,27 @@ namespace Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("AdditionalImage")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage2")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage3")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage4")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage5")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("Thumbnail")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("WishlistLocationsId")
@@ -381,7 +399,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistLocationImages", (string)null);
+                    b.ToTable("WishlistLocationImages");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistLocations", b =>
@@ -418,7 +436,7 @@ namespace Data.Migrations
                     b.Property<Guid>("WishlistId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WishlistLocationImagesId")
+                    b.Property<Guid>("WishlistLocationImagesId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -426,10 +444,9 @@ namespace Data.Migrations
                     b.HasIndex("WishlistId");
 
                     b.HasIndex("WishlistLocationImagesId")
-                        .IsUnique()
-                        .HasFilter("[WishlistLocationImagesId] IS NOT NULL");
+                        .IsUnique();
 
-                    b.ToTable("WishlistLocations", (string)null);
+                    b.ToTable("WishlistLocations");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistNoteImages", b =>
@@ -439,18 +456,23 @@ namespace Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("AdditionalImage")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage2")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage3")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage4")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("AdditionalImage5")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("WishlistNotesId")
@@ -458,7 +480,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistNoteImages", (string)null);
+                    b.ToTable("WishlistNoteImages");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistNotes", b =>
@@ -478,7 +500,7 @@ namespace Data.Migrations
                     b.Property<Guid>("WishlistId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WishlistNoteImagesId")
+                    b.Property<Guid>("WishlistNoteImagesId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -486,10 +508,9 @@ namespace Data.Migrations
                     b.HasIndex("WishlistId");
 
                     b.HasIndex("WishlistNoteImagesId")
-                        .IsUnique()
-                        .HasFilter("[WishlistNoteImagesId] IS NOT NULL");
+                        .IsUnique();
 
-                    b.ToTable("WishlistNotes", (string)null);
+                    b.ToTable("WishlistNotes");
                 });
 
             modelBuilder.Entity("Data.Entities.Journal", b =>
@@ -497,7 +518,8 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.JournalImages", "JournalImages")
                         .WithOne("Journal")
                         .HasForeignKey("Data.Entities.Journal", "JournalImagesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Data.Entities.UserJournal", "UserJournal")
                         .WithMany("Journals")
@@ -564,7 +586,8 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.WishlistImage", "WishlistImage")
                         .WithOne("Wishlist")
                         .HasForeignKey("Data.Entities.Wishlist", "WishlistImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("UserWishlist");
 
@@ -576,7 +599,8 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.WishlistAccommodationImages", "WishlistAccommodationImages")
                         .WithOne("WishlistAccommodations")
                         .HasForeignKey("Data.Entities.WishlistAccommodations", "WishlistAccomidationImagesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Data.Entities.Wishlist", "Wishlist")
                         .WithMany("WishlistAccommodations")
@@ -600,7 +624,8 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.WishlistLocationImages", "WishlistLocationImages")
                         .WithOne("WishlistLocations")
                         .HasForeignKey("Data.Entities.WishlistLocations", "WishlistLocationImagesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Wishlist");
 
@@ -618,7 +643,8 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.WishlistNoteImages", "WishlistNoteImages")
                         .WithOne("WishlistNotes")
                         .HasForeignKey("Data.Entities.WishlistNotes", "WishlistNoteImagesId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Wishlist");
 

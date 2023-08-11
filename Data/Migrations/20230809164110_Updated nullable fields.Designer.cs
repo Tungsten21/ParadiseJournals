@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809164110_Updated nullable fields")]
+    partial class Updatednullablefields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace Data.Migrations
 
                     b.HasIndex("UserJournalId");
 
-                    b.ToTable("Journals", (string)null);
+                    b.ToTable("Journals");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalDay", b =>
@@ -75,7 +78,7 @@ namespace Data.Migrations
 
                     b.HasIndex("JournalId");
 
-                    b.ToTable("JournalDays", (string)null);
+                    b.ToTable("JournalDays");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalImages", b =>
@@ -107,7 +110,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JournalImages", (string)null);
+                    b.ToTable("JournalImages");
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
@@ -150,7 +153,7 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasFilter("[UserImageId] IS NOT NULL");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Data.Entities.UserImage", b =>
@@ -168,7 +171,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserImages", (string)null);
+                    b.ToTable("UserImage");
                 });
 
             modelBuilder.Entity("Data.Entities.UserJournal", b =>
@@ -187,7 +190,7 @@ namespace Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("UserJournals", (string)null);
+                    b.ToTable("UserJournal");
                 });
 
             modelBuilder.Entity("Data.Entities.UserWishlist", b =>
@@ -206,7 +209,7 @@ namespace Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("UserWishlists", (string)null);
+                    b.ToTable("UserWishlist");
                 });
 
             modelBuilder.Entity("Data.Entities.Wishlist", b =>
@@ -251,7 +254,7 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasFilter("[WishlistImageId] IS NOT NULL");
 
-                    b.ToTable("Wiishlists", (string)null);
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistAccommodationImages", b =>
@@ -283,7 +286,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistAccommodationImages", (string)null);
+                    b.ToTable("WishlistAccommodationImages");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistAccommodations", b =>
@@ -331,7 +334,7 @@ namespace Data.Migrations
 
                     b.HasIndex("WishlistId");
 
-                    b.ToTable("WishlistAccommodations", (string)null);
+                    b.ToTable("WishlistAccommodations");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistImage", b =>
@@ -349,7 +352,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistImages", (string)null);
+                    b.ToTable("WishlistImage");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistLocationImages", b =>
@@ -381,7 +384,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistLocationImages", (string)null);
+                    b.ToTable("WishlistLocationImages");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistLocations", b =>
@@ -429,7 +432,7 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasFilter("[WishlistLocationImagesId] IS NOT NULL");
 
-                    b.ToTable("WishlistLocations", (string)null);
+                    b.ToTable("WishlistLocations");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistNoteImages", b =>
@@ -458,7 +461,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishlistNoteImages", (string)null);
+                    b.ToTable("WishlistNoteImages");
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistNotes", b =>
@@ -489,7 +492,7 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasFilter("[WishlistNoteImagesId] IS NOT NULL");
 
-                    b.ToTable("WishlistNotes", (string)null);
+                    b.ToTable("WishlistNotes");
                 });
 
             modelBuilder.Entity("Data.Entities.Journal", b =>
