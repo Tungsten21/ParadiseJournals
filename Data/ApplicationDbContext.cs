@@ -61,6 +61,11 @@ namespace Data
             modelBuilder.Entity<UserJournal>(x => x.ToTable("UserJournals"));
             modelBuilder.Entity<UserWishlist>(x => x.ToTable("UserWishlists"));
 
+            modelBuilder.Entity<Journal>().Property("StartDate").HasColumnType("date");
+            modelBuilder.Entity<Journal>().Property("EndDate").HasColumnType("date");
+            modelBuilder.Entity<Wishlist>().Property("StartDate").HasColumnType("date");
+            modelBuilder.Entity<Wishlist>().Property("EndDate").HasColumnType("date");
+
             // Configure relationships and constraints here
             //Journal
             modelBuilder.Entity<Journal>()
