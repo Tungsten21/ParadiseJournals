@@ -116,8 +116,7 @@ namespace Data
                 .HasOne(wl => wl.WishlistLocationImages)
                 .WithOne(wli => wli.WishlistLocations)
                 .HasForeignKey<WishlistLocations>(wli => wli.WishlistLocationImagesId)
-                .OnDelete(DeleteBehavior.Cascade)
-                ;
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Wishlist>()
                 .HasMany(w => w.WishlistNotes)

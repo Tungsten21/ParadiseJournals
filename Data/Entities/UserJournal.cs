@@ -11,9 +11,13 @@ namespace Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
         public Guid OwnerId { get; set; }
+        [Required]
         public User Owner { get; set; }
+        [Required]
         public Guid JournalId { get; set; }
+        [Required]
         public ICollection<Journal> Journals { get; set; }
     }
 }
