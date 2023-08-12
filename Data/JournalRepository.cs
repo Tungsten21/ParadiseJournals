@@ -31,7 +31,6 @@ namespace Data
             userJournalMap.OwnerId = journal.OwnerId;
             userJournalMap.JournalId = journal.Id;
 
-
             _context.Journals.Add(journalToCreate);
             _context.UserJournals.Add(userJournalMap);
 
