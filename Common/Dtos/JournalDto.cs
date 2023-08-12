@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Dtos
 {
-    internal class JournalDto
+    public class JournalDto
     {
     }
 }
