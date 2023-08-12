@@ -16,6 +16,7 @@ namespace Data.Entities
         [Required]
         public Guid UserJournalId { get; set; }
         public UserJournal UserJournal { get; set; }
+        public IEnumerable<JournalDay> JournalDays { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
