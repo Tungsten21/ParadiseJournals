@@ -49,7 +49,7 @@ namespace ViewModels.Dialogs
 
             var userModel = _mapper.Map<UserModel>(user);
 
-            UserContext.CurrentUser = userModel;
+            _userContext.CurrentUser = userModel;
 
             _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
             CloseWindow?.Invoke();

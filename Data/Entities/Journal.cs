@@ -13,18 +13,15 @@ namespace Data.Entities
         public Guid Id { get; set; }
         public Guid? JournalImagesId { get; set; }
         public JournalImages? JournalImages { get; set; }
+        public Guid? UserJournalId { get; set; }
+        public UserJournal? UserJournal { get; set; }
         [Required]
-        public Guid UserJournalId { get; set; }
-        [Required]
-        public UserJournal UserJournal { get; set; }
-        [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime EndDate { get; set; }
-        [Required]
+        //[Required]
         public int TotalDays { get; set; }
-        public ICollection<JournalDay> DayIds { get; set; }
     }
 }

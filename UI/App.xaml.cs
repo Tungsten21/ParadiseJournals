@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Data;
 using Data.Interfaces;
+using Data.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
@@ -14,6 +15,7 @@ using ViewModels;
 using ViewModels.Controls;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
+using ViewModels.Mappers;
 using ViewModels.Navigation;
 using ViewModels.User;
 
@@ -38,10 +40,11 @@ namespace UI
 
         private void ConfigureServices(ServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString));
+            services.AddDbContext<ApplicationDbContext>();
 
-            services.AddAutoMapper(typeof(ServerProfiles).Assembly);
+            services.AddAutoMapper(typeof(ServiceProfiles).Assembly, 
+                                   typeof(ViewModelProfiles).Assembly,
+                                   typeof(RepositoryProfiles).Assembly);
 
             services.AddSingleton<MainWindow>();
             services.AddTransient<BaseDialog>();
@@ -70,8 +73,10 @@ namespace UI
             services.AddSingleton<IDialogService, DialogService>();
             services.AddSingleton<IServiceProvider, ServiceProvider>();
             services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IJournalService, JournalService>();
 
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IJournalRepository, JournalRepository>();
 
 
         }

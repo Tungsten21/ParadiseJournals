@@ -9,7 +9,7 @@ namespace Services.Interfaces
 {
     public interface IJournalService
     {
-        Guid CreateJournal(JournalDto journal);
+        ResultDto CreateJournal(JournalDto journal);
 
         JournalDto GetJournal(Guid journalId);
     }

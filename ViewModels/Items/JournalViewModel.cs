@@ -91,7 +91,7 @@ namespace ViewModels.Items
                 if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
                 {
                     ClearErrors(nameof(StartDate));
-                    _model.StartDate = DateOnly.Parse(value);
+                    _model.StartDate = DateTime.Parse(value);
 
                     IsPreviousDateInvalid = GetErrors(nameof(EndDate)).Any() ? true : false;
                     ClearErrors(nameof(EndDate));
@@ -117,7 +117,7 @@ namespace ViewModels.Items
                 if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
                 {
                     ClearErrors(nameof(EndDate));
-                    _model.EndDate = DateOnly.Parse(value);
+                    _model.EndDate = DateTime.Parse(value);
 
 
                     IsPreviousDateInvalid = GetErrors(nameof(StartDate)).Any() ? true : false;

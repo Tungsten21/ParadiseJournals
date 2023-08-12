@@ -13,13 +13,19 @@ namespace Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<UserImage> UserImages { get; set; }
+        public DbSet<UserJournal> UserJournals { get; set; }
+        public DbSet<UserWishlist> UserWishlists { get; set; }
         public DbSet<Journal> Journals { get; set; }
         public DbSet<JournalDay> JournalDays { get; set; }
         public DbSet<JournalImages> JournalImages { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<WishlistLocations> WishlistLocations { get; set; }
+        public DbSet<WishlistLocationImages> WishlistLocationImages { get; set; }
         public DbSet<WishlistAccommodations> WishlistAccommodations { get; set; }
+        public DbSet<WishlistAccommodationImages> WishlistAccommodationImages { get; set; }
         public DbSet<WishlistNotes> WishlistNotes { get; set; }
+        public DbSet<WishlistNoteImages> WishlistNoteImages { get; set; }
 
         public ApplicationDbContext()
         {
@@ -42,7 +48,7 @@ namespace Data
             modelBuilder.Entity<Journal>(x => x.ToTable("Journals"));
             modelBuilder.Entity<JournalDay>(x => x.ToTable("JournalDays"));
             modelBuilder.Entity<JournalImages>(x => x.ToTable("JournalImages"));
-            modelBuilder.Entity<Wishlist>(x => x.ToTable("Wiishlists"));
+            modelBuilder.Entity<Wishlist>(x => x.ToTable("Wishlists"));
             modelBuilder.Entity<WishlistImage>(x => x.ToTable("WishlistImages"));
             modelBuilder.Entity<WishlistAccommodations>(x => x.ToTable("WishlistAccommodations"));
             modelBuilder.Entity<WishlistAccommodationImages>(x => x.ToTable("WishlistAccommodationImages"));
@@ -63,11 +69,11 @@ namespace Data
                 .HasForeignKey<Journal>(j => j.JournalImagesId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Journal>()
-                .HasMany(j => j.DayIds)
-                .WithOne(jd => jd.Journal)
-                .HasForeignKey(jd => jd.JournalId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<Journal>()
+            //    .HasMany(j => j.DayIds)
+            //    .WithOne(jd => jd.Journal)
+            //    .HasForeignKey(jd => jd.JournalId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Journal>()
                 .HasOne(j => j.UserJournal)

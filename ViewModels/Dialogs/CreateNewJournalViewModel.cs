@@ -1,7 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using AutoMapper;
+using Common.Dtos;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Models;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,11 +18,15 @@ using ViewModels.Messages;
 
 namespace ViewModels.Dialogs
 {
-    public partial class CreateNewJournalViewModel : ObservableObject, IViewModel, IClosable
+    public partial class CreateNewJournalViewModel : BaseViewModel, IViewModel, IClosable
     {
+
+
         //Properties
+        private readonly IMapper _mapper;
         private readonly INavigationService _navigationService;
         private readonly IMessenger _messenger;
+        private readonly IJournalService _journalService;
 
         [ObservableProperty]
         private JournalViewModel _journalViewModel = new();
@@ -43,10 +50,12 @@ namespace ViewModels.Dialogs
         }
 
         //Constructors
-        public CreateNewJournalViewModel(INavigationService navigationService, IMessenger messenger)
+        public CreateNewJournalViewModel(IMapper mapper, IUserContext userContext, INavigationService navigationService, IMessenger messenger, IJournalService journalService) : base(userContext)
         {
+            _mapper = mapper;
             _navigationService = navigationService;
             _messenger = messenger;
+            _journalService = journalService;
         }
 
         //Methods
@@ -54,18 +63,23 @@ namespace ViewModels.Dialogs
         {
             //Eventually move to its own service input & output -> ServiceModels. Map -> ViewModel Models.
             var model = (JournalModel) JournalViewModel.CloneModel();
-            DateOnly startDate = model.StartDate;
-            DateOnly endDate = model.EndDate;
+            DateTime startDate = model.StartDate;
+            DateTime endDate = model.EndDate;
 
             ObservableCollection<JournalDayViewModel> journalDays = new();
 
-            for(DateOnly beginDate = startDate; beginDate <= endDate; beginDate = beginDate.AddDays(1))
+            for(DateTime beginDate = startDate; beginDate <= endDate; beginDate = beginDate.AddDays(1))
             {
                 var journalDay = new JournalDayViewModel() { ShortDateFormat = beginDate.ToShortDateString() };
                 journalDays.Add(journalDay); 
             }
 
             JournalViewModel.Days = journalDays;
+
+            var journalDto = _mapper.Map<JournalDto>(JournalViewModel.CloneModel());
+            journalDto.OwnerId = _userContext.CurrentUser.Id;
+
+            var result = _journalService.CreateJournal(journalDto);
         }
         
     }

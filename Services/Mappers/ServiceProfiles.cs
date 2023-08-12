@@ -5,9 +5,9 @@ using Models;
 
 namespace Services.Mappers
 {
-    public class ServerProfiles : Profile
+    public class ServiceProfiles : Profile
     {
-        public ServerProfiles() 
+        public ServiceProfiles() 
         {
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<UserDto, UserModel>().ReverseMap();

@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230812151524_Updated Journal.Name to be Title")]
+    partial class UpdatedJournalNametobeTitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,7 @@ namespace Data.Migrations
                     b.Property<int>("TotalDays")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("UserJournalId")
+                    b.Property<Guid>("UserJournalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -502,7 +505,8 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.UserJournal", "UserJournal")
                         .WithMany("Journals")
                         .HasForeignKey("UserJournalId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("JournalImages");
 
@@ -512,7 +516,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.JournalDay", b =>
                 {
                     b.HasOne("Data.Entities.Journal", "Journal")
-                        .WithMany()
+                        .WithMany("DayIds")
                         .HasForeignKey("JournalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -622,6 +626,11 @@ namespace Data.Migrations
                     b.Navigation("Wishlist");
 
                     b.Navigation("WishlistNoteImages");
+                });
+
+            modelBuilder.Entity("Data.Entities.Journal", b =>
+                {
+                    b.Navigation("DayIds");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalImages", b =>

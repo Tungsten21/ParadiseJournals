@@ -55,7 +55,7 @@ namespace ViewModels.Dialogs
             }
 
             var userModel = _mapper.Map<UserModel>(_userService.Login(TempUser.Username, TempUser.Password));
-            UserContext.CurrentUser = userModel;
+            _userContext.CurrentUser = userModel;
 
             _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
             CloseWindow?.Invoke();
