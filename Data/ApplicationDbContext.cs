@@ -154,5 +154,23 @@ namespace Data
                 .HasForeignKey(uw => uw.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
+
+        private void InitializeDB()
+        {
+            InitializeUsers();
+            InitializeJournals();
+            InitializeWishlists();
+
+        }
+
+        private void InitializeJournals()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InitializeUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
