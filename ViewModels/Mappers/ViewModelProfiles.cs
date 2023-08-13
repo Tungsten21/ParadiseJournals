@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.Dtos;
+using Data.Entities;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace ViewModels.Mappers
     {
         public ViewModelProfiles() 
         {
-            CreateMap<JournalModel, JournalDto>().ReverseMap();
+            CreateMap<JournalModel, JournalDto>().ReverseMap().ForMember(x => x.Days, opt => opt.MapFrom(src => src.JournalDays));
+            CreateMap<JournalDayModel, JournalDayDto>().ReverseMap();
         }
     }
 }

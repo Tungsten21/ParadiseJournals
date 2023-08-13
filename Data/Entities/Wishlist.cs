@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
+    [Index(nameof(OwnerId))]
     public class Wishlist
     {
         [Key]
@@ -14,9 +16,9 @@ namespace Data.Entities
         public Guid? WishlistImageId { get; set; }
         public WishlistImage? WishlistImage { get; set; }
         [Required]
-        public Guid UserWishlistId { get; set; }
+        public Guid OwnerId { get; set; }
         [Required]
-        public UserWishlist UserWishlist { get; set; }
+        public User Owner { get; set; }
         public Guid? WishlistAccommodationsId { get; set; }
         public ICollection<WishlistAccommodations>? WishlistAccommodations { get; set; }
         public Guid? WishlistLocationsId { get; set; }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Data.Entities;
+using System.Reflection.Emit;
 
 namespace Data
 {
@@ -14,8 +15,6 @@ namespace Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserImage> UserImages { get; set; }
-        public DbSet<UserJournal> UserJournals { get; set; }
-        public DbSet<UserWishlist> UserWishlists { get; set; }
         public DbSet<Journal> Journals { get; set; }
         public DbSet<JournalDay> JournalDays { get; set; }
         public DbSet<JournalImages> JournalImages { get; set; }
@@ -44,10 +43,23 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Table names
-            modelBuilder.Entity<Journal>(x => x.ToTable("Journals"));
-            modelBuilder.Entity<JournalDay>(x => x.ToTable("JournalDays"));
-            modelBuilder.Entity<JournalImages>(x => x.ToTable("JournalImages"));
+            modelBuilder.Entity<Journal>().Property("StartDate").HasColumnType("date");
+            modelBuilder.Entity<Journal>().Property("EndDate").HasColumnType("date");
+            modelBuilder.Entity<Wishlist>().Property("StartDate").HasColumnType("date");
+            modelBuilder.Entity<Wishlist>().Property("EndDate").HasColumnType("date");
+
+            InitializeDB(modelBuilder);
+        }
+
+        private void InitializeDB(ModelBuilder modelBuilder)
+        {
+            InitializeUsers(modelBuilder);
+            InitializeJournals(modelBuilder);
+            InitializeWishlists(modelBuilder);
+        }
+
+        private void InitializeWishlists(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Wishlist>(x => x.ToTable("Wishlists"));
             modelBuilder.Entity<WishlistImage>(x => x.ToTable("WishlistImages"));
             modelBuilder.Entity<WishlistAccommodations>(x => x.ToTable("WishlistAccommodations"));
@@ -56,37 +68,7 @@ namespace Data
             modelBuilder.Entity<WishlistLocationImages>(x => x.ToTable("WishlistLocationImages"));
             modelBuilder.Entity<WishlistNotes>(x => x.ToTable("WishlistNotes"));
             modelBuilder.Entity<WishlistNoteImages>(x => x.ToTable("WishlistNoteImages"));
-            modelBuilder.Entity<User>(x => x.ToTable("Users"));
-            modelBuilder.Entity<UserImage>(x => x.ToTable("UserImages"));
-            modelBuilder.Entity<UserJournal>(x => x.ToTable("UserJournals"));
-            modelBuilder.Entity<UserWishlist>(x => x.ToTable("UserWishlists"));
 
-            modelBuilder.Entity<Journal>().Property("StartDate").HasColumnType("date");
-            modelBuilder.Entity<Journal>().Property("EndDate").HasColumnType("date");
-            modelBuilder.Entity<Wishlist>().Property("StartDate").HasColumnType("date");
-            modelBuilder.Entity<Wishlist>().Property("EndDate").HasColumnType("date");
-
-            // Configure relationships and constraints here
-            //Journal
-            modelBuilder.Entity<Journal>()
-                .HasOne(j => j.JournalImages)
-                .WithOne(ji => ji.Journal)
-                .HasForeignKey<Journal>(j => j.JournalImagesId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<Journal>()
-            //    .HasMany(j => j.DayIds)
-            //    .WithOne(jd => jd.Journal)
-            //    .HasForeignKey(jd => jd.JournalId)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Journal>()
-                .HasOne(j => j.UserJournal)
-                .WithMany(uj => uj.Journals)
-                .HasForeignKey(j => j.UserJournalId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            //Wishlist
             modelBuilder.Entity<Wishlist>()
                 .HasOne(w => w.WishlistImage)
                 .WithOne(wi => wi.Wishlist)
@@ -94,9 +76,9 @@ namespace Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Wishlist>()
-                .HasOne(w => w.UserWishlist)
-                .WithMany(uw => uw.Wishlists)
-                .HasForeignKey(w => w.UserWishlistId)
+                .HasOne(w => w.Owner)
+                .WithMany(o => o.UserWishlists)
+                .HasForeignKey(w => w.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Wishlist>()
@@ -134,8 +116,39 @@ namespace Data
                 .WithOne(wni => wni.WishlistNotes)
                 .HasForeignKey<WishlistNotes>(wni => wni.WishlistNoteImagesId)
                 .OnDelete(DeleteBehavior.Cascade);
+        }
 
-            //Owner
+        private void InitializeJournals(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Journal>(x => x.ToTable("Journals"));
+            modelBuilder.Entity<JournalDay>(x => x.ToTable("JournalDays"));
+            modelBuilder.Entity<JournalImages>(x => x.ToTable("JournalImages"));
+
+            modelBuilder.Entity<Journal>()
+                .HasOne(j => j.JournalImages)
+                .WithOne(ji => ji.Journal)
+                .HasForeignKey<Journal>(j => j.JournalImagesId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Journal>()
+            //    .HasMany(j => j.DayIds)
+            //    .WithOne(jd => jd.Journal)
+            //    .HasForeignKey(jd => jd.JournalId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Journal>()
+                .HasOne(j => j.Owner)
+                .WithMany(o => o.UserJournals)
+                .HasForeignKey(j => j.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
+        private void InitializeUsers(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<User>(x => x.ToTable("Users"));
+            modelBuilder.Entity<UserImage>(x => x.ToTable("UserImages"));
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserImage)
                 .WithOne(ui => ui.User)
@@ -153,24 +166,6 @@ namespace Data
                 .WithOne(uw => uw.Owner)
                 .HasForeignKey(uw => uw.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
-
-        private void InitializeDB()
-        {
-            InitializeUsers();
-            InitializeJournals();
-            InitializeWishlists();
-
-        }
-
-        private void InitializeJournals()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void InitializeUsers()
-        {
-            throw new NotImplementedException();
         }
     }
 }

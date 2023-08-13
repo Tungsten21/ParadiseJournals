@@ -24,11 +24,9 @@ namespace Services
         public ResultDto CreateJournal(JournalDto journal)
         {
             var journalId = Guid.NewGuid();
-            var userJournalId = Guid.NewGuid();
 
             journal.Id = journalId;
-            journal.UserJournalId = userJournalId;
-            journal.OwnerId= journal.OwnerId;
+            journal.OwnerId = journal.OwnerId;
 
             var result = _journalRepo.CreateJournal(journal);
 
@@ -37,12 +35,13 @@ namespace Services
                 return result;
             }
 
+            result.Message = "Error creating journal: Journal not created.";
             return result;
         }
 
         public JournalDto GetJournal(Guid journalId)
         {
-            throw new NotImplementedException();
+            return _journalRepo.GetJournal(journalId);
         }
     }
 }

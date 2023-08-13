@@ -82,7 +82,7 @@ namespace ViewModels.Items
         [DateComparator(CompareMode.LessThan, "EndDate", ErrorMessage = "Start date must be before the end date.")]
         public string StartDate
         {
-            get => _startDate;
+            get => _startDate != null ? DateTime.Parse(_startDate).ToShortDateString() : _startDate;
             set
             {
                 if (value.Length == 0)
@@ -108,7 +108,7 @@ namespace ViewModels.Items
         [DateComparator(CompareMode.GreaterThan, "StartDate", ErrorMessage = "End date must be after the start date.")]
         public string EndDate
         {
-            get => _endDate;
+            get => _endDate != null ? DateTime.Parse(_endDate).ToShortDateString() : _endDate;
             set
             {
                 if (value.Length == 0)

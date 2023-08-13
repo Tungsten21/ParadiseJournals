@@ -8,6 +8,7 @@ namespace Models
 {
     public class JournalDayModel
     {
-        public string ShortDateFormat;
+        public string ShortDateFormat { get; set; }
+        public string Title { get; set; }
     }
 }

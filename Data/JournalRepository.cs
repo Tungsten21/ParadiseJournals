@@ -24,25 +24,40 @@ namespace Data
         public ResultDto CreateJournal(JournalDto journal)
         {
             var journalToCreate = _mapper.Map<Journal>(journal);
-            journalToCreate.UserJournalId = journal.UserJournalId;
+            journalToCreate.OwnerId = journal.OwnerId;
 
-            var userJournalMap = new UserJournal();
-            userJournalMap.Id = journal.UserJournalId;
-            userJournalMap.OwnerId = journal.OwnerId;
-            userJournalMap.JournalId = journal.Id;
+            var journalDays = new List<JournalDay>();
+
+            for (DateTime beginDate = journal.StartDate; beginDate <= journal.EndDate; beginDate = beginDate.AddDays(1))
+            {
+                var journalDay = new JournalDay() { ShortDateFormat = beginDate.ToShortDateString(), JournalId = journal.Id };
+                journalDays.Add(journalDay);
+            }
 
             _context.Journals.Add(journalToCreate);
-            _context.UserJournals.Add(userJournalMap);
+            _context.JournalDays.AddRange(journalDays);
 
             _context.SaveChanges();
 
+
             //UPDATE
-            return new ResultDto() { Success = true };
+            return new ResultDto() { Id = journal.Id, Success = true };
         }
 
         public JournalDto GetJournal(Guid journalId)
         {
-            throw new NotImplementedException();
+            var result = new JournalDto();
+
+            var journal = _context.Journals.FirstOrDefault(x => x.Id == journalId);
+            var journalDays = _context.JournalDays.Where(x => x.JournalId == journalId);
+
+            if(journal != null && journalDays != null)
+            {
+                journal.JournalDays = journalDays;
+                result = _mapper.Map<JournalDto>(journal);
+            }
+
+            return result;
         }
     }
 }
