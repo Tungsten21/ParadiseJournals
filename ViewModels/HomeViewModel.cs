@@ -11,30 +11,16 @@ using ViewModels.Messages;
 
 namespace ViewModels
 {
-    public partial class HomeViewModel : BaseViewModel, IViewModel
+    public partial class HomeViewModel : ObservableObject, IViewModel
     {
         //Properties
         private readonly IDialogService _dialogService;
         private readonly IMessenger _messenger;
         private readonly INavigationService _navigationService;
-        [NotifyPropertyChangedFor(nameof(NoItemsFound))]
-        [NotifyPropertyChangedFor(nameof(NoWishListsButJournalFound))]
+        private readonly IUserContext _userContext;
+
         [ObservableProperty]
-        private bool _atLeastOneJournal;
-
-        [NotifyPropertyChangedFor(nameof(NoItemsFound))]
-        [NotifyPropertyChangedFor(nameof(NoJournalsButWishListFound))]
-        [ObservableProperty]
-        private bool _atLeastOneWishList;
-
-        public bool NoJournalsButWishListFound => AtLeastOneWishList && !AtLeastOneJournal;
-
-        public bool NoWishListsButJournalFound => !AtLeastOneWishList && AtLeastOneJournal;
-
-        public bool NoItemsFound => !AtLeastOneJournal && !AtLeastOneWishList;
-
-        public ObservableCollection<JournalViewModel> UserJournals { get; set; } = new();
-        public ObservableCollection<WishListViewModel> UserWishLists { get; set; } = new();
+        private ItemCache _itemCache;
 
         //Commands
         [RelayCommand]
@@ -50,42 +36,20 @@ namespace ViewModels
         }
 
         //Constructors
-        public HomeViewModel(IUserContext userContext, IDialogService dialogService, IMessenger messenger, INavigationService navigationService) : base(userContext)
+        public HomeViewModel(IUserContext userContext, IDialogService dialogService, IMessenger messenger, INavigationService navigationService, ItemCache itemCache)
         {
             _dialogService = dialogService;
             _messenger = messenger;
             _navigationService = navigationService;
+            _userContext = userContext;
 
-            _messenger.Register<ItemCreatedMessage>(this, (r, m) => AddItemOnReceived(m.Value));
+            itemCache.ItemClickedEvent += OnItemClick;
+            ItemCache = itemCache;
+
+            
         }
 
         //Methods
-        private void AddItemOnReceived(IModel item)
-        {
-            switch (item)
-            {
-                case JournalModel journal:
-
-                    var journalVM = new JournalViewModel(journal);
-                    journalVM.JournalItemClickedEvent += OnItemClick;
-                    UserJournals.Add(journalVM);
-                    if(!AtLeastOneJournal)
-                        AtLeastOneJournal = true;
-                    
-                    break;
-                case WishListModel wishList:
-
-                    var wishListVM = new WishListViewModel(wishList);
-                    //wishListVM.WishListItemClickedEvent = ...
-                    UserWishLists.Add(wishListVM);
-                    if (!AtLeastOneWishList)
-                        AtLeastOneWishList = true;
-                    break;
-
-            }
-
-        }
-
         private void OnItemClick(object? sender, EventArgs e)
         {
             var vm = sender as IClonableModel;
@@ -93,8 +57,9 @@ namespace ViewModels
             switch (vm)
             {
                 case JournalViewModel journal:
-                    _messenger.Send(new ItemClickedMessage(journal.CloneModel()));
-                    _navigationService.NavigateToViewModel<ViewJournalViewModel>();
+                    _navigationService.NavigateToViewModel<ViewJournalViewModel>(
+                                            () => _messenger.Send(new ItemClickedMessage(journal.CloneModel()))
+                                            );
                     break;
             }
         }

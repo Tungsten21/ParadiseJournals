@@ -17,19 +17,18 @@ using System.Threading.Tasks;
 using ViewModels.Interfaces;
 using ViewModels.Items;
 using ViewModels.Messages;
+using ViewModels.Validation;
 
 namespace ViewModels.Dialogs
 {
-    public partial class CreateNewJournalViewModel : BaseViewModel, IViewModel, IClosable
+    public partial class CreateNewJournalViewModel : ValidatableViewModel, IViewModel, IClosable
     {
-
-
         //Properties
         private readonly IMapper _mapper;
         private readonly INavigationService _navigationService;
         private readonly IMessenger _messenger;
         private readonly IJournalService _journalService;
-
+        private readonly IUserContext _userContext;
         [ObservableProperty]
         private JournalViewModel _journalViewModel = new();
 
@@ -58,12 +57,13 @@ namespace ViewModels.Dialogs
         }
 
         //Constructors
-        public CreateNewJournalViewModel(IMapper mapper, IUserContext userContext, INavigationService navigationService, IMessenger messenger, IJournalService journalService) : base(userContext)
+        public CreateNewJournalViewModel(IMapper mapper, IUserContext userContext, INavigationService navigationService, IMessenger messenger, IJournalService journalService)
         {
             _mapper = mapper;
             _navigationService = navigationService;
             _messenger = messenger;
             _journalService = journalService;
+            _userContext = userContext;
         }
 
         //Methods

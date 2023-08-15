@@ -8,6 +8,7 @@ using Common.Extensions;
 using ViewModels.Validation;
 using Models.Interfaces;
 using CommunityToolkit.Mvvm.Input;
+using ViewModels.Navigation;
 
 namespace ViewModels.Items
 {

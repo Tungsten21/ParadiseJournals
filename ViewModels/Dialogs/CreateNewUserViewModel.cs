@@ -8,14 +8,16 @@ using Services.Interfaces;
 using ViewModels.Controls;
 using ViewModels.Interfaces;
 using ViewModels.User;
+using ViewModels.Validation;
 
 namespace ViewModels.Dialogs
 {
-    public partial class CreateNewUserViewModel : BaseViewModel, IViewModel, IClosable
+    public partial class CreateNewUserViewModel : ValidatableViewModel, IViewModel, IClosable
     {
 
         //Properties
         private readonly INavigationService _navigationService;
+        private readonly IUserContext _userContext;
         private readonly IMapper _mapper;
         private readonly MenuBarViewModel _menuBar;
         private readonly IUserService _userService;
@@ -65,12 +67,13 @@ namespace ViewModels.Dialogs
 
         //Constructors
         public CreateNewUserViewModel(MenuBarViewModel menu, IMapper mapper, INavigationService navigationService,
-                                      IUserContext userContext, IUserService userService) : base(userContext)
+                                      IUserContext userContext, IUserService userService)
         {
             _mapper = mapper;
             _menuBar = menu;
             _userService = userService;
             _navigationService = navigationService;
+            _userContext = userContext;
         }
 
 

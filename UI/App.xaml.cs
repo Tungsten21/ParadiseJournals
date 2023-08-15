@@ -15,6 +15,7 @@ using ViewModels;
 using ViewModels.Controls;
 using ViewModels.Dialogs;
 using ViewModels.Interfaces;
+using ViewModels.Items;
 using ViewModels.Mappers;
 using ViewModels.Navigation;
 using ViewModels.User;
@@ -67,6 +68,7 @@ namespace UI
             services.AddTransient<CreateNewWishListViewModel>();
 
             services.AddSingleton<IUserContext, UserContext>();
+            services.AddSingleton<ItemCache>();
 
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>();

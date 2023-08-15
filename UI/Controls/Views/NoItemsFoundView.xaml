@@ -9,7 +9,7 @@
 
     <!--Format Container-->
     <Grid Background="Red"
-          Visibility="{Binding NoItemsFound, Converter={StaticResource BooleanToVisibilityConverter}}">
+          Visibility="{Binding ItemCache.NoItemsFound, Converter={StaticResource BooleanToVisibilityConverter}}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
