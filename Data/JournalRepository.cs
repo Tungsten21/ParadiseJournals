@@ -59,5 +59,21 @@ namespace Data
 
             return result;
         }
+
+        public IQueryable<JournalDto>? GetJournals(Guid userId)
+        {
+
+            var result = default(IQueryable<JournalDto>);
+            var journals = default(IQueryable<Journal>);
+
+            journals =  _context.Journals.Where(j => j.OwnerId == userId);
+
+            if (journals != null)
+            {
+                result = _mapper.ProjectTo<JournalDto>(journals);
+            }
+
+            return result;
+        }
     }
 }

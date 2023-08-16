@@ -36,7 +36,8 @@ namespace ViewModels
         }
 
         //Constructors
-        public HomeViewModel(IUserContext userContext, IDialogService dialogService, IMessenger messenger, INavigationService navigationService, ItemCache itemCache)
+        public HomeViewModel(IUserContext userContext, ItemCache itemCache, IDialogService dialogService, IMessenger messenger, 
+                             INavigationService navigationService)
         {
             _dialogService = dialogService;
             _messenger = messenger;

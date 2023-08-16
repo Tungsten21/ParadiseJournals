@@ -10,12 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModels.Messages;
 using ViewModels.Interfaces;
+using Services.Interfaces;
+using Common.Dtos;
+using AutoMapper;
 
 namespace ViewModels.Items
 {
     public partial class ItemCache : ObservableObject
     {
+        private readonly IMapper _mapper;
         private readonly IMessenger _messenger;
+        private readonly IUserContext _userContext;
+        private readonly IJournalService _journalService;
 
         [NotifyPropertyChangedFor(nameof(NoItemsFound))]
         [NotifyPropertyChangedFor(nameof(NoWishListsButJournalFound))]
@@ -43,11 +49,16 @@ namespace ViewModels.Items
 
 
 
-        public ItemCache(IMessenger messenger)
+        public ItemCache(IMapper mapper, IMessenger messenger, IUserContext userContext, IJournalService journalService)
         {
+            _mapper = mapper;
             _messenger = messenger;
+            _userContext = userContext;
+            _journalService = journalService;
 
             _messenger.Register<ItemCreatedMessage>(this, (r, m) => AddItemOnReceived(m.Value));
+
+            RetrieveJournals();
         }
 
         public void AddItemOnReceived(IModel item)
@@ -74,6 +85,25 @@ namespace ViewModels.Items
 
             }
 
+        }
+
+        public void RetrieveJournals()
+        {
+            var journalsResult = _journalService.GetJournals(_userContext.CurrentUser.Id);
+            
+            if (!journalsResult.Success)
+            {
+                //notify user
+                return;
+            }
+
+            var journalDtos = journalsResult.Items.Cast<JournalDto>().ToList();
+            var journals = _mapper.Map<List<JournalModel>>(journalDtos);
+
+            foreach (var journalModel in journals)
+            {
+                AddItemOnReceived(journalModel);
+            }
         }
 
         private void ItemClicked(object? sender, EventArgs e)

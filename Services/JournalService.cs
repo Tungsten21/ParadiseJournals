@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.Dtos;
+using Data.Entities;
 using Data.Interfaces;
 using Services.Interfaces;
 using System;
@@ -42,6 +43,22 @@ namespace Services
         public JournalDto GetJournal(Guid journalId)
         {
             return _journalRepo.GetJournal(journalId);
+        }
+
+        public ResultDto GetJournals(Guid userId)
+        {
+            var result = new ResultDto();
+    
+            var journals = _journalRepo.GetJournals(userId);
+
+            if(journals != null)
+            {
+                result.Success = true;
+                result.Items = journals.ToList<object>();
+            }
+
+            result.Message = "Error creating journal: Journal not created.";
+            return result;
         }
     }
 }

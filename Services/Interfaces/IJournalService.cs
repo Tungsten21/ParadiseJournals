@@ -12,5 +12,7 @@ namespace Services.Interfaces
         ResultDto CreateJournal(JournalDto journal);
 
         JournalDto GetJournal(Guid journalId);
+        
+        ResultDto GetJournals(Guid userId);
     }
 }
