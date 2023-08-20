@@ -14,6 +14,6 @@ namespace Data.Interfaces
 
         WishlistDto GetWishlist(Guid wishlistId);
 
-        IQueryable<WishlistDto>? GetWishlists(Guid userId);
+        IQueryable<WishlistDto> GetWishlists(Guid userId);
     }
 }

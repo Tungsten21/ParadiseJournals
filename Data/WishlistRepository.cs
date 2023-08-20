@@ -49,7 +49,7 @@ namespace Data
             return result;
         }
 
-        public IQueryable<WishlistDto>? GetWishlists(Guid userId)
+        public IQueryable<WishlistDto> GetWishlists(Guid userId)
         {
             var result = default(IQueryable<WishlistDto>);
             var wishlists = default(IQueryable<Wishlist>);

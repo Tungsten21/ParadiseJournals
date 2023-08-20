@@ -46,7 +46,7 @@ namespace Services
 
             var wishlists = _wishlistRepo.GetWishlists(userId);
 
-            if (wishlists != null)
+            if (wishlists.Any())
             {
                 result.Success = true;
                 result.Items = wishlists.ToList<object>();
