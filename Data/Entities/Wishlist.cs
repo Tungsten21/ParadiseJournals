@@ -26,7 +26,7 @@ namespace Data.Entities
         public Guid? WishlistNotesId { get; set; }
         public ICollection<WishlistNotes>? WishlistNotes { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
         [Required]

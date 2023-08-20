@@ -24,7 +24,6 @@ namespace Data
         public ResultDto CreateJournal(JournalDto journal)
         {
             var journalToCreate = _mapper.Map<Journal>(journal);
-            journalToCreate.OwnerId = journal.OwnerId;
 
             var journalDays = new List<JournalDay>();
 
@@ -41,7 +40,7 @@ namespace Data
 
 
             //UPDATE
-            return new ResultDto() { Id = journal.Id, Success = true };
+            return new ResultDto() { Id = journalToCreate.Id, Success = true };
         }
 
         public JournalDto GetJournal(Guid journalId)
@@ -49,11 +48,9 @@ namespace Data
             var result = new JournalDto();
 
             var journal = _context.Journals.FirstOrDefault(x => x.Id == journalId);
-            var journalDays = _context.JournalDays.Where(x => x.JournalId == journalId);
 
-            if(journal != null && journalDays != null)
+            if(journal != null)
             {
-                journal.JournalDays = journalDays;
                 result = _mapper.Map<JournalDto>(journal);
             }
 

@@ -32,7 +32,7 @@ namespace Tests.Services
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<ServerProfiles>();
+                cfg.AddProfile<ServiceProfiles>();
             });
 
             _mapper = new Mapper(mapperConfig);

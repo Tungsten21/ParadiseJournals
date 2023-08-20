@@ -13,6 +13,7 @@ namespace Tests.ViewModels
     public class NavigationServiceTests
     {
         private Mock<IServiceProvider> _serviceProvider;
+        private Mock<IUserContext> _userContext;
         private Mock<IDialogService> _dialogService;      
         private IMessenger _messenger;
         private INavigationService _navigationService;
@@ -29,7 +30,8 @@ namespace Tests.ViewModels
             _messenger = new WeakReferenceMessenger();
             _navigationService = new NavigationService(_serviceProvider.Object, _messenger);
             _menuBarViewModel = new(_navigationService, _dialogService.Object);
-            _mainWindowViewModel = new(_serviceProvider.Object, _messenger, _menuBarViewModel);
+            _userContext = new();
+            _mainWindowViewModel = new(_serviceProvider.Object, _userContext.Object, _messenger, _menuBarViewModel);
         }
 
         [TestMethod]
@@ -37,7 +39,7 @@ namespace Tests.ViewModels
         {
             //Arrange
             _serviceProvider.Setup(x => x.GetService(typeof(HomeViewModel)))
-                .Returns(new HomeViewModel(_dialogService.Object, _messenger, _navigationService));
+                .Returns(new Mock<HomeViewModel>().Object);
 
             //Act
             _navigationService.NavigateToViewModel<HomeViewModel>();

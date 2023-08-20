@@ -50,6 +50,11 @@ namespace ViewModels
             
         }
 
+        public HomeViewModel()
+        {
+            
+        }
+
         //Methods
         private void OnItemClick(object? sender, EventArgs e)
         {
@@ -60,6 +65,11 @@ namespace ViewModels
                 case JournalViewModel journal:
                     _navigationService.NavigateToViewModel<ViewJournalViewModel>(
                                             () => _messenger.Send(new ItemClickedMessage(journal.CloneModel()))
+                                            );
+                    break;
+                case WishListViewModel wishList:
+                    _navigationService.NavigateToViewModel<ViewWishListViewModel>(
+                                            () => _messenger.Send(new ItemClickedMessage(wishList.CloneModel()))
                                             );
                     break;
             }

@@ -16,6 +16,7 @@ namespace ViewModels.Mappers
         {
             CreateMap<JournalModel, JournalDto>().ReverseMap().ForMember(x => x.Days, opt => opt.MapFrom(src => src.JournalDays));
             CreateMap<JournalDayModel, JournalDayDto>().ReverseMap();
+            CreateMap<WishListModel, WishlistDto>().ReverseMap();
         }
     }
 }

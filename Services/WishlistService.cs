@@ -2,6 +2,7 @@
 using Common.Dtos;
 using Data.Entities;
 using Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,24 +12,20 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class JournalService : IJournalService
+    public class WishlistService : IWishlistService
     {
         private IMapper _mapper;
-        private IJournalRepository _journalRepo;
+        private IWishlistRepository _wishlistRepo;
 
-        public JournalService(IMapper mapper, IJournalRepository journalRepository)
+        public WishlistService(IMapper mapper, IWishlistRepository wishlistRepository) 
         {
             _mapper = mapper;
-            _journalRepo = journalRepository;
+            _wishlistRepo = wishlistRepository;
         }
 
-        public ResultDto CreateJournal(JournalDto journal)
+        public ResultDto CreateWishlist(WishlistDto wishlist)
         {
-            var journalId = Guid.NewGuid();
-
-            journal.Id = journalId;
-
-            var result = _journalRepo.CreateJournal(journal);
+            var result = _wishlistRepo.CreateWishlist(wishlist);
 
             if (!result.Success)
             {
@@ -38,21 +35,20 @@ namespace Services
             return result;
         }
 
-        public JournalDto GetJournal(Guid journalId)
+        public WishlistDto GetWishlist(Guid wishlistId)
         {
-            return _journalRepo.GetJournal(journalId);
-        }
+            return _wishlistRepo.GetWishlist(wishlistId);        }
 
-        public ResultDto GetJournals(Guid userId)
+        public ResultDto GetWishlists(Guid userId)
         {
             var result = new ResultDto();
-    
-            var journals = _journalRepo.GetJournals(userId);
 
-            if(journals != null)
+            var wishlists = _wishlistRepo.GetWishlists(userId);
+
+            if (wishlists != null)
             {
                 result.Success = true;
-                result.Items = journals.ToList<object>();
+                result.Items = wishlists.ToList<object>();
             }
             else
             {

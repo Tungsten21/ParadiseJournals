@@ -80,7 +80,7 @@ namespace ViewModels.Items
         [DateComparator(CompareMode.LessThan, "EndDate", ErrorMessage = "Start date must be before the end date.")]
         public string StartDate
         {
-            get => _startDate;
+            get => _startDate != null ? DateTime.Parse(_startDate).ToShortDateString() : _startDate;
             set
             {
                 if (value.Length == 0)
@@ -89,7 +89,7 @@ namespace ViewModels.Items
                 if (SetProperty(ref _startDate, value, true) && GetErrors(nameof(StartDate)).Count() == 0)
                 {
                     ClearErrors(nameof(StartDate));
-                    _model.StartDate = DateOnly.Parse(value);
+                    _model.StartDate = DateTime.Parse(value);
 
                  
                     IsPreviousDateInvalid = GetErrors(nameof(EndDate)).Any() ? true : false;
@@ -107,7 +107,7 @@ namespace ViewModels.Items
         [DateComparator(CompareMode.GreaterThan, "StartDate", ErrorMessage = "End date must be after the start date.")]
         public string EndDate
         {
-            get => _endDate;
+            get => _endDate != null ? DateTime.Parse(_endDate).ToShortDateString() : _endDate;
             set
             {
                 if (value.Length == 0)
@@ -116,7 +116,7 @@ namespace ViewModels.Items
                 if (SetProperty(ref _endDate, value, true) && GetErrors(nameof(EndDate)).Count() == 0)
                 {
                     ClearErrors(nameof(EndDate));
-                    _model.EndDate = DateOnly.Parse(value);
+                    _model.EndDate = DateTime.Parse(value);
 
                     IsPreviousDateInvalid = GetErrors(nameof(StartDate)).Any() ? true : false;
                     ClearErrors(nameof(StartDate));

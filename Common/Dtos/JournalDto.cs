@@ -10,7 +10,6 @@ namespace Common.Dtos
     {
         public Guid Id { get; set; }
         public Guid OwnerId { get; set; }
-        public Guid UserJournalId { get; set; }
         public List<JournalDayDto> JournalDays { get; set; }
         public string Title { get; set; }
         public string Country { get; set; }

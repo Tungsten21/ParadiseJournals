@@ -76,6 +76,11 @@ namespace ViewModels.Dialogs
             _userContext = userContext;
         }
 
+        public CreateNewUserViewModel()
+        {
+            
+        }
+
 
 
         //Methods

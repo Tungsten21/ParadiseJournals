@@ -66,6 +66,11 @@ namespace ViewModels.Dialogs
             _userContext = userContext;
         }
 
+        public CreateNewJournalViewModel()
+        {
+            
+        }
+
         //Methods
         private JournalDto CreateJournal()
         {

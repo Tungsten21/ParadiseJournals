@@ -73,6 +73,11 @@ namespace ViewModels.Dialogs
             _userContext = userContext;
         }
 
+        public LoginViewModel()
+        {
+            
+        }
+
         //Methods
     }
 }

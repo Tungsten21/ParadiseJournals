@@ -76,9 +76,11 @@ namespace UI
             services.AddSingleton<IServiceProvider, ServiceProvider>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IJournalService, JournalService>();
+            services.AddSingleton<IWishlistService, WishlistService>();
 
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IJournalRepository, JournalRepository>();
+            services.AddSingleton<IWishlistRepository, WishlistRepository>();
 
 
         }

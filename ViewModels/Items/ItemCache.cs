@@ -22,6 +22,7 @@ namespace ViewModels.Items
         private readonly IMessenger _messenger;
         private readonly IUserContext _userContext;
         private readonly IJournalService _journalService;
+        private readonly IWishlistService _wishlistService;
 
         [NotifyPropertyChangedFor(nameof(NoItemsFound))]
         [NotifyPropertyChangedFor(nameof(NoWishListsButJournalFound))]
@@ -49,16 +50,23 @@ namespace ViewModels.Items
 
 
 
-        public ItemCache(IMapper mapper, IMessenger messenger, IUserContext userContext, IJournalService journalService)
+        public ItemCache(IMapper mapper, IMessenger messenger, IUserContext userContext, IJournalService journalService, IWishlistService wishlistService)
         {
             _mapper = mapper;
             _messenger = messenger;
             _userContext = userContext;
             _journalService = journalService;
+            _wishlistService = wishlistService;
 
             _messenger.Register<ItemCreatedMessage>(this, (r, m) => AddItemOnReceived(m.Value));
 
             RetrieveJournals();
+            RetrieveWishlists();
+        }
+
+        public ItemCache()
+        {
+                
         }
 
         public void AddItemOnReceived(IModel item)
@@ -77,7 +85,7 @@ namespace ViewModels.Items
                 case WishListModel wishList:
 
                     var wishListVM = new WishListViewModel(wishList);
-                    //wishListVM.WishListItemClickedEvent = ...
+                    wishListVM.WishListItemClickedEvent += ItemClicked;
                     Wishlists.Add(wishListVM);
                     if (!AtLeastOneWishList)
                         AtLeastOneWishList = true;
@@ -104,6 +112,26 @@ namespace ViewModels.Items
             {
                 AddItemOnReceived(journalModel);
             }
+        }
+
+        public void RetrieveWishlists()
+        {
+            var wishlistsResult = _wishlistService.GetWishlists(_userContext.CurrentUser.Id);
+
+            if (!wishlistsResult.Success)
+            {
+                //notify user
+                return;
+            }
+
+            var wishListDtos = wishlistsResult.Items.Cast<WishlistDto>().ToList();
+            var wishlists = _mapper.Map<List<WishListModel>>(wishListDtos);
+
+            foreach (var wishlistModel in wishlists)
+            {
+                AddItemOnReceived(wishlistModel);
+            }
+
         }
 
         private void ItemClicked(object? sender, EventArgs e)
