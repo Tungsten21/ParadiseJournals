@@ -49,7 +49,7 @@ namespace Services
     
             var journals = _journalRepo.GetJournals(userId);
 
-            if(journals != null)
+            if(journals.Any())
             {
                 result.Success = true;
                 result.Items = journals.ToList<object>();

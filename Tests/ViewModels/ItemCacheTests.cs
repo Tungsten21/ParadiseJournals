@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModels.Items;
 using ViewModels.Messages;
-using ViewModels;
 using AutoMapper;
 using Moq;
 using ViewModels.Interfaces;
@@ -14,7 +8,6 @@ using Services.Interfaces;
 using Services.Mappers;
 using Common.Dtos;
 using Models;
-using ViewModels.User;
 
 namespace Tests.ViewModels
 {
@@ -45,7 +38,7 @@ namespace Tests.ViewModels
 
             _journalService.Setup(x => x.GetJournals(It.IsAny<Guid>())).Returns(
                 new ResultDto() { Success = false }
-                );
+            );
 
             _wishlistService.Setup(x => x.GetWishlists(It.IsAny<Guid>())).Returns(
                 new ResultDto() { Success = false }

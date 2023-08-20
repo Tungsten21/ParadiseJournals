@@ -14,6 +14,6 @@ namespace Data.Interfaces
 
         JournalDto GetJournal(Guid journalId);
 
-        IQueryable<JournalDto>? GetJournals(Guid userId);
+        IQueryable<JournalDto> GetJournals(Guid userId);
     }
 }

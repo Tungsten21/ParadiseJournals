@@ -57,7 +57,7 @@ namespace Data
             return result;
         }
 
-        public IQueryable<JournalDto>? GetJournals(Guid userId)
+        public IQueryable<JournalDto> GetJournals(Guid userId)
         {
 
             var result = default(IQueryable<JournalDto>);

@@ -42,7 +42,7 @@ namespace Tests.Services
         [TestMethod()]
         public void LoginWithValidCredentialsReturnsHydratedUserDto()
         {
-            //Arange
+            //Arrange
             var userName = "TestUsername";
             var password = "password123";
 

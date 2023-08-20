@@ -17,7 +17,7 @@ namespace Services
         private IMapper _mapper;
         private IWishlistRepository _wishlistRepo;
 
-        public WishlistService(IMapper mapper, IWishlistRepository wishlistRepository) 
+        public WishlistService(IMapper mapper, IWishlistRepository wishlistRepository)
         {
             _mapper = mapper;
             _wishlistRepo = wishlistRepository;
@@ -37,7 +37,8 @@ namespace Services
 
         public WishlistDto GetWishlist(Guid wishlistId)
         {
-            return _wishlistRepo.GetWishlist(wishlistId);        }
+            return _wishlistRepo.GetWishlist(wishlistId);
+        }
 
         public ResultDto GetWishlists(Guid userId)
         {
