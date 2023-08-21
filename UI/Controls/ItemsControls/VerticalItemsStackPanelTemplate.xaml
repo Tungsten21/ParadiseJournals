@@ -31,7 +31,7 @@
                           VerticalScrollBarVisibility="Hidden">
                 <ItemsControl MinWidth="250"
                               ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=local:VerticalItemsStackPanelTemplate}}"
-                              ItemTemplateSelector="{StaticResource JournalOrWishListTemplateSelector}">
+                              ItemTemplateSelector="{StaticResource VerticalStackPanelItemTemplateSelector}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel/>

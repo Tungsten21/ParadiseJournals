@@ -6,7 +6,7 @@ using UI.Controls.ItemsControls.ItemTemplates;
 
 namespace UI.Resources.DataTemplateSelectors
 {
-    public class VerticalStackPanelItemTemplate : DataTemplateSelector
+    public class VerticalStackPanelItemTemplateSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
