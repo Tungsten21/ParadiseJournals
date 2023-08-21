@@ -21,6 +21,8 @@ namespace Tests.ViewModels
         private Mock<INavigationService> _navigationService;
         private HomeViewModel _homeViewModel;
         private IMessenger _messenger;
+        private Mock<IUserContext> _userContext;
+        private Mock<ItemCache> _itemCache;
 
 
         [TestInitialize]
@@ -29,7 +31,10 @@ namespace Tests.ViewModels
             _dialogService = new();
             _navigationService = new();
             _messenger = new WeakReferenceMessenger();
-            _homeViewModel = new(_dialogService.Object, _messenger, _navigationService.Object);
+            _userContext = new();
+            _itemCache = new();
+
+            _homeViewModel = new(_userContext.Object, _itemCache.Object, _dialogService.Object, _messenger, _navigationService.Object);
 
         }
 
@@ -37,10 +42,10 @@ namespace Tests.ViewModels
         public void OpenCreateNewJournalDialogCommandShouldCallDialogServiceWithCreateNewJournalViewModel()
         {
             // Arrange
-            var createNewJournalViewModel = new CreateNewJournalViewModel(_navigationService.Object, _messenger);
+            var createNewJournalViewModel = new Mock<CreateNewJournalViewModel>();
             _dialogService.SetupProperty(x => x.CurrentViewModel);
             _dialogService.Setup(x => x.ShowDialog<CreateNewJournalViewModel>(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback(() => _dialogService.Object.CurrentViewModel = createNewJournalViewModel);
+                .Callback(() => _dialogService.Object.CurrentViewModel = createNewJournalViewModel.Object);
 
             // Act
             _homeViewModel.OpenCreateNewJournalDialogCommand.Execute(null);
@@ -55,10 +60,10 @@ namespace Tests.ViewModels
         public void OpenCreateNewWishListDialogCommandShouldCallDialogServiceWithCreateNewWishListViewModel()
         {
             // Arrange
-            var createNewWishListViewModel = new CreateNewWishListViewModel(_navigationService.Object, _messenger);
+            var createNewWishListViewModel = new Mock<CreateNewWishListViewModel>();
             _dialogService.SetupProperty(x => x.CurrentViewModel);
             _dialogService.Setup(x => x.ShowDialog<CreateNewWishListViewModel>(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback(() => _dialogService.Object.CurrentViewModel = createNewWishListViewModel);
+                .Callback(() => _dialogService.Object.CurrentViewModel = createNewWishListViewModel.Object);
 
             // Act
             _homeViewModel.OpenCreateNewWishListDialogCommand.Execute(null);
@@ -67,42 +72,6 @@ namespace Tests.ViewModels
             _dialogService.Verify(m => m.ShowDialog<CreateNewWishListViewModel>("Create New Wishlist", "Large"));
             Assert.IsInstanceOfType(_dialogService.Object.CurrentViewModel, typeof(CreateNewWishListViewModel));
 
-        }
-
-        [TestMethod()]
-        public void AddingOneJournalShouldUpdateTheRelevantProperties()
-        {
-            //Arrange
-            var journalToSend = new JournalViewModel();
-            var messageToSend = new ItemCreatedMessage(journalToSend.CloneModel());
-            
-            //Act
-            _messenger.Send(messageToSend);
-
-            //Assert
-            Assert.IsTrue(_homeViewModel.UserJournals.Count == 1);
-            Assert.IsTrue(_homeViewModel.AtLeastOneJournal);
-            Assert.IsFalse(_homeViewModel.NoJournalsButWishListFound);
-            Assert.IsTrue(_homeViewModel.NoWishListsButJournalFound);
-            Assert.IsFalse(_homeViewModel.NoItemsFound);
-        }
-
-        [TestMethod()]
-        public void AddingOneWishListShouldUpdateTheRelevantProperties()
-        {
-            //Arrange
-            var wishListToSend = new WishListViewModel();
-            var messageToSend = new ItemCreatedMessage(wishListToSend.CloneModel());
-
-            //Act
-            _messenger.Send(messageToSend);
-
-            //Assert
-            Assert.IsTrue(_homeViewModel.UserWishLists.Count == 1);
-            Assert.IsTrue(_homeViewModel.AtLeastOneWishList);
-            Assert.IsTrue(_homeViewModel.NoJournalsButWishListFound);
-            Assert.IsFalse(_homeViewModel.NoWishListsButJournalFound);
-            Assert.IsFalse(_homeViewModel.NoItemsFound);
         }
     }
 }

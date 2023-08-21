@@ -11,10 +11,8 @@ namespace Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid? UserJournalsId { get; set; }
-        public ICollection<UserJournal>? UserJournals { get; set; }
-        public Guid? UserWishlistId { get; set; }
-        public ICollection<UserWishlist>? UserWishlists { get; set; }
+        public ICollection<Journal>? UserJournals { get; set; }
+        public ICollection<Wishlist>? UserWishlists { get; set; }
         public Guid? UserImageId { get; set; }
         public UserImage? UserImage { get; set; }
         public string Username { get; set; }

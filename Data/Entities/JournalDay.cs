@@ -16,6 +16,7 @@ namespace Data.Entities
         [Required]
         public Journal Journal { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string ShortDateFormat { get; set; }
+        public string? Title { get; set; }
     }
 }

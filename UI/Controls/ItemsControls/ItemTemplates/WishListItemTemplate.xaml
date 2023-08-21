@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
+    <Grid UIElement.MouseDown="OnItemClick">
         <!--Item Container-->
         <Border Width="Auto"
                 MinHeight="75"

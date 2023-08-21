@@ -32,7 +32,7 @@ namespace Tests.Services
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<ServerProfiles>();
+                cfg.AddProfile<ServiceProfiles>();
             });
 
             _mapper = new Mapper(mapperConfig);
@@ -42,7 +42,7 @@ namespace Tests.Services
         [TestMethod()]
         public void LoginWithValidCredentialsReturnsHydratedUserDto()
         {
-            //Arange
+            //Arrange
             var userName = "TestUsername";
             var password = "password123";
 

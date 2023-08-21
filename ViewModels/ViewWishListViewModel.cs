@@ -27,6 +27,7 @@ namespace ViewModels
         {
             _messenger = messenger;
             _messenger.Register<ItemCreatedMessage>(this, (r, m) => SetWishList(m.Value));
+            _messenger.Register<ItemClickedMessage>(this, (r, m) => SetWishList(m.Value));
         }
 
         //Methods

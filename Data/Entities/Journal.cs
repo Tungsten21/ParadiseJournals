@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
+    [Index(nameof(OwnerId))]
     public class Journal
     {
         [Key]
@@ -14,17 +16,20 @@ namespace Data.Entities
         public Guid? JournalImagesId { get; set; }
         public JournalImages? JournalImages { get; set; }
         [Required]
-        public Guid UserJournalId { get; set; }
+        public Guid OwnerId { get; set; }
         [Required]
-        public UserJournal UserJournal { get; set; }
+        public User Owner { get; set; }
+        public IEnumerable<JournalDay> JournalDays { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
+        [Required]
+        public string Country { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime EndDate { get; set; }
-        [Required]
+        public string? Description { get; set; }
+        public string? City { get; set; }
         public int TotalDays { get; set; }
-        public ICollection<JournalDay> DayIds { get; set; }
     }
 }

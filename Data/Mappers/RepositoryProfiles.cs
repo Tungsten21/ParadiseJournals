@@ -14,6 +14,9 @@ namespace Data.Mappers
         public RepositoryProfiles()
         {
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Journal, JournalDto>().ReverseMap().ForMember(x => x.JournalDays, opt => opt.MapFrom(src => src.JournalDays));
+            CreateMap<JournalDay, JournalDayDto>().ReverseMap();
+            CreateMap<Wishlist, WishlistDto>().ReverseMap();
         }
     }
 }

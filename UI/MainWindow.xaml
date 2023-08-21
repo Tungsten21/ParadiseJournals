@@ -14,7 +14,7 @@
             <ColumnDefinition Width="{Binding MenuBarViewModel.IsMenuBarVisible, Converter={StaticResource MenuBarToWidthConverter}}"
                               x:Name="menuColumn"/>
 
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>

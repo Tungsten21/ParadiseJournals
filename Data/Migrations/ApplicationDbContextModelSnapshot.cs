@@ -28,24 +28,34 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<Guid?>("JournalImagesId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TotalDays")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("UserJournalId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -53,7 +63,7 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasFilter("[JournalImagesId] IS NOT NULL");
 
-                    b.HasIndex("UserJournalId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Journals", (string)null);
                 });
@@ -67,8 +77,11 @@ namespace Data.Migrations
                     b.Property<Guid>("JournalId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("ShortDateFormat")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -134,12 +147,6 @@ namespace Data.Migrations
                     b.Property<Guid?>("UserImageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserJournalsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserWishlistId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -171,44 +178,6 @@ namespace Data.Migrations
                     b.ToTable("UserImages", (string)null);
                 });
 
-            modelBuilder.Entity("Data.Entities.UserJournal", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("JournalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("UserJournals", (string)null);
-                });
-
-            modelBuilder.Entity("Data.Entities.UserWishlist", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("WishlistId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("UserWishlists", (string)null);
-                });
-
             modelBuilder.Entity("Data.Entities.Wishlist", b =>
                 {
                     b.Property<Guid>("Id")
@@ -216,20 +185,20 @@ namespace Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
-                    b.Property<string>("Name")
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TotalDays")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("UserWishlistId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("WishlistAccommodationsId")
                         .HasColumnType("uniqueidentifier");
@@ -245,13 +214,13 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserWishlistId");
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("WishlistImageId")
                         .IsUnique()
                         .HasFilter("[WishlistImageId] IS NOT NULL");
 
-                    b.ToTable("Wiishlists", (string)null);
+                    b.ToTable("Wishlists", (string)null);
                 });
 
             modelBuilder.Entity("Data.Entities.WishlistAccommodationImages", b =>
@@ -499,21 +468,21 @@ namespace Data.Migrations
                         .HasForeignKey("Data.Entities.Journal", "JournalImagesId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Data.Entities.UserJournal", "UserJournal")
-                        .WithMany("Journals")
-                        .HasForeignKey("UserJournalId")
+                    b.HasOne("Data.Entities.User", "Owner")
+                        .WithMany("UserJournals")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("JournalImages");
 
-                    b.Navigation("UserJournal");
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalDay", b =>
                 {
                     b.HasOne("Data.Entities.Journal", "Journal")
-                        .WithMany("DayIds")
+                        .WithMany("JournalDays")
                         .HasForeignKey("JournalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -531,33 +500,11 @@ namespace Data.Migrations
                     b.Navigation("UserImage");
                 });
 
-            modelBuilder.Entity("Data.Entities.UserJournal", b =>
-                {
-                    b.HasOne("Data.Entities.User", "Owner")
-                        .WithMany("UserJournals")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("Data.Entities.UserWishlist", b =>
+            modelBuilder.Entity("Data.Entities.Wishlist", b =>
                 {
                     b.HasOne("Data.Entities.User", "Owner")
                         .WithMany("UserWishlists")
                         .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("Data.Entities.Wishlist", b =>
-                {
-                    b.HasOne("Data.Entities.UserWishlist", "UserWishlist")
-                        .WithMany("Wishlists")
-                        .HasForeignKey("UserWishlistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -566,7 +513,7 @@ namespace Data.Migrations
                         .HasForeignKey("Data.Entities.Wishlist", "WishlistImageId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("UserWishlist");
+                    b.Navigation("Owner");
 
                     b.Navigation("WishlistImage");
                 });
@@ -627,7 +574,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.Journal", b =>
                 {
-                    b.Navigation("DayIds");
+                    b.Navigation("JournalDays");
                 });
 
             modelBuilder.Entity("Data.Entities.JournalImages", b =>
@@ -647,16 +594,6 @@ namespace Data.Migrations
                 {
                     b.Navigation("User")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Entities.UserJournal", b =>
-                {
-                    b.Navigation("Journals");
-                });
-
-            modelBuilder.Entity("Data.Entities.UserWishlist", b =>
-                {
-                    b.Navigation("Wishlists");
                 });
 
             modelBuilder.Entity("Data.Entities.Wishlist", b =>

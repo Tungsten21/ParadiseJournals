@@ -14,10 +14,11 @@ using ViewModels.User;
 
 namespace ViewModels.Dialogs
 {
-    public partial class LoginViewModel : BaseViewModel , IViewModel, IClosable
+    public partial class LoginViewModel : ValidatableViewModel, IViewModel, IClosable
     {
         //Properties
         private INavigationService _navigationService;
+        private IUserContext _userContext;
         private IUserService _userService;
         private readonly MenuBarViewModel _menuBar;
         private readonly IMapper _mapper;
@@ -49,7 +50,7 @@ namespace ViewModels.Dialogs
 
             var userModel = _mapper.Map<UserModel>(user);
 
-            UserContext.CurrentUser = userModel;
+            _userContext.CurrentUser = userModel;
 
             _navigationService.NavigateToViewModel<HomeViewModel>(() => _menuBar.IsMenuBarVisible = true);
             CloseWindow?.Invoke();
@@ -63,12 +64,17 @@ namespace ViewModels.Dialogs
                               IMapper mapper,
                               IUserContext userContext, 
                               INavigationService navigationService, 
-                              IUserService userService) : base(userContext)
+                              IUserService userService)
         {
             _menuBar = menu;
             _mapper = mapper;
             _userService = userService;
             _navigationService = navigationService;
+            _userContext = userContext;
+        }
+
+        public LoginViewModel()
+        {
             
         }
 
