@@ -13,11 +13,24 @@ namespace UI.Resources.DataTemplateSelectors
             FrameworkElementFactory frameworkElementFactory = new();
             DataTemplate dataTemplate = new();
 
-            if (item.GetType() == typeof(JournalViewModel))
-               frameworkElementFactory.Type = typeof(JournalItemTemplate);
-
-            if (item.GetType() == typeof(WishListViewModel))
-                frameworkElementFactory.Type = typeof(WishListItemTemplate);
+            switch (item)
+            {
+                case JournalViewModel _:
+                    frameworkElementFactory.Type = typeof(JournalItemTemplate);
+                    break;
+                case WishListViewModel _:
+                    frameworkElementFactory.Type = typeof(WishListItemTemplate);
+                    break;
+                case WishListAccommodationViewModel _:
+                    frameworkElementFactory.Type = typeof(WishListViewModel);
+                    break;
+                case WishListLocationViewModel _:
+                    frameworkElementFactory.Type = typeof(WishListViewModel);
+                    break;
+                case WishListNoteViewModel _:
+                    frameworkElementFactory.Type = typeof(WishListViewModel);
+                    break;
+            }
 
             dataTemplate.VisualTree = frameworkElementFactory;
 
