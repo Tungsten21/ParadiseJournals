@@ -8,6 +8,7 @@ using Services.Interfaces;
 using Services.Mappers;
 using Common.Dtos;
 using Models;
+using ViewModels.Mappers;
 
 namespace Tests.ViewModels
 {
@@ -27,6 +28,7 @@ namespace Tests.ViewModels
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<ServiceProfiles>();
+                cfg.AddProfile<ViewModelProfiles>();
             });
 
             _mapper = new Mapper(mapperConfig);
@@ -86,6 +88,51 @@ namespace Tests.ViewModels
             Assert.IsTrue(_itemCache.NoJournalsButWishListFound);
             Assert.IsFalse(_itemCache.NoWishListsButJournalFound);
             Assert.IsFalse(_itemCache.NoItemsFound);
+        }
+
+        [DataRow(0, 0)]
+        [DataRow(1, 0)]
+        [DataRow(0, 1)]
+        [DataRow(1, 1)]
+        [DataRow(2, 2)]
+        [DataTestMethod()]
+        public void RetrieveItemsShouldUpdateRelevantLists(int journalCount, int wishlistCount)
+        {
+            //Arrange
+            var journals = new List<JournalDto>();
+            var wishlists = new List<WishlistDto>();
+
+            for (int i = 0; i < journalCount; i++)
+            {
+                journals.Add(new JournalDto() { });
+            }
+
+            for (int i = 0; i < wishlistCount; i++)
+            {
+                wishlists.Add(new WishlistDto() { });
+            }
+
+            _journalService.Setup(x => x.GetJournals(It.IsAny<Guid>())).Returns(
+                new ResultDto()
+                {
+                    Success = journalCount != 0,
+                    Items = journals.ToList<object>(),
+                });
+
+            _wishlistService.Setup(x => x.GetWishlists(It.IsAny<Guid>())).Returns(
+                new ResultDto()
+                {
+                    Success = wishlistCount != 0,
+                    Items = wishlists.ToList<object>(),
+                });
+
+            //Act
+            _itemCache.RetrieveJournals();
+            _itemCache.RetrieveWishlists();
+
+            //Assert
+            Assert.IsTrue(_itemCache.Journals.Count == journalCount);
+            Assert.IsTrue(_itemCache.Wishlists.Count == wishlistCount);
         }
     }
 }
