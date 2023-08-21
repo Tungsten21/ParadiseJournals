@@ -24,9 +24,9 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
-        private ObservableCollection<AccommodationViewModel> _accommodations;
-        private ObservableCollection<LocationViewModel> _locaitons;
-        private ObservableCollection<NoteViewModel> _notes;
+        private ObservableCollection<WishListAccommodationViewModel> _accommodations;
+        private ObservableCollection<WishListLocationViewModel> _locaitons;
+        private ObservableCollection<WishListNoteViewModel> _notes;
         private readonly WishListModel _model = new();
 
         private bool _isPreviousDateInvalid;
