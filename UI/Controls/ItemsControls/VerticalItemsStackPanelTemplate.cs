@@ -17,12 +17,12 @@ using System.Windows.Shapes;
 namespace UI.Controls.ItemsControls
 {
     /// <summary>
-    /// Interaction logic for HomeViewItemsPanelTemplate.xaml
+    /// Interaction logic for VerticalItemsStackPanelTemplate.xaml
     /// </summary>
-    public partial class HomeViewItemsPanelTemplate : UserControl
+    public partial class VerticalItemsStackPanelTemplate : UserControl
     {
         public static DependencyProperty ItemsSourceProperty =
-                    DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(HomeViewItemsPanelTemplate), new PropertyMetadata(null));
+                    DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(VerticalItemsStackPanelTemplate), new PropertyMetadata(null));
 
         public IEnumerable ItemsSource
         {
@@ -31,7 +31,7 @@ namespace UI.Controls.ItemsControls
         }
 
         public static DependencyProperty TitleProperty =
-                    DependencyProperty.Register("Title", typeof(string), typeof(HomeViewItemsPanelTemplate), new PropertyMetadata(null));
+                    DependencyProperty.Register("Title", typeof(string), typeof(VerticalItemsStackPanelTemplate), new PropertyMetadata(null));
 
         public string Title
         {
@@ -41,7 +41,7 @@ namespace UI.Controls.ItemsControls
 
 
 
-        public HomeViewItemsPanelTemplate()
+        public VerticalItemsStackPanelTemplate()
         {
             InitializeComponent();
         }
