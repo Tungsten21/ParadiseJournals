@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:itemsControls="clr-namespace:UI.Controls.ItemsControls" 
+             xmlns:controlViews="clr-namespace:UI.Controls.Views" 
              xmlns:local="clr-namespace:UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -99,15 +100,28 @@
             </Grid.ColumnDefinitions>
 
             <itemsControls:VerticalItemsStackPanelTemplate ItemsSource="{Binding Accommodations}"
-                                                      Title="Accomodations:"/>
+                                                           Visibility="{Binding AccommodationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="Accomodations:"/>
+
+            <controlViews:NoWishListItemFoundView Item="Accomodation"
+                                                  Visibility="{Binding AccommodationsFound, Converter={StaticResource NegateBoolConverter}}"/>
 
             <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="2"
-                                                      ItemsSource="{Binding Locations}"
-                                                      Title="Locations:"/>
+                                                           ItemsSource="{Binding Locations}"
+                                                           Visibility="{Binding LocationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="Locations:"/>
+
+            <controlViews:NoWishListItemFoundView Grid.Row="2"  
+                                                  Item="Location"
+                                                  Visibility="{Binding LocationsFound, Converter={StaticResource NegateBoolConverter}}"/>
 
             <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="4"
-                                                      ItemsSource="{Binding Notes}"
-                                                      Title="Notes:"/>
+                                                           ItemsSource="{Binding Notes}"
+                                                           Visibility="{Binding AccommodationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="Notes:"/>
+
+            <controlViews:NoWishListItemFoundView Item="Note"
+                                                  Visibility="{Binding NotesFound, Converter={StaticResource NegateBoolConverter}}"/>
 
         </Grid>
     </Grid>
