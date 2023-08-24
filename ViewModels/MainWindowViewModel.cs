@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using ViewModels.Controls;
+using ViewModels.Dialogs.Context;
 using ViewModels.Interfaces;
 using ViewModels.Messages;
 
@@ -12,6 +13,12 @@ namespace ViewModels
         //Properties
         private IServiceProvider _serviceProvider;
         private IMessenger _messenger;
+
+        [ObservableProperty]
+        private bool _isOverlayActive;
+
+        [ObservableProperty]
+        private IViewModel _currentPopupViewModel;
 
         [ObservableProperty]
         private IViewModel _currentViewModel;
@@ -30,7 +37,14 @@ namespace ViewModels
             _currentViewModel = _serviceProvider.GetService<EntryViewModel>();
             _menuBarViewModel = menuBarViewModel;
 
+            //Message from NavigatationService
             _messenger.Register<NavigationMessage>(this, (r, m) =>
+            {
+                CurrentViewModel = m.Value;
+            });
+
+            //Message from ContextPopupService
+            _messenger.Register<PopupMessage>(this, (r, m) =>
             {
                 CurrentViewModel = m.Value;
             });
