@@ -48,6 +48,12 @@ namespace ViewModels
             {
                 CurrentViewModel = m.Value;
             });
+
+            //Message from ContextPopupService
+            _messenger.Register<ToggleContextPopupVisibilityMessage>(this, (r, m) =>
+            {
+                IsOverlayActive = m.Value;
+            });
         }
 
         //Methods

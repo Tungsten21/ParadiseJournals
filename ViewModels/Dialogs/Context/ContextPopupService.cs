@@ -29,11 +29,12 @@ namespace ViewModels.Dialogs.Context
                 ?? throw new ArgumentInvalidException("Passed in viewmodel " + typeof(TViewModel).FullName + " is not registered with DI.");
             action?.Invoke();
             _messenger.Send(new CreateContextPopupMessage(_destViewModel));
+            _messenger.Send(new ToggleContextPopupVisibilityMessage(true));
         }
 
         public void ClosePopup()
         {
-            throw new NotImplementedException();
+            _messenger.Send(new ToggleContextPopupVisibilityMessage(false));
         }
 
         
