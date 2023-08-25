@@ -44,7 +44,7 @@ namespace ViewModels
             });
 
             //Message from ContextPopupService
-            _messenger.Register<PopupMessage>(this, (r, m) =>
+            _messenger.Register<CreateContextPopupMessage>(this, (r, m) =>
             {
                 CurrentViewModel = m.Value;
             });

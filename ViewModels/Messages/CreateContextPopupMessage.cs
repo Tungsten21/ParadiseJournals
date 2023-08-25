@@ -1,15 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.Messaging.Messages;
-using Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModels.Interfaces;
 
 namespace ViewModels.Messages
 {
-    public class ItemClickedMessage : ValueChangedMessage<IModel>
+    public class CreateContextPopupMessage : ValueChangedMessage<IViewModel>
     {
-        public ItemClickedMessage(IModel item) : base(item){}
+        public CreateContextPopupMessage(IViewModel value) : base(value) { }
     }
 }

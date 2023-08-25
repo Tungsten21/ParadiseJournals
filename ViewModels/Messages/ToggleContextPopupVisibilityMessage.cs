@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Messaging.Messages;
-using Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ViewModels.Messages
 {
-    public class ItemClickedMessage : ValueChangedMessage<IModel>
+    public class ToggleContextPopupVisibilityMessage : ValueChangedMessage<bool>
     {
-        public ItemClickedMessage(IModel item) : base(item){}
+        public ToggleContextPopupVisibilityMessage(bool value) : base(value) { }
     }
 }

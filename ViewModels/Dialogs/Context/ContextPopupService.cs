@@ -28,7 +28,7 @@ namespace ViewModels.Dialogs.Context
             var _destViewModel = (IViewModel)_serviceProvider.GetService(typeof(TViewModel))
                 ?? throw new ArgumentInvalidException("Passed in viewmodel " + typeof(TViewModel).FullName + " is not registered with DI.");
             action?.Invoke();
-            _messenger.Send(new PopupMessage(_destViewModel));
+            _messenger.Send(new CreateContextPopupMessage(_destViewModel));
         }
 
         public void ClosePopup()
