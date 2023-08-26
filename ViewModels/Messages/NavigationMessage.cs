@@ -11,9 +11,7 @@ namespace ViewModels.Messages
 {
     public class NavigationMessage : ValueChangedMessage<IViewModel>
     {
-        public NavigationMessage(IViewModel viewModel) : base(viewModel)
-        {
-        }
+        public NavigationMessage(IViewModel viewModel) : base(viewModel){}
 
 
     }

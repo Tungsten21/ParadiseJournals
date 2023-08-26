@@ -34,10 +34,11 @@ namespace ViewModels
         {
             _serviceProvider = serviceProvider;
             _messenger = messenger;
+
             _currentViewModel = _serviceProvider.GetService<EntryViewModel>();
             _menuBarViewModel = menuBarViewModel;
 
-            //Message from NavigatationService
+            //Message from NavigationService
             _messenger.Register<NavigationMessage>(this, (r, m) =>
             {
                 CurrentViewModel = m.Value;
@@ -46,12 +47,19 @@ namespace ViewModels
             //Message from ContextPopupService
             _messenger.Register<CreateContextPopupMessage>(this, (r, m) =>
             {
-                CurrentViewModel = m.Value;
+                CurrentPopupViewModel = m.Value;
             });
 
             //Message from ContextPopupService
             _messenger.Register<ToggleContextPopupVisibilityMessage>(this, (r, m) =>
             {
+                /*
+                 * Need to check whether value is show or close (true or false for now).
+                 * On show view model should have already been set.
+                 * On close view model dispose of any resources on popup, then set to null.
+                 * Ideally dont want view models with views you cant see in memory when they dont need to be.
+                 */
+                 
                 IsOverlayActive = m.Value;
             });
         }

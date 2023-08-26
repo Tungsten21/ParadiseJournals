@@ -34,7 +34,7 @@ namespace ViewModels.Items
         private ObservableCollection<WishListNoteViewModel> _notes;
 
         private bool _isPreviousDateInvalid;
-        public bool AccomodationsFound => _model.Accomodations != null && _model.Accomodations.Any();
+        public bool AccommodationsFound => _model.Accomodations != null && _model.Accomodations.Any();
         public bool LocationsFound => _model.Locations != null && _model.Locations.Any();
         public bool NotesFound => _model.Notes != null && _model.Notes.Any();
 

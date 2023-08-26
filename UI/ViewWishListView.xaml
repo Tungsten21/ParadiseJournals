@@ -6,10 +6,11 @@
              xmlns:itemsControls="clr-namespace:UI.Controls.ItemsControls" 
              xmlns:controlViews="clr-namespace:UI.Controls.Views" 
              xmlns:local="clr-namespace:UI"
+             xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding WishListViewModel}" 
-          Background="AliceBlue"
+
+    <Grid Background="AliceBlue"
           ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -53,13 +54,13 @@
 
             <TextBlock VerticalAlignment="Center"
                        TextAlignment="Center"
-                       Text="{Binding Title}"/>
+                       Text="{Binding WishListViewModel.Title}"/>
 
             <!--TODO: Add City-->
             <TextBlock Grid.Row="1"
                        VerticalAlignment="Center"
                        TextAlignment="Center"
-                       Text="{Binding Country}"/>
+                       Text="{Binding WishListViewModel.Country}"/>
 
             <!--Date Container-->
             <StackPanel Grid.Row="2"
@@ -67,13 +68,13 @@
                         Orientation="Horizontal">
 
                 <TextBlock VerticalAlignment="Center"
-                           Text="{Binding StartDate}"/>
+                           Text="{Binding WishListViewModel.StartDate}"/>
 
                 <TextBlock VerticalAlignment="Center"
                            Text=" - "/>
 
                 <TextBlock VerticalAlignment="Center"
-                           Text="{Binding EndDate}"/>
+                           Text="{Binding WishListViewModel.EndDate}"/>
             </StackPanel>
 
             <TextBlock Grid.Row="3"
@@ -99,29 +100,37 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <itemsControls:VerticalItemsStackPanelTemplate ItemsSource="{Binding Accommodations}"
+            <itemsControls:VerticalItemsStackPanelTemplate DataContext="{Binding WishListViewModel}"
+                                                           ItemsSource="{Binding Accommodations}"
                                                            Visibility="{Binding AccommodationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                           Title="Accomodations:"/>
+                                                           Title="Accommodations:"/>
 
-            <controlViews:NoWishListItemFoundView Item="Accomodation"
-                                                  Visibility="{Binding AccommodationsFound, Converter={StaticResource NegateBoolConverter}}"/>
+            <controlViews:NoWishListItemFoundView
+                                                  Item="Accommodations"
+                                                  ItemText="No accommodations found..."
+                                                  Visibility="{Binding WishListViewModel.AccommodationsFound, Converter={StaticResource NegateBoolConverter}}"/>
 
-            <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="2"
+            <itemsControls:VerticalItemsStackPanelTemplate DataContext="{Binding WishListViewModel}"
+                                                           Grid.Column="2"
                                                            ItemsSource="{Binding Locations}"
                                                            Visibility="{Binding LocationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                            Title="Locations:"/>
 
-            <controlViews:NoWishListItemFoundView Grid.Row="2"  
-                                                  Item="Location"
-                                                  Visibility="{Binding LocationsFound, Converter={StaticResource NegateBoolConverter}}"/>
+            <controlViews:NoWishListItemFoundView Grid.Column="2"  
+                                                  Item="Locations"
+                                                  ItemText="No locations found..."
+                                                  Visibility="{Binding WishListViewModel.LocationsFound, Converter={StaticResource NegateBoolConverter}}"/>
 
-            <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="4"
+            <itemsControls:VerticalItemsStackPanelTemplate DataContext="{Binding WishListViewModel}"
+                                                           Grid.Column="4"
                                                            ItemsSource="{Binding Notes}"
-                                                           Visibility="{Binding AccommodationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Visibility="{Binding NotesFound, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                            Title="Notes:"/>
 
-            <controlViews:NoWishListItemFoundView Item="Note"
-                                                  Visibility="{Binding NotesFound, Converter={StaticResource NegateBoolConverter}}"/>
+            <controlViews:NoWishListItemFoundView Grid.Column="4"
+                                                  Item="Notes"
+                                                  ItemText="No notes found..."
+                                                  Visibility="{Binding WishListViewModel.NotesFound, Converter={StaticResource NegateBoolConverter}}"/>
 
         </Grid>
     </Grid>

@@ -16,9 +16,11 @@
         <TextBlock VerticalAlignment="Center"
                    TextAlignment="Center"
                    Margin="0 20"
-                   Text="{Binding Item, RelativeSource={RelativeSource AncestorType=local:NoWishListItemFoundView}}"/>
+                   Text="{Binding ItemText, RelativeSource={RelativeSource AncestorType=local:NoWishListItemFoundView}}"/>
 
-        <Button Margin="0 20"
+        <Button Command="{Binding ShowAddItemContextPopupCommand}"
+                CommandParameter="{Binding Item, RelativeSource={RelativeSource AncestorType=local:NoWishListItemFoundView}}"
+                Margin="0 20"
                 Content="Add Item"/>
 
     </StackPanel>

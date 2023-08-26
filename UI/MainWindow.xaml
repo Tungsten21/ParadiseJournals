@@ -45,8 +45,9 @@
             </ContentControl>
         </Grid>
 
-        <!-- Overylay for focused popups -->
-        <Grid Panel.ZIndex="1">
+        <!-- Overlay for focused popups -->
+        <Grid Visibility="{Binding IsOverlayActive, Converter={StaticResource BooleanToVisibilityConverter}}" 
+              Panel.ZIndex="2">
             <Grid.Background>
                 <SolidColorBrush Color="#FF2E2E2E" Opacity="0.6"/>
             </Grid.Background>
