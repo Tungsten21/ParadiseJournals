@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ViewModels.Items
 {
-    public class LocationViewModel
+    public partial class WishListLocationViewModel : ObservableObject
     {
         private string _name;
         private string _thumbnail;

@@ -1,9 +1,4 @@
 ﻿using Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models
 {
@@ -16,6 +11,9 @@ namespace Models
         public DateTime EndDate { get; set; }
         public string? Description { get; set; }
         public string? City { get; set; }
+        public IEnumerable<WishListAccommodationModel>? Accomodations { get; set; }
+        public IEnumerable<WishListLocationModel>? Locations { get; set; }
+        public IEnumerable<WishListNoteModel>? Notes { get; set; }
 
     }
 }

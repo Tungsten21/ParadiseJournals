@@ -8,8 +8,9 @@
              Startup="OnStart">
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <dataTemplateSelectors:JournalOrWishListItemTeplateSelector x:Key="JournalOrWishListTemplateSelector"/>
+        <dataTemplateSelectors:VerticalStackPanelItemTemplateSelector x:Key="VerticalStackPanelItemTemplateSelector"/>
         <converters:MenuBarBooleanToWidthConverter x:Key="MenuBarToWidthConverter"/>
+        <converters:NegateBoolConverter x:Key="NegateBoolConverter"/>
         
         <ResourceDictionary x:Key="ItemTemplates">
             <itemTemplates:JournalItemTemplate x:Key="JournalItemTemplate"/>

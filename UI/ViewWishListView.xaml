@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:itemsControls="clr-namespace:UI.Controls.ItemsControls" 
+             xmlns:controlViews="clr-namespace:UI.Controls.Views" 
              xmlns:local="clr-namespace:UI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -97,19 +99,29 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Background="Red">
+            <itemsControls:VerticalItemsStackPanelTemplate ItemsSource="{Binding Accommodations}"
+                                                           Visibility="{Binding AccommodationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="Accomodations:"/>
 
-            </StackPanel>
+            <controlViews:NoWishListItemFoundView Item="Accomodation"
+                                                  Visibility="{Binding AccommodationsFound, Converter={StaticResource NegateBoolConverter}}"/>
 
-            <StackPanel Grid.Column="2"
-                        Background="Blue">
+            <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="2"
+                                                           ItemsSource="{Binding Locations}"
+                                                           Visibility="{Binding LocationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="Locations:"/>
 
-            </StackPanel>
+            <controlViews:NoWishListItemFoundView Grid.Row="2"  
+                                                  Item="Location"
+                                                  Visibility="{Binding LocationsFound, Converter={StaticResource NegateBoolConverter}}"/>
 
-            <StackPanel Grid.Column="4"
-                        Background="Green">
+            <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="4"
+                                                           ItemsSource="{Binding Notes}"
+                                                           Visibility="{Binding AccommodationsFound, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="Notes:"/>
 
-            </StackPanel>
+            <controlViews:NoWishListItemFoundView Item="Note"
+                                                  Visibility="{Binding NotesFound, Converter={StaticResource NegateBoolConverter}}"/>
 
         </Grid>
     </Grid>

@@ -33,14 +33,14 @@
             </Grid.ColumnDefinitions>
 
             <!--Items Controls -->
-            <itemsControls:HomeViewItemsPanelTemplate ItemsSource="{Binding ItemCache.Journals}"
-                                                      Visibility="{Binding ItemCache.AtLeastOneJournal, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                      Title="My Journals:"/>
+            <itemsControls:VerticalItemsStackPanelTemplate ItemsSource="{Binding ItemCache.Journals}"
+                                                           Visibility="{Binding ItemCache.AtLeastOneJournal, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="My Journals:"/>
 
-            <itemsControls:HomeViewItemsPanelTemplate Grid.Column="2"
-                                                      ItemsSource="{Binding ItemCache.Wishlists}"
-                                                      Visibility="{Binding ItemCache.AtLeastOneWishList, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                      Title="My Wishlists:"/>
+            <itemsControls:VerticalItemsStackPanelTemplate Grid.Column="2"
+                                                           ItemsSource="{Binding ItemCache.Wishlists}"
+                                                           Visibility="{Binding ItemCache.AtLeastOneWishList, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                           Title="My Wishlists:"/>
 
             <!--Default View's If No Items Found-->
             <controlViews:NoJournalsFoundView/>

@@ -24,13 +24,19 @@ namespace ViewModels.Items
         private string _endDate;
         private string _descripition;
         private string _city;
-        private ObservableCollection<AccommodationViewModel> _accommodations;
-        private ObservableCollection<LocationViewModel> _locaitons;
-        private ObservableCollection<NoteViewModel> _notes;
         private readonly WishListModel _model = new();
 
+        [ObservableProperty]
+        private ObservableCollection<WishListAccommodationViewModel> _accommodations;
+        [ObservableProperty]
+        private ObservableCollection<WishListLocationViewModel> _locations;
+        [ObservableProperty]
+        private ObservableCollection<WishListNoteViewModel> _notes;
+
         private bool _isPreviousDateInvalid;
-        private bool _isEndDateInvalid;
+        public bool AccomodationsFound => _model.Accomodations != null && _model.Accomodations.Any();
+        public bool LocationsFound => _model.Locations != null && _model.Locations.Any();
+        public bool NotesFound => _model.Notes != null && _model.Notes.Any();
 
         public event EventHandler WishListItemClickedEvent;
 
@@ -149,33 +155,6 @@ namespace ViewModels.Items
                     _model.City = value;
             }
         }
-
-        #endregion
-
-        #region Details
-
-
-        public ObservableCollection<AccommodationViewModel> Accommodations
-        {
-            get { return _accommodations; }
-            set { _accommodations = value; }
-        }
-
-        
-
-        public ObservableCollection<LocationViewModel> Locations
-        {
-            get { return _locaitons; }
-            set { _locaitons = value; }
-        }
-
-        public ObservableCollection<NoteViewModel> Notes
-        {
-            get { return _notes; }
-            set { _notes = value; }
-        }
-
-
 
         #endregion
 
