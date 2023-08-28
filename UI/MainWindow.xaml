@@ -56,15 +56,15 @@
             </Grid.Background>
 
             <!--DataTemplates To Tie Popups -> PopupViewModels-->
-            <ContentControl Content="{Binding CurrentPopupViewModel}">
+            <ContentControl x:Name="Popup" Content="{Binding CurrentPopupViewModel}">
                 <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type contextViewModels: AddWishlistAccommodationViewModel}">
+                    <DataTemplate DataType="{x:Type contextViewModels:AddWishlistAccommodationViewModel}">
                         <contextViews:AddWishlistAccommodationView/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type contextViewModels: AddWishlistLocationViewModel}">
+                    <DataTemplate DataType="{x:Type contextViewModels:AddWishlistLocationViewModel}">
                         <contextViews:AddWishlistLocationView/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type contextViewModels: AddWishlistNoteViewModel}">
+                    <DataTemplate DataType="{x:Type contextViewModels:AddWishlistNoteViewModel}">
                         <contextViews:AddWishlistNoteView/>
                     </DataTemplate>
 

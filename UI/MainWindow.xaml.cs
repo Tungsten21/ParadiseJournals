@@ -36,8 +36,14 @@ namespace UI
 
         private void CloseContextPopup(object sender, MouseButtonEventArgs e)
         {
-            var dataContext = (MainWindowViewModel) DataContext;
-            dataContext.CloseContextPopupOnLostFocusCommand.Execute(null);
+            var dataContext = (MainWindowViewModel)DataContext;
+
+            if (!PopupContainer.IsMouseOver)
+            {
+                dataContext.CloseContextPopupOnLostFocusCommand.Execute(null);
+            }
+
+
         }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:UI.Dialogs.Context"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red" Width="200" Height="200">
+    <Grid Background="Red" Width="200" Height="200" ZIndex="5">
             
     </Grid>
 </UserControl>
