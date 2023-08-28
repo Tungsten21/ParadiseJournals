@@ -38,7 +38,7 @@ namespace UI
         {
             var dataContext = (MainWindowViewModel)DataContext;
 
-            if (!PopupContainer.IsMouseOver)
+            if (!Popup.IsMouseOver)
             {
                 dataContext.CloseContextPopupOnLostFocusCommand.Execute(null);
             }
