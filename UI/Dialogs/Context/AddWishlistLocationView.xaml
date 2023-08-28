@@ -5,21 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Dialogs.Context"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="450">
 
-    <Grid d:DesignWidth="450" 
-          d:DesignHeight="800"
-          Width="450"
-          Height="800"
-          ShowGridLines="True"
-          Background="Red">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.8*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.45*"/>
-        </Grid.ColumnDefinitions>
+    <Border CornerRadius="30"
+            Background="PaleVioletRed"
+            MinWidth="250"
+            MinHeight="350"
+            MaxWidth="550"
+            MaxHeight="650">
 
-        <TextBlock VerticalAlignment="Center" TextAlignment="Center" FontSize="30"> This will be the Add location popup!</TextBlock>
-    </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+    </Border>
 </UserControl>
