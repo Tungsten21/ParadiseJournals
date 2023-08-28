@@ -64,7 +64,7 @@ namespace Tests.ViewModels
 
             //Assert
             Assert.IsNotNull(exception);
-            Assert.IsInstanceOfType(exception, typeof(ArgumentInvalidException));
+            Assert.IsInstanceOfType(exception, typeof(ArgumentException));
             Assert.IsTrue(exception.Message == "Passed in viewmodel " + typeof(UnRegisteredViewModel).FullName + " is not registered with DI.");
         }
     }

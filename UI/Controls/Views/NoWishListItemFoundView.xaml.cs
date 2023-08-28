@@ -31,6 +31,15 @@ namespace UI.Controls.Views
             set { SetValue(ItemProperty, value); }
         }
 
+        public static DependencyProperty ItemTextProperty =
+            DependencyProperty.Register("ItemText", typeof(string), typeof(NoWishListItemFoundView), new PropertyMetadata(null));
+
+        public string ItemText
+        {
+            get { return (string)GetValue(ItemTextProperty); }
+            set { SetValue(ItemTextProperty, value); }
+        }
+
         public NoWishListItemFoundView()
         {
             InitializeComponent();

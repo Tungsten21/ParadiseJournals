@@ -11,12 +11,7 @@ namespace ViewModels.Messages
 {
     public class NavigationMessage : ValueChangedMessage<IViewModel>
     {
-        public IViewModel ViewModel { get; }
-
-        public NavigationMessage(IViewModel viewModel) : base(viewModel)
-        {
-            ViewModel = viewModel;
-        }
+        public NavigationMessage(IViewModel viewModel) : base(viewModel){}
 
 
     }

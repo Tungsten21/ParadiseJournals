@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dialogs\" />
     <Folder Include="Controls\" />
+    <Folder Include="Dialogs\Context\" />
   </ItemGroup>
 
 </Project>

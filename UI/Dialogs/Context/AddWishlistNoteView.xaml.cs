@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace UI
+namespace UI.Dialogs.Context
 {
     /// <summary>
-    /// Interaction logic for ViewWishListView.xaml
+    /// Interaction logic for AddWishlistNoteView.xaml
     /// </summary>
-    public partial class ViewWishListView : UserControl
+    public partial class AddWishlistNoteView : UserControl
     {
-        public ViewWishListView()
+        public AddWishlistNoteView()
         {
             InitializeComponent();
         }
-
     }
 }

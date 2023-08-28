@@ -13,7 +13,6 @@ namespace ViewModels
     {
         private IServiceProvider _serviceProvider;
 
-        public IViewModel CurrentViewModel { get; set; }
 
         public DialogService(IServiceProvider serviceProvider) {
             _serviceProvider = serviceProvider;
@@ -21,9 +20,11 @@ namespace ViewModels
 
         public void ShowDialog<TViewModel>(string title, string? windowSize = "Medium") where TViewModel : IViewModel
         {
+            var currentVm = default(TViewModel);
+
             try
             {
-                CurrentViewModel = _serviceProvider.GetService<TViewModel>();
+                currentVm = _serviceProvider.GetService<TViewModel>();
             }
             catch (Exception ex) //catch exception if view model hasnt been registered with service provider...
             {
@@ -33,20 +34,20 @@ namespace ViewModels
             BaseDialog baseDialogWindow = _serviceProvider.GetService<BaseDialog>();
 
             BaseDialogViewModel dataContext = baseDialogWindow.DataContext as BaseDialogViewModel;
-            dataContext.ViewModel = CurrentViewModel;
+            dataContext.ViewModel = currentVm;
 
             baseDialogWindow.Title = title;
-            var windowSizes = mapWindowSize(windowSize);
+            var windowSizes = MapWindowSize(windowSize);
             baseDialogWindow.Width = windowSizes.Item1;
             baseDialogWindow.Height = windowSizes.Item2;
 
-            if(CurrentViewModel is IClosable vm) 
+            if(currentVm is IClosable vm) 
                 vm.CloseWindow = () => baseDialogWindow.Close();
                
             baseDialogWindow.Show();
         }
 
-        public Tuple<int, int> mapWindowSize(string windowSize)
+        private Tuple<int, int> MapWindowSize(string windowSize)
         {
             if (windowSize == "Small")
                 return Tuple.Create((int)DialogSize.SmallWidth, (int)DialogSize.SmallHeight);

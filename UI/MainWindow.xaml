@@ -6,43 +6,71 @@
         xmlns:local="clr-namespace:UI"
         xmlns:controls="clr-namespace:UI.Controls"
         xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+        xmlns:contextViews="clr-namespace:UI.Dialogs.Context"
+        xmlns:contextViewModels="clr-namespace:ViewModels.Dialogs.Context;assembly=ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
 
-    <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding MenuBarViewModel.IsMenuBarVisible, Converter={StaticResource MenuBarToWidthConverter}}"
+    <Grid>
+        <Grid Panel.ZIndex="1"
+          Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding MenuBarViewModel.IsMenuBarVisible, Converter={StaticResource MenuBarToWidthConverter}}"
                               x:Name="menuColumn"/>
 
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="25"/>
-        </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
 
-        <controls:MenuBar/>
+            <controls:MenuBar/>
 
-        <!--DataTemplates To Tie Views -> ViewModels-->
-        <ContentControl Grid.Column="2"
-                        Content="{Binding CurrentViewModel}">
-            
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewModels:EntryViewModel}">
-                    <local:EntryView/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
-                    <local:HomeView/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ViewJournalViewModel}">
-                    <local:ViewJournalView/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ViewWishListViewModel}">
-                    <local:ViewWishListView/>
-                </DataTemplate>
+            <!--DataTemplates To Tie Views -> ViewModels-->
+            <ContentControl Grid.Column="2"
+                            Content="{Binding CurrentViewModel}">
 
-            </ContentControl.Resources>
-        </ContentControl>
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewModels:EntryViewModel}">
+                        <local:EntryView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                        <local:HomeView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:ViewJournalViewModel}">
+                        <local:ViewJournalView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:ViewWishListViewModel}">
+                        <local:ViewWishListView/>
+                    </DataTemplate>
+
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+
+        <!-- Overlay for focused popups -->
+        <Grid Visibility="{Binding IsOverlayActive, Converter={StaticResource BooleanToVisibilityConverter}}" 
+              Panel.ZIndex="2" 
+              MouseLeftButtonDown="CloseContextPopup">
+            <Grid.Background>
+                <SolidColorBrush Color="#FF2E2E2E" Opacity="0.6"/>
+            </Grid.Background>
+
+            <!--DataTemplates To Tie Popups -> PopupViewModels-->
+            <ContentControl x:Name="Popup" Content="{Binding CurrentPopupViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type contextViewModels:AddWishlistAccommodationViewModel}">
+                        <contextViews:AddWishlistAccommodationView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type contextViewModels:AddWishlistLocationViewModel}">
+                        <contextViews:AddWishlistLocationView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type contextViewModels:AddWishlistNoteViewModel}">
+                        <contextViews:AddWishlistNoteView/>
+                    </DataTemplate>
+
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
     </Grid>
-
-    
 
 </Window>

@@ -5,11 +5,6 @@ namespace ViewModels.Messages
 {
     public class ItemCreatedMessage : ValueChangedMessage<IModel>
     {
-        public IModel Item { get; }
-
-        public ItemCreatedMessage(IModel item) : base(item)
-        {
-            Item = item;
-        }
+        public ItemCreatedMessage(IModel item) : base(item){}
     }
 }

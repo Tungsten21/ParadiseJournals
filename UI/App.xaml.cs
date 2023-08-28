@@ -14,6 +14,7 @@ using UI.Dialogs;
 using ViewModels;
 using ViewModels.Controls;
 using ViewModels.Dialogs;
+using ViewModels.Dialogs.Context;
 using ViewModels.Interfaces;
 using ViewModels.Items;
 using ViewModels.Mappers;
@@ -63,6 +64,9 @@ namespace UI
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<ViewJournalViewModel>();
             services.AddSingleton<ViewWishListViewModel>();
+            services.AddSingleton<AddWishlistAccommodationViewModel>();
+            services.AddSingleton<AddWishlistLocationViewModel>();
+            services.AddSingleton<AddWishlistNoteViewModel>();
 
             services.AddTransient<CreateNewJournalViewModel>();
             services.AddTransient<CreateNewWishListViewModel>();
@@ -77,6 +81,7 @@ namespace UI
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IJournalService, JournalService>();
             services.AddSingleton<IWishlistService, WishlistService>();
+            services.AddSingleton<IContextPopupService, ContextPopupService>();
 
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IJournalRepository, JournalRepository>();
