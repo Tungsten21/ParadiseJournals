@@ -10,5 +10,11 @@ namespace ViewModels.Dialogs.Context
 {
     public partial class AddWishlistAccommodationViewModel : ObservableObject, IViewModel
     {
+        [ObservableProperty] private string _test;
+
+        public AddWishlistAccommodationViewModel()
+        {
+            
+        }
     }
 }

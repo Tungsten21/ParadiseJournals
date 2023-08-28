@@ -34,6 +34,10 @@ namespace UI
             InitializeComponent();
         }
 
-
+        private void CloseContextPopup(object sender, MouseButtonEventArgs e)
+        {
+            var dataContext = (MainWindowViewModel) DataContext;
+            dataContext.CloseContextPopupOnLostFocusCommand.Execute(null);
+        }
     }
 }
