@@ -41,7 +41,6 @@ namespace ViewModels.Items
             }
 
         }
-        #endregion
 
 
         public byte[] Thumbnail
@@ -130,5 +129,6 @@ namespace ViewModels.Items
                     _model.AdditionalPhotos = value.ToList();
             }
         }
+        #endregion
     }
 }

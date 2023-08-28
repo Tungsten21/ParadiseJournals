@@ -18,6 +18,6 @@ namespace Models
         public Currency Currency { get; set; }
         public double PricePerNight { get; set; }
         public string Notes { get; set; }
-        public List<byte[]> AdditionalPhotos { get; set;}
+        public List<byte[]> AdditionalPhotos { get; set; }
     }
 }
