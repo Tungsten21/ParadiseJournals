@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Dialogs.Context"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="450">
+             d:DesignHeight="700" d:DesignWidth="700">
 
     <Border CornerRadius="30"
             Background="Tan" 
@@ -16,16 +16,49 @@
 
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <!-- Thumbnail -->
+            <Border Grid.Row="1"
+                    Grid.RowSpan="3" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="20 0 19  0"
+                    MaxWidth="300"
+                    MaxHeight="210"
+                    CornerRadius="20"
+                    Background="Navy"/>
+
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     VerticalAlignment="Top"
+                     Height="35"
+                     Margin="10 0 20 20"/>
+
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     VerticalAlignment="Top"
+                     Height="35"
+                     Margin="10 0 20 0"/>
+
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     VerticalAlignment="Top"
+                     Height="35"
+                     Margin="10 20 20 0"/>
+
         </Grid>
 
     </Border>
