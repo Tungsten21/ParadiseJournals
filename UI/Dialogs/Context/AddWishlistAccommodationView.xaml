@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UI.Dialogs.Context"
+             xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="700">
 
@@ -26,8 +27,9 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.6*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Thumbnail -->
@@ -39,26 +41,130 @@
                     MaxWidth="300"
                     MaxHeight="230"
                     CornerRadius="20"
-                    Background="Navy"/>
+                    Background="Navy">
+                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="20" TextWrapping="Wrap" Text="Accommodation Thumbmnail"/>
+            </Border>
 
             <TextBox Grid.Row="1"
                      Grid.Column="1"
+                     Grid.ColumnSpan="2"
                      VerticalAlignment="Center"
-                     Height="35"
+                     Height="40"
                      Margin="10 0 20 0"/>
 
             <TextBox Grid.Row="2"
                      Grid.Column="1"
+                     Grid.ColumnSpan="2"
                      VerticalAlignment="Center"
-                     Height="35"
+                     Height="40"
                      Margin="10 0 20 0"/>
 
-            <TextBox Grid.Row="3"
-                     Grid.Column="1"
+            <Grid Grid.Row="3"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  Height="40"
+                  Margin="30 0 40 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <materialIcons:MaterialIcon Kind="Star"/>
+                <materialIcons:MaterialIcon Grid.Column="1" 
+                                            Kind="Star"/>
+                <materialIcons:MaterialIcon Grid.Column="2" 
+                                            Kind="Star"/>
+                <materialIcons:MaterialIcon Grid.Column="3" 
+                                            Kind="Star"/>
+                <materialIcons:MaterialIcon Grid.Column="4" 
+                                            Kind="Star"/>
+            </Grid>
+
+            <TextBox Grid.Row="4"
                      VerticalAlignment="Center"
-                     Height="35"
+                     Height="40"
+                     Margin="20 0 10 0"/>
+
+            <ComboBox Grid.Row="4"
+                      Height="40"
+                      Grid.Column="1"
+                      Margin="10 0 10 0"/>
+
+            <TextBox Grid.Row="4"
+                     Grid.Column="2"
+                     VerticalAlignment="Center"
+                     Height="40"
                      Margin="10 0 20 0"/>
 
+            <TextBox Grid.Row="5" 
+                     Grid.ColumnSpan="3"
+                     Margin="20"/>
+
+
+            <Grid Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Margin="15 0 5  0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border
+                        MaxWidth="90"
+                        MaxHeight="90"
+                        Height="75"
+                        Width="75"
+                        CornerRadius="20"
+                        Background="White">
+                    <materialIcons:MaterialIcon Kind="PlusBold"
+                                                Foreground="Navy"/>
+                </Border>
+
+                <Border Grid.Column="1" 
+                        MaxWidth="90"
+                        MaxHeight="90"
+                        Height="75"
+                        Width="75"
+                        CornerRadius="20"
+                        Background="Navy">
+                    <TextBlock Text=""/>
+                </Border>
+
+                <Border Grid.Column="2"
+                        MaxWidth="90"
+                        MaxHeight="90"
+                        Height="75"
+                        Width="75"
+                        CornerRadius="20"
+                        Background="Navy">
+                    <TextBlock Text=""/>
+                </Border>
+
+                <Border Grid.Column="3"
+                        MaxWidth="90"
+                        MaxHeight="90"
+                        Height="75"
+                        Width="75"
+                        CornerRadius="20"
+                        Background="Navy">
+                    <TextBlock Text=""/>
+                </Border>
+
+            </Grid>
+
+            <Button Grid.Row="6"
+                    Grid.Column="2"
+                    MaxWidth="150"
+                    MaxHeight="50"
+                    Content="Create Journal"/>
         </Grid>
 
     </Border>
