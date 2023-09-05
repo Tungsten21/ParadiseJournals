@@ -164,7 +164,7 @@
                     Grid.Column="2"
                     MaxWidth="150"
                     MaxHeight="50"
-                    Content="Create Journal"/>
+                    Content="Add Accommodation"/>
         </Grid>
 
     </Border>
