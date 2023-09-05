@@ -63,7 +63,7 @@
                       Grid.ColumnSpan="2"
                       Height="40"
                       Grid.Column="1"
-                      Margin="10 0 10 0"/>
+                      Margin="10 0 20 0"/>
 
             <TextBox Grid.Row="4"
                      VerticalAlignment="Center"
@@ -146,7 +146,7 @@
                     Grid.Column="2"
                     MaxWidth="150"
                     MaxHeight="50"
-                    Content="Create Journal"/>
+                    Content="Add Location"/>
         </Grid>
 
     </Border>
