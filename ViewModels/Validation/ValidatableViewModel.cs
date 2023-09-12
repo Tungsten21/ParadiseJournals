@@ -8,7 +8,7 @@ using ViewModels.Interfaces;
 
 namespace ViewModels.Validation
 {
-    public class ValidatableViewModel : ObservableValidator
+    public class ValidatableViewModel : ObservableValidator, IViewModel
     {
         public ValidatableViewModel() { }
         public bool IsValid()
