@@ -1,81 +1,134 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Common.Enums;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Extensions;
+using ViewModels.Validation;
 
 namespace ViewModels.Items
 {
-    public partial class WishListLocationViewModel : ObservableObject
+    public partial class WishListLocationViewModel : ValidatableViewModel
     {
         private string _name;
-        private string _thumbnail;
+        private byte[] _thumbnail;
         private string _websiteUrl;
-        private string _category;
+        private LocationCategory _locationCategory;
         private string _location;
-        private string _currency;
+        private Currency _currency;
         private double _pricePerPerson;
         private string _notes;
-        private ObservableCollection<string> _additionalPhotos;
+        private ObservableCollection<byte[]> _additionalPhotos;
+        private readonly WishListLocationModel _model = new();
 
+        #region Information
+
+        [Required(ErrorMessage = "Please enter the name of the location.")]
+        [MinLength(5, ErrorMessage = "Location name must be at least 5 characters.")]
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set
+            {
+                _model.Name.Clear();
+                if (SetProperty(ref _name, value, true) && GetErrors(nameof(Name)).Count() == 0)
+                    _model.Name = value;
+            }
+
         }
 
 
-        public string Thumbnail
+        public byte[] Thumbnail
         {
-            get { return _thumbnail; }
-            set { _thumbnail = value; }
+            get => _thumbnail;
+            set
+            {
+                if (SetProperty(ref _thumbnail, value, true) && GetErrors(nameof(Thumbnail)).Count() == 0)
+                    _model.Thumbnail = value;
+            }
         }
 
 
         public string WebSiteURL
         {
-            get { return _websiteUrl; }
-            set { _websiteUrl = value; }
+            get => _websiteUrl;
+            set
+            {
+                _model.WebsiteURL.Clear();
+                if (SetProperty(ref _websiteUrl, value, true) && GetErrors(nameof(WebSiteURL)).Count() == 0)
+                    _model.WebsiteURL = value;
+            }
         }
 
-        public string Category
+        public LocationCategory LocationCategory
         {
-            get { return _category; }
-            set { _category = value; }
+            get => _locationCategory;
+            set
+            {
+                if (SetProperty(ref _locationCategory, value, true) && GetErrors(nameof(LocationCategory)).Count() == 0)
+                    _model.LocationCategory = value;
+            }
         }
+
 
         public string Location
         {
-            get { return _location; }
-            set { _location = value; }
+            get => _location;
+            set
+            {
+                _model.Location.Clear();
+                if (SetProperty(ref _location, value, true) && GetErrors(nameof(Location)).Count() == 0)
+                    _model.Location = value;
+            }
         }
 
-        public string Currency
+        public Currency Currency
         {
-            get { return _currency; }
-            set { _currency = value; }
+            get => _currency;
+            set
+            {
+                if (SetProperty(ref _currency, value, true) && GetErrors(nameof(Currency)).Count() == 0)
+                    _model.Currency = value;
+            }
         }
 
-        public double PricePerNight
+        public double PricePerPerson
         {
-            get { return _pricePerPerson; }
-            set { _pricePerPerson = value; }
+            get => _pricePerPerson;
+            set
+            {
+                if (SetProperty(ref _pricePerPerson, value, true) && GetErrors(nameof(PricePerPerson)).Count() == 0)
+                    _model.PricePerPerson = value;
+            }
         }
 
 
         public string Notes
         {
-            get { return _notes; }
-            set { _notes = value; }
+            get => _notes;
+            set
+            {
+                _model.Notes.Clear();
+                if (SetProperty(ref _notes, value, true) && GetErrors(nameof(Notes)).Count() == 0)
+                    _model.Name = value;
+            }
         }
 
 
-        public ObservableCollection<string> AdditionalPhotos
+        public ObservableCollection<byte[]> AdditionalPhotos
         {
-            get { return _additionalPhotos; }
-            set { _additionalPhotos = value; }
+            get => _additionalPhotos;
+            set
+            {
+                if (SetProperty(ref _additionalPhotos, value, true) && GetErrors(nameof(AdditionalPhotos)).Count() == 0)
+                    _model.AdditionalPhotos = value.ToList();
+            }
         }
+        #endregion
     }
 }

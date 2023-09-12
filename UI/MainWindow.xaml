@@ -55,8 +55,22 @@
                 <SolidColorBrush Color="#FF2E2E2E" Opacity="0.6"/>
             </Grid.Background>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
             <!--DataTemplates To Tie Popups -> PopupViewModels-->
-            <ContentControl x:Name="Popup" Content="{Binding CurrentPopupViewModel}">
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            x:Name="Popup" 
+                            Content="{Binding CurrentPopupViewModel}">
                 <ContentControl.Resources>
                     <DataTemplate DataType="{x:Type contextViewModels:AddWishlistAccommodationViewModel}">
                         <contextViews:AddWishlistAccommodationView/>
