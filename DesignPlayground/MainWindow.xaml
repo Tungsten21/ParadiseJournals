@@ -13,12 +13,12 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}">
 
-    <Border Grid.Row="1" Grid.Column="1" CornerRadius="30"
-                Background="Tan" 
-                MinWidth="250"
-                MinHeight="350"
-                MaxWidth="550"
-                MaxHeight="550">
+    <Border CornerRadius="30"
+            Background="LightSlateGray" 
+            MinWidth="250"
+            MinHeight="350"
+            MaxWidth="550"
+            MaxHeight="550">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
@@ -36,7 +36,20 @@
                 <ColumnDefinition Width="0.6*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Style="{DynamicResource MaterialDesignFilledTextBox}" Width="200"/>
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Height="40"
+                     Width="200"
+                     Style="{DynamicResource MaterialDesignFilledTextBox}" />
+
+            
+            <DatePicker Grid.Row="2"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Height="40"
+                     Width="200"
+                     Style="{DynamicResource MaterialDesignDatePicker}" />
 
         </Grid>
     </Border>
